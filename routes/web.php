@@ -31,7 +31,7 @@ Route::get('/admin/calendar', "ReservationController@adminCalendar")->name('/adm
 Route::get('/admin/profile', function(){ return view('admin.profile.show');})->name('/admin/profile');
 Route::get('/admin/showReser',"ReservationController@showReserAdmin");
 Route::get('/admin/email', "MessageController@emails");
-Route::get('addRoom', function(){ return view('mngRooms.addRoom');})->name('addRoom');
+Route::get('addRoom', function(){ return view('admin.mngRooms.addRoom');})->name('addRoom');
 Route::get('/admin/notifications', function(){ return view('admin.notifications');})->name('/admin/notifications');
 
 //admin/rooms

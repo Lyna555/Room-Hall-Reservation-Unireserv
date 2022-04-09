@@ -22,7 +22,7 @@
   @endif
 
 <div class="card-body">
-    <h1>Rooms Halls List</h1>
+    <h1>Reservations List</h1>
     <a href="{{ url('/user/showNames') }}" class="btn btn-sm btn-warning" style="background: rgb(255, 152, 67);color:white;border:none">Add</a>
 
     <table class="table">
@@ -49,7 +49,7 @@
         </div>
         </div>
         <tr>
-            <td>{{ $reservation->room_id }}</td>
+            <td>{{ $reservation->room_name }}</td>
             <td>{{ $reservation->date }}</td>
             <td>{{ $reservation->creneaude }}</td>
             <td>{{ $reservation->creneaua }}</td>

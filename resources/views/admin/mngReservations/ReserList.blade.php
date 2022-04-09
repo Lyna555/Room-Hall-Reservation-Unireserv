@@ -22,7 +22,7 @@
   @endif
 
 <div class="card-body">
-    <h1>Rooms Halls List</h1>
+    <h1>Reservations List</h1>
     <a href="{{ url('/admin/showNames') }}" class="btn btn-sm btn-warning" style="background: rgb(255, 152, 67);color:white;border:none">Add</a>
 
     <table class="table">
@@ -38,7 +38,7 @@
       </thead>
       <tbody>
         @foreach($reservations as $reservation)
-        @if($reservation->date>=$sysdate && $reservation->creneaude>=$sysdate)
+        @if($reservation->date>=$sysdate)
         <div id="overlay">
           <div style="display:flex; flex-direction:column;justify-content:center;align-items:center;gap:20px;width:30%;height:20%;background:white;border-radius:20px;">
             <p><strong>Are you sure to delete this Room/Hall?</strong></p>
@@ -49,7 +49,7 @@
         </div>
         </div>
         <tr>
-            <td>{{ $reservation->room_id }}</td>
+            <td>{{ $reservation->room_name }}</td>
             <td>{{ $reservation->date }}</td>
             <td>{{ $reservation->creneaude }}</td>
             <td>{{ $reservation->creneaua }}</td>
