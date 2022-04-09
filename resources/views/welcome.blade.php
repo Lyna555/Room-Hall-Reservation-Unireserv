@@ -26,15 +26,12 @@
             }
             body {
                 font-family: 'Nunito', sans-serif;
-                background: url("{{ URL('images/back.jpeg') }}") no-repeat;
+                background: rgb(236, 219, 162);
                 background-size: 100%;
             }
             #container{
                 width: 100%;
                 height: 100vh;
-                background-color: #b6890c17;
-                backdrop-filter: blur(2px);
-                backdrop-filter: brightness(70%);
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -112,7 +109,7 @@
         <div id="container">
             <div id="cont">
                 <img src="{{ URL('images/logo2.png') }}">
-                <h1 style="font-family:Nunito;font-size:30px;color:rgb(253, 240, 198) ; text-align:center;font-weight:150; text-shadow:3px 3px 4px black;" >Rejoint nous pour une annee educative<br>bien organise !</h1>
+                <h1 style="font-family:Nunito;font-size:30px; text-align:center;font-weight:150; text-shadow:3px 3px 4px black;" >Rejoint nous pour une annee educative<br>bien organise !</h1>
                 @if (Route::has('login'))
                 <div id="auth">
                     @auth
@@ -120,9 +117,7 @@
                     @else
                         <a class="buttons" id="login" href="{{ route('login') }}">Login</a>
 
-                        @if (Route::has('register'))
-                            <a class="buttons" id="register" href="{{ route('register') }}">Register</a>
-                        @endif
+                        
                     @endauth
                 </div>
             @endif
