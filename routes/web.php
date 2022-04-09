@@ -32,6 +32,7 @@ Route::get('/admin/profile', function(){ return view('admin.profile.show');})->n
 Route::get('/admin/showReser',"ReservationController@showReserAdmin");
 Route::get('/admin/email', "MessageController@emails");
 Route::get('addRoom', function(){ return view('mngRooms.addRoom');})->name('addRoom');
+Route::get('/admin/notifications', function(){ return view('admin.notifications');})->name('/admin/notifications');
 
 //admin/rooms
 Route::get('/store',"RoomController@store");
@@ -48,16 +49,14 @@ Route::get('/admin/editR/{id}',"ReservationController@editAdmin");
 //admin/contact
 Route::get('/admin/sendedEmail', "MessageController@sendEmail");
 
-//admin/notifications
-Route::get('notifications', function(){ return view('admin.notifications');})->name('notifications');
 
 ////user
 
 //user/navbar
-Route::get('calender', "ReservationController@userCalendar")->name('calender');
+Route::get('calendar', "ReservationController@userCalendar")->name('calendar');
 Route::get('/user/showReser',"ReservationController@showReserUser");
 Route::get('/user/email', "MessageController@emailsUser");
-
+Route::get('/user/notifications', function(){ return view('notifications');})->name('/user/notifications');
 
 //user/reservation
 Route::get('/storeR',"ReservationController@store");

@@ -24,7 +24,7 @@ class ReservationController extends Controller
             'model'      => '\\App\\Models\\Reservation',
             'date_field' => 'date',
             'end_field'  => 'date',
-            'field'      => 'room_id',
+            'field'      => 'room_name',
             'prefix'     => 'user_id',
             'creneaua'   => 'creneaua',
             'suffix'     => 'creneaude',
@@ -83,15 +83,15 @@ class ReservationController extends Controller
             'model'      => '\\App\\Models\\Reservation',
             'date_field' => 'date',
             'end_field'  => 'date',
-            'field'      => 'room_id',
+            'field'      => 'room_name',
             'prefix'     => 'user_id',
             'creneaua'   => 'creneaua',
             'suffix'     => 'creneaude',
-            'route'      => '/calendar',
+            'route'      => 'calendar',
         ],
     ];
 
-    public function userCalender()
+    public function userCalendar()
     {
         $events = [];
         foreach ($this->resources as $resource) {
@@ -183,7 +183,7 @@ class ReservationController extends Controller
     {
         $reservations = Reservation::all();
         $reservation = new Reservation();
-        $reservation->room_id = $request->input('name');
+        $reservation->room_name = $request->input('name');
         $reservation->creneaude = $request->input('creneaude');
         $reservation->creneaua = $request->input('creneaua');
         $reservation->objective = $request->input('objective');
@@ -191,7 +191,7 @@ class ReservationController extends Controller
         $reservation->user_id = Auth::user()->id;
         
         foreach($reservations as $reser){
-            if($reser->room_id==$reservation->room_id && $reser->date==$reservation->date && (
+            if($reser->room_name==$reservation->room_name && $reser->date==$reservation->date && (
             ($reser->creneaude>=$reservation->creneaude && $reser->creneaua<=$reservation->creneaua)||
             ($reser->creneaude<=$reservation->creneaude && $reser->creneaua>=$reservation->creneaua)|| 
             ($reser->creneaude<$reservation->creneaude && $reser->creneaua>$reservation->creneaude)||
@@ -204,11 +204,11 @@ class ReservationController extends Controller
             return back()->with('errorMessage','Date expired');
         }elseif ($reservation->creneaua<=$reservation->creneaude){
                 return back()->with('errorMessage','Time expired');
-        }elseif(Auth::user()->role=='1'){
+        }elseif(Auth::user()->role=='admin'){
             $reservation->save();
             return redirect('/admin/showReser')->with('message','Reservation successfully added!');
         }else{
-            $verif=Room::where('name','=',$reservation->room_id)->value('state');
+            $verif=Room::where('name','=',$reservation->room_name)->value('state');
             if($verif=='speacial'){
                 return back()->with('errorMessage','You need admin approaval');
             }else{
@@ -270,7 +270,7 @@ class ReservationController extends Controller
 
         foreach($reservations as $reser){
             if($reser->id!=$reservation->id){
-                if($reser->room_id==$reservation->room_id && $reser->date==$reservation->date && (
+                if($reser->room_name==$reservation->room_name && $reser->date==$reservation->date && (
                 ($reser->creneaude>=$reservation->creneaude && $reser->creneaua<=$reservation->creneaua)||
                 ($reser->creneaude<=$reservation->creneaude && $reser->creneaua>=$reservation->creneaua)|| 
                 ($reser->creneaude<$reservation->creneaude && $reser->creneaua>$reservation->creneaude)||
@@ -286,7 +286,7 @@ class ReservationController extends Controller
          
         }elseif ($reservation->creneaua<$reservation->creneaude){
             return back()->with('errorMessage','Time expired');
-        }elseif(Auth::user()->role=='1'){
+        }elseif(Auth::user()->role=='admin'){
             $reservation->save();
             return redirect('/admin/showReser')->with('message','Reservation successfully added!');
         }else{

@@ -42,7 +42,7 @@
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex nav" style="cursor: pointer">
-                    <x-jet-nav-link href="{{ route('notifications') }}" style="cursor: pointer;font-size:13px;">
+                    <x-jet-nav-link href="{{ route('/admin/notifications') }}" style="cursor: pointer;font-size:13px;">
                         {{ __('Notifications') }}
                     </x-jet-nav-link>
                 </div>

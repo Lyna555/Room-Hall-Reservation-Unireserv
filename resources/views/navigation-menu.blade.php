@@ -18,7 +18,7 @@
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex nav">
-                    <x-jet-nav-link href="{{ route('calender') }}" :active="request()->routeIs('calender')" style="font-size:13px;">
+                    <x-jet-nav-link href="{{ route('calendar') }}" :active="request()->routeIs('calender')" style="font-size:13px;">
                         {{ __('Calendar') }}
                     </x-jet-nav-link>
                 </div>
@@ -32,6 +32,12 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex nav" style="cursor: pointer">
                     <x-jet-nav-link href="{{ url('/user/email') }}" :active="request()->routeIs('/user/email')" style="cursor: pointer;font-size:13px;">
                         {{ __('Contact') }}
+                    </x-jet-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex nav" style="cursor: pointer">
+                    <x-jet-nav-link href="{{ route('/user/notifications') }}" :active="request()->routeIs('/user/email')" style="cursor: pointer;font-size:13px;">
+                        {{ __('Notifications') }}
                     </x-jet-nav-link>
                 </div>
             </div>

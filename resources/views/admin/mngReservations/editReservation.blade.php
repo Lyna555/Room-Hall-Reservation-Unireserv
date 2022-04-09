@@ -29,7 +29,7 @@
                     <div class="form-group">
                         <label>Room/Hall Name</label>
                         <select required name="name">
-                          <option>{{ $reservation->room_id }}</option>
+                          <option>{{ $reservation->room_name }}</option>
                           <option ></option>
                           @foreach($rooms as $room)
                           <option>{{$room->name}}</option>
