@@ -116,8 +116,6 @@
                         <a class="buttons" id="dashb" href="{{ url('/redirects') }}">Dashboard</a>
                     @else
                         <a class="buttons" id="login" href="{{ route('login') }}">Login</a>
-
-                        
                     @endauth
                 </div>
             @endif
