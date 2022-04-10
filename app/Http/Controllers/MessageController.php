@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Mail\SendEmail;
+use App\Mail\WelcomEmail;
 use Mail;
-use Auth;
 
 class MessageController extends Controller
 {
