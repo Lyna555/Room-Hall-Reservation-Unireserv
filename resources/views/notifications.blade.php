@@ -10,49 +10,21 @@
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 </head>
 <body style="background:rgb(236, 219, 162)">
-    @include('admin.navigation-menu')
+    @include('navigation-menu')
 
     <div style="display: flex;width:100%;justify-content:end">
   </div>
 <div class="card mb-3" style="width:90%;margin:auto">
-  @if(session()->has('message'))
-    <div id="hh" class="alert alert-danger">
-        {{session()->get('message')}}
-    </div>
-  @endif
 <div class="card-body">
-    <h1>Rooms Halls List</h1>
-    <a href="{{  }}" class="btn btn-sm btn-warning" style="background: rgb(255, 152, 67);color:white;border:none">Add</a>
+    <h1>Notifications</h1>
 
     <table class="table">
       <thead class="thread-light">
-        <tr>
-          <th scope="col">Name</th>
-          <th scope="col">Capacity</th>
-          <th scope="col">Operations</th>
-        </tr>
       </thead>
       <tbody>
-        @foreach()
-        <div id="overlay">
-          <div style="display:flex; flex-direction:column;justify-content:center;align-items:center;gap:20px;width:30%;height:20%;background:white;border-radius:20px;">
-            <p><strong>Are you sure to delete this Room/Hall?</strong></p>
-            <div style="display:flex;flex-direction:row;justify-content:center; gap:20px">
-              <a href="{{ url('/destroy/'.$room->id) }}" class="btn btn-sm btn-warning" style="background: rgb(224, 54, 54);color:white;border:none">Delete</a>
-              <a href="" onclick="document.getElementById('overlay').style.display='none';" class="btn btn-sm btn-warning" style="background: lightgray;border:none">Cancel</a>
-          </div>
-        </div>
-        </div>
         <tr>
             <td></td>
-            <td></td>
-            
-            <td>
-              <button onclick="document.getElementById('overlay').style.display='flex'" class="btn btn-sm btn-warning">Accept</button>
-              <a href="{{  }}" class="btn btn-sm btn-warning">Refuse</a>
-            </td>
         </tr>
-        @endforeach
       </tbody>
     </table>
   </div>

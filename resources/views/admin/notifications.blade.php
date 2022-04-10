@@ -21,37 +21,42 @@
     </div>
   @endif
 <div class="card-body">
-    <h1>Rooms Halls List</h1>
-    <a href="{{  }}" class="btn btn-sm btn-warning" style="background: rgb(255, 152, 67);color:white;border:none">Add</a>
+    <h1>Notifications</h1>
 
     <table class="table">
       <thead class="thread-light">
         <tr>
           <th scope="col">Name</th>
-          <th scope="col">Capacity</th>
+          <th scope="col">Room</th>
+          <th scope="col">Date</th>
+          <th scope="col">Time</th>
           <th scope="col">Operations</th>
         </tr>
       </thead>
       <tbody>
-        @foreach()
+        @foreach($reservations as $reservation)
+        @if($reservation->satate=='wait')
         <div id="overlay">
           <div style="display:flex; flex-direction:column;justify-content:center;align-items:center;gap:20px;width:30%;height:20%;background:white;border-radius:20px;">
-            <p><strong>Are you sure to delete this Room/Hall?</strong></p>
+            <p><strong>Are you sure to Refuse this reservation ?</strong></p>
             <div style="display:flex;flex-direction:row;justify-content:center; gap:20px">
-              <a href="{{ url('/destroy/'.$room->id) }}" class="btn btn-sm btn-warning" style="background: rgb(224, 54, 54);color:white;border:none">Delete</a>
-              <a href="" onclick="document.getElementById('overlay').style.display='none';" class="btn btn-sm btn-warning" style="background: lightgray;border:none">Cancel</a>
+            <a href="{{url('/refuse/'.$reservation->id)}}" onclick="document.getElementById('overlay').style.display='none';" class="btn btn-sm btn-danger" style="border:none">Accept</a>
+            <a href="" onclick="document.getElementById('overlay').style.display='none';" class="btn btn-sm btn-warning" style="background: lightgray;border:none">Cancel</a>
           </div>
         </div>
         </div>
         <tr>
-            <td></td>
-            <td></td>
+            <td>name</td>
+            <td>{{$reservation->room_name}}</td>
+            <td>{{$reservation->date}}</td>
+            <td>{{$reservation->creneaude}} - {{$reservation->creneaua}}</td>
             
             <td>
-              <button onclick="document.getElementById('overlay').style.display='flex'" class="btn btn-sm btn-warning">Accept</button>
-              <a href="{{  }}" class="btn btn-sm btn-warning">Refuse</a>
+            <a href="{{url('/accept/'.$reservation->id)}}" class="btn btn-sm btn-warning">Accept</a>
+             <button onclick="document.getElementById('overlay').style.display='flex'" class="btn btn-sm btn-warning">Refuse</button>
             </td>
         </tr>
+        @endif
         @endforeach
       </tbody>
     </table>

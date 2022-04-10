@@ -28,6 +28,7 @@ class ReservationController extends Controller
             'prefix'     => 'user_id',
             'creneaua'   => 'creneaua',
             'suffix'     => 'creneaude',
+            'satate'     => 'satate',
             'route'      => '/admin/calendar',
         ],
     ];
@@ -43,6 +44,8 @@ class ReservationController extends Controller
                 if (!$crudFieldValue) {
                     continue;
                 }
+                if($model->{$source['satate']}=='reserved'){
+
                 if($model->{$source['end_field']}<Carbon::now()){
                     $events[] = [
                         'title' => trim($query . " " . $model->{$source['field']}
@@ -74,10 +77,9 @@ class ReservationController extends Controller
             
             }
         }
-
+    }
         return view('admin.fullcalendar', compact('events'));
     }
-
     public $resources = [
         [
             'model'      => '\\App\\Models\\Reservation',
@@ -102,6 +104,7 @@ class ReservationController extends Controller
                 if (!$crudFieldValue) {
                     continue;
                 }
+                if($model->{$source['satate']}=='reserved'){
                 if($model->{$resource['end_field']}<Carbon::now()){
                     $events[] = [
                         'title' => trim($query . " " . $model->{$resource['field']}
@@ -133,7 +136,7 @@ class ReservationController extends Controller
             
             }
         }
-
+    }
         return view('fullcalendar', compact('events'));
     }
 
@@ -157,6 +160,12 @@ class ReservationController extends Controller
     {
         $rooms = Room::all();
         return view('mngReservations.addReservation',['rooms'=>$rooms]);
+    }
+    public function showNotification()
+    {
+        $sysdate = Carbon::now();
+        $reservations=Reservation::all();
+        return view('admin.notifications',['reservations'=>$reservations,'sysdate'=>$sysdate]);
     }
 
     public function showReserUser()
@@ -188,6 +197,8 @@ class ReservationController extends Controller
         $reservation->creneaua = $request->input('creneaua');
         $reservation->objective = $request->input('objective');
         $reservation->date = $request->input('date');
+        $reservation->satate = 'reserved';
+
         $reservation->user_id = Auth::user()->id;
         
         foreach($reservations as $reser){
@@ -210,6 +221,8 @@ class ReservationController extends Controller
         }else{
             $verif=Room::where('name','=',$reservation->room_name)->value('state');
             if($verif=='speacial'){
+                $reservation->satate='wait';
+                $reservation->save();
                 return back()->with('errorMessage','You need admin approaval');
             }else{
             $reservation->save();
@@ -291,6 +304,7 @@ class ReservationController extends Controller
             return redirect('/admin/showReser')->with('message','Reservation successfully added!');
         }else{
             if($verif=='speacial'){
+            
                 return back()->with('errorMessage','You need admin approaval');
             }else{
                 $reservation->save();
@@ -314,4 +328,21 @@ class ReservationController extends Controller
         $reservation->delete();
         return back()->with('message','Reservation successfully deleted!');
     }
+
+    public function accept($id){
+        $reservation=Reservation::find($id);
+        $reservation->satate='reserved';
+        $reservation->save();
+        return redirect('/admin/notifications');
+        
+    }
+
+    public function refuse($id){
+        $reservation=Reservation::find($id);
+        $reservation->satate='not-reserved';
+        $reservation->save();
+        return redirect('/admin/notifications');
+        
+    }
+
 }
