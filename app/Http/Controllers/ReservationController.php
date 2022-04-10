@@ -202,7 +202,7 @@ class ReservationController extends Controller
         $nowDate=Carbon::now();
         if ($reservation->date<$nowDate){
             return back()->with('errorMessage','Date expired');
-        }elseif ($reservation->creneaua<=$reservation->creneaude){
+        }elseif ($reservation->creneaude>=$reservation->creneaua){
                 return back()->with('errorMessage','Time expired');
         }elseif(Auth::user()->role=='admin'){
             $reservation->save();
