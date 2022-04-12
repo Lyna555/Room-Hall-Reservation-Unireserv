@@ -36,9 +36,10 @@
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex nav" style="cursor: pointer">
-                    <x-jet-nav-link href="{{ route('/user/notifications') }}" :active="request()->routeIs('/user/email')" style="cursor: pointer;font-size:13px;">
+                    <x-jet-nav-link href="{{ route('/user/notifications') }}" :active="request()->routeIs('/user/email')" style="cursor: pointer;">
                         {{ __('Notifications') }}
                     </x-jet-nav-link>
+                
                 </div>
             </div>
 

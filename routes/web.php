@@ -60,7 +60,7 @@ Route::get('/refuse/{id}',"ReservationController@refuse");
 Route::get('calendar', "ReservationController@userCalendar")->name('calendar');
 Route::get('/user/showReser',"ReservationController@showReserUser");
 Route::get('/user/email', "MessageController@emailsUser");
-Route::get('/user/notifications', function(){ return view('notifications');})->name('/user/notifications');
+Route::get('/user/notifications', "ReservationController@notif")->name('/user/notifications');
 
 //user/reservation
 Route::get('/storeR',"ReservationController@store");

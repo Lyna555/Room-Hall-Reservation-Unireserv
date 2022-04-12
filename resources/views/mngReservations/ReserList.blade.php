@@ -38,7 +38,7 @@
       </thead>
       <tbody>
         @foreach($reservations as $reservation)
-        @if($reservation->date>=$sysdate)
+        @if($reservation->date>=$sysdate && $reservation->satate!='reserv-ref')
         <div id="overlay">
           <div style="display:flex; flex-direction:column;justify-content:center;align-items:center;gap:20px;width:30%;height:20%;background:white;border-radius:20px;">
             <p><strong>Are you sure to delete this Room/Hall?</strong></p>

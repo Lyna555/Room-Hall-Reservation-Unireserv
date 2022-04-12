@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Room;
 use App\Models\User;
 use App\Models\Reservation;
+use App\Models\Notification;
 use Illuminate\Validation\Rule;
 use Carbon\Carbon;
 use Auth;
@@ -44,7 +45,7 @@ class ReservationController extends Controller
                 if (!$crudFieldValue) {
                     continue;
                 }
-                if($model->{$source['satate']}=='reserved'){
+                if($model->{$source['satate']}=='reserved' || $model->{$source['satate']}=='reserv-state'){
 
                 if($model->{$source['end_field']}<Carbon::now()){
                     $events[] = [
@@ -89,6 +90,7 @@ class ReservationController extends Controller
             'prefix'     => 'user_id',
             'creneaua'   => 'creneaua',
             'suffix'     => 'creneaude',
+            'satate'     => 'satate',
             'route'      => 'calendar',
         ],
     ];
@@ -104,7 +106,7 @@ class ReservationController extends Controller
                 if (!$crudFieldValue) {
                     continue;
                 }
-                if($model->{$source['satate']}=='reserved'){
+                if($model->{$resource['satate']}=='reserved' || $model->{$resource['satate']}=='reserv-state'){
                 if($model->{$resource['end_field']}<Carbon::now()){
                     $events[] = [
                         'title' => trim($query . " " . $model->{$resource['field']}
@@ -303,12 +305,14 @@ class ReservationController extends Controller
             $reservation->save();
             return redirect('/admin/showReser')->with('message','Reservation successfully added!');
         }else{
+            $verif=Room::where('name','=',$reservation->room_name)->value('state');
             if($verif=='speacial'){
-            
+                $reservation->satate='wait';
+                $reservation->save();
                 return back()->with('errorMessage','You need admin approaval');
             }else{
-                $reservation->save();
-                return redirect('/user/showReser')->with('message','Reservation successfully added!');
+            $reservation->save();
+            return redirect('/user/showReser')->with('message','Reservation successfully added!');
             }
         }
 
@@ -331,18 +335,24 @@ class ReservationController extends Controller
 
     public function accept($id){
         $reservation=Reservation::find($id);
-        $reservation->satate='reserved';
+        $reservation->satate='reserv-state';
+        $reservation->message='Your reservation is accepted';
         $reservation->save();
         return redirect('/admin/notifications');
-        
     }
 
     public function refuse($id){
         $reservation=Reservation::find($id);
-        $reservation->satate='not-reserved';
+        $reservation->satate='reserv-ref';
+        $reservation->message='Your reservation is refused';
         $reservation->save();
         return redirect('/admin/notifications');
         
+    }
+    public function notif(){
+        $notifications=Reservation::all();
+        $user=Auth::user()->id;
+        return view('notifications',['notifications'=>$notifications,'user'=>$user]); 
     }
 
 }
