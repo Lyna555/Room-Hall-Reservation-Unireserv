@@ -204,6 +204,7 @@ class ReservationController extends Controller
         $reservation->user_id = Auth::user()->id;
         
         foreach($reservations as $reser){
+            if($reser->satate!='reserv-ref'){
             if($reser->room_name==$reservation->room_name && $reser->date==$reservation->date && (
             ($reser->creneaude>=$reservation->creneaude && $reser->creneaua<=$reservation->creneaua)||
             ($reser->creneaude<=$reservation->creneaude && $reser->creneaua>=$reservation->creneaua)|| 
@@ -211,6 +212,7 @@ class ReservationController extends Controller
             ($reser->creneaua<$reservation->creneaua && $reser->creneaua>$reservation->creneaua))){
                 return back()->with('errorMessage','Reservation already exists!');
             }
+        }
         }
         $nowDate=Carbon::now();
         if ($reservation->date<$nowDate){
@@ -231,6 +233,7 @@ class ReservationController extends Controller
             return redirect('/user/showReser')->with('message','Reservation successfully added!');
             }
         }
+        
     }
 
     /**
@@ -284,7 +287,7 @@ class ReservationController extends Controller
         $reservation->objective = $request->input('objective');
 
         foreach($reservations as $reser){
-            if($reser->id!=$reservation->id){
+            if($reser->id!=$reservation->id && $reser->satate!='reserv-ref'){
                 if($reser->room_name==$reservation->room_name && $reser->date==$reservation->date && (
                 ($reser->creneaude>=$reservation->creneaude && $reser->creneaua<=$reservation->creneaua)||
                 ($reser->creneaude<=$reservation->creneaude && $reser->creneaua>=$reservation->creneaua)|| 

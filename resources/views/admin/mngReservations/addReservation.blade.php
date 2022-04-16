@@ -34,7 +34,11 @@
             <select required name="name">
               <option></option>
               @foreach($rooms as $room)
+              @if($room->state!='speacial')
               <option>{{$room->name}}</option>
+              @else
+              <option style="background-color: #A4C8D5;">{{$room->name}}</option>
+              @endif
               @endforeach
             </select>
           </div>

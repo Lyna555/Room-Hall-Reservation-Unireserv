@@ -36,6 +36,11 @@ $(document).ready(function () {
         editable: true,
         selectable: true,
         selectHelper: true,
+        header:{
+            left:'prev,next today',
+            center:'title',
+            right:'month,agendaWeek,agendaDay',
+        },
         events: events,
     });
 }
