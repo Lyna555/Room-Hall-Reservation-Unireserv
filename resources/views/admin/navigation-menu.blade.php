@@ -48,7 +48,7 @@
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex nav" style="cursor: pointer">
-                    <x-jet-nav-link href="{{ route('register') }}" style="cursor: pointer;font-size:13px;">
+                    <x-jet-nav-link href="{{ route('/admin/prof') }}" style="cursor: pointer;font-size:13px;">
                         {{ __('Add Professor') }}
                     </x-jet-nav-link>
                 </div>

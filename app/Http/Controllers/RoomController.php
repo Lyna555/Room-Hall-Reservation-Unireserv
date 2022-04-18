@@ -116,7 +116,7 @@ class RoomController extends Controller
         $room = Room::find($id);
         $reservations = Reservation::all();
         foreach($reservations as $reservation){
-            if($reservation->room_id==$room->name){
+            if($reservation->room_name==$room->name){
                 $reservation->delete();
             }
         }
