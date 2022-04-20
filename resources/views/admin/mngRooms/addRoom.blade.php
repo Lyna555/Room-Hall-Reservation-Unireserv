@@ -8,8 +8,15 @@
 <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 <script src="{{ mix('js/app.js') }}" defer></script>
   <title>Add Rooms/Hall</title>
+  <style>
+    body {
+      background-image: url('{{url("images/web.png")}}');
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+  </style>
 </head>
-<body style="background:rgb(236, 219, 162)">
+<body>
   <div >
   @include('admin.navigation-menu')
   <div id="div" style="width:40%;margin:80px auto 0 auto;border-radius:15px;background:rgba(255, 255, 255, 0.658);padding:20px">

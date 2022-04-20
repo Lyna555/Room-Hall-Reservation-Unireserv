@@ -31,11 +31,9 @@ $(document).ready(function () {
     events={!! json_encode($events) !!};
 
     $('#calendar').fullCalendar({
-        editable: true,
+        editable: false,
         displayEventTime: true,
-        editable: true,
         selectable: true,
-        selectHelper: true,
         header:{
             left:'prev,next today',
             center:'title',

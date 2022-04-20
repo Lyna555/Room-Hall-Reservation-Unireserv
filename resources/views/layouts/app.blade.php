@@ -12,6 +12,14 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+
+        <style>
+            body{
+                background-image: url('{{url("images/web.png")}}');
+                background-size: 100% 104%;
+                background-repeat: no-repeat;
+            }
+        </style>
     
 
         @livewireStyles
@@ -19,7 +27,7 @@
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
     </head>
-    <body class="font-sans antialiased" style="background:rgb(236, 219, 162)">
+    <body class="font-sans antialiased">
         <x-jet-banner />
             <div >
                {{$slot}}

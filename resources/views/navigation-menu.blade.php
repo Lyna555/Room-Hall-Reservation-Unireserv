@@ -5,7 +5,7 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <a style="font-family: Georgia, 'Times New Roman', Times, serif, Tahoma, Geneva, Verdana, sans-serif ">
+                    <a style="font-family: 'Script MT';font-size: 20px;">
                         {{ __('unireserv') }}
                     </a>
                 </div>

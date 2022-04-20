@@ -8,10 +8,17 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <link rel="stylesheet" href="{{ mix('css/app.css') }}">
   <script src="{{ mix('js/app.js') }}" defer></script>
+  <style>
+    body {
+      background-image: url('{{url("images/web.png")}}');
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+  </style>
   <title>Add Reservations</title>
 </head>
 
-<body style="background:rgb(236, 219, 162)">
+<body>
   <div>
     @include('admin.navigation-menu')
     <div id="div" style="width:40%;margin:80px auto 0 auto;border-radius:15px;background:rgba(255, 255, 255, 0.658);padding:20px">
@@ -25,7 +32,7 @@
         {{session()->get('errorMessage')}}
       </div>
       @endif
-
+    
       <form id="form" action="{{ url('/storeR')}}" method="get">
         @csrf
         <div style="display:flex;flex-direction:column;gap:10px;">
@@ -35,9 +42,9 @@
               <option></option>
               @foreach($rooms as $room)
               @if($room->state!='speacial')
-              <option>{{$room->name}}</option>
+              <option value="{{$room->name}}">{{$room->name}} (Capacity: {{$room->capacity}}, Floor: {{$room->floor}})</option>
               @else
-              <option style="background-color: #A4C8D5;">{{$room->name}}</option>
+              <option value="{{$room->name}}" style="background-color: #A4C8D5;">{{$room->name}} (Capacity: {{$room->capacity}}, Floor: {{$room->floor}})</option>
               @endif
               @endforeach
             </select>

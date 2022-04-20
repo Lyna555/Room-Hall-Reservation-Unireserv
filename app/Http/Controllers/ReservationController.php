@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\Room;
 use App\Models\User;
 use App\Models\Reservation;
-use App\Models\Notification;
 use Illuminate\Validation\Rule;
 use Carbon\Carbon;
 use Auth;
@@ -39,7 +38,8 @@ class ReservationController extends Controller
         $events = [];
         foreach ($this->sources as $source) {
             foreach ($source['model']::all() as $model) {
-        $query=User::where('id','=',$model->{$source['prefix']})->value('name');
+                
+                $query=User::where('id','=',$model->{$source['prefix']})->value('name');
                 $crudFieldValue = $model->getOriginal($source['date_field']);
 
                 if (!$crudFieldValue) {
@@ -207,7 +207,7 @@ class ReservationController extends Controller
             if($reser->satate!='reserv-ref'){
             if($reser->room_name==$reservation->room_name && $reser->date==$reservation->date && (
             ($reser->creneaude>=$reservation->creneaude && $reser->creneaua<=$reservation->creneaua)||
-            ($reser->creneaude<=$reservation->creneaude && $reser->creneaua>=$reservation->creneaua)|| 
+            ($reser->creneaude<=$reservation->creneaude && $reser->creneaua>=$reservation->creneaua)||
             ($reser->creneaude<$reservation->creneaude && $reser->creneaua>$reservation->creneaude)||
             ($reser->creneaua<$reservation->creneaua && $reser->creneaua>$reservation->creneaua))){
                 return back()->with('errorMessage','Reservation already exists!');

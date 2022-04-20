@@ -15,9 +15,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
     <script src="{{ mix('js/app.js') }}" defer></script>
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    <style>
+            body{
+                background-image: url('{{url("images/web.png")}}');
+                background-size: cover;
+                background-repeat: no-repeat;
+            }
+        </style>
     
 </head>
-<body style="background:rgb(236, 219, 162)"> 
+<body> 
     <div >
 @include('admin.navigation-menu')
   
@@ -31,11 +38,9 @@ $(document).ready(function () {
     events={!! json_encode($events) !!};
 
     $('#calendar').fullCalendar({
-        editable: true,
+        editable: false,
         displayEventTime: true,
-        editable: true,
         selectable: true,
-        selectHelper: true,
         header:{
             left:'prev,next today',
             center:'title',

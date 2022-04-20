@@ -5,8 +5,13 @@
         {{session()->get('error')}}
     </div>
     @endif
-    <div style="display: flex;width:100%;height:90vh;justify-content:left;align-items:center">
-        <img src="{{URL('images/image2.png')}}" style="height:80vh;width:50%" alt="">
+    <div style="display:flex;width:60%;height:93.9vh;justify-content:center;align-items:center;position:absolute">
+    <pre style="text-align:center;font-family: 'Script MT';font-size: 90px;">Welcome to our
+    website
+    </pre>
+    </div>
+    <div style="display:flex;width:100%;height:93.9vh;justify-content:end;align-items:end">
+        <img src="{{URL('images/douaa.png')}}" alt="event">
     </div>
 
 </x-app-layout>

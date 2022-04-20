@@ -64,13 +64,15 @@
       padding: 0;
       box-sizing: border-box;
     }
-body{
-  background: rgb(236, 219, 162);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center
-}
+    body{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-image: url('{{url("images/web.png")}}');
+      background-size: 100% 104%;
+      background-repeat: no-repeat;
+    }
     input,
     textarea {
       font-family: "Poppins", sans-serif;

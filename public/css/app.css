@@ -42,7 +42,6 @@ html {
 
 body {
   margin: 0; /* 1 */
-  line-height: inherit; /* 2 */
 }
 
 
@@ -105,10 +104,6 @@ a {
   color: inherit;
   text-decoration: inherit;
   
-}
-
-.nav:hover{
-  background-color: rgba(231, 205, 118, 0.747);
 }
 
 #overlay{
