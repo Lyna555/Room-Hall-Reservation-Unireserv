@@ -48,11 +48,7 @@ $(document).ready(function () {
         },
         events: events,
     });
-}
-);
- 
-
-  
+});
 </script>
 </div>
 </body>
