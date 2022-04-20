@@ -12,8 +12,16 @@
   <style>
     body {
       background-image: url('{{url("images/web.png")}}');
-      background-size:cover;
+      background-size: cover;
+      background-attachment: fixed;
       background-repeat: no-repeat;
+    }
+    td {
+      text-align: center;
+    }
+
+    th {
+      text-align: center;
     }
   </style>
 </head>
@@ -21,53 +29,53 @@
 <body>
   <div>
     @include('admin.navigation-menu')
-    <div style="display: flex;width:100%;justify-content:end">
-    </div>
-    <div class="card mb-3" style="width:90%;margin:auto">
-      @if(session()->has('message'))
-      <div id="hh" class="alert alert-danger">
-        {{session()->get('message')}}
-      </div>
-      @endif
+    <div style="display: flex;width:100%;justify-content:center">
+      <div class="card mb-3" style="width:90%;margin-top:30px">
+        @if(session()->has('message'))
+        <div id="hh" class="alert alert-danger">
+          {{session()->get('message')}}
+        </div>
+        @endif
 
-      <div class="card-body">
-        <h1>Professors List</h1>
-        <a href="{{ route('register') }}" class="btn btn-sm btn-warning" style="background: rgb(255, 152, 67);color:white;border:none">Add</a>
-
-        <table class="table">
-          <thead class="thread-light">
-            <tr>
-              <th scope="col">Name</th>
-              <th scope="col">Email</th>
-              <th scope="col">Operations</th>
-            </tr>
-          </thead>
-          <tbody>
-            @foreach($profs as $prof)
-            @if( $prof->role=='prof')
-            <div id="overlay">
-              <div style="display:flex; flex-direction:column;justify-content:center;align-items:center;gap:20px;width:30%;height:20%;background:white;border-radius:20px;">
-                <p><strong>Are you sure to delete this Professor?</strong></p>
-                <div style="display:flex;flex-direction:row;justify-content:center; gap:20px">
-                  <a href="{{ url('/destroyy/'.$prof->id) }}" class="btn btn-sm btn-warning" style="background: rgb(224, 54, 54);color:white;border:none">Delete</a>
-                  <a href="" onclick="document.getElementById('overlay').style.display='none';" class="btn btn-sm btn-warning" style="background: lightgray;border:none">Cancel</a>
+        <div class="card-body">
+        <div style="display: flex;justify-content: space-between;width:93%">
+            <h1 style="font-weight: bold;">Professors List</h1>
+            <a href="{{ route('register') }}" class="btn btn-sm btn-warning" style="background: rgb(255, 152, 67);color:white;border:none">Add Professor</a>
+          </div>
+          <table class="table">
+            <thead class="thread-light">
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Operations</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach($profs as $prof)
+              @if( $prof->role=='prof')
+              <div id="overlay">
+                <div style="display:flex; flex-direction:column;justify-content:center;align-items:center;gap:20px;width:30%;height:20%;background:white;border-radius:20px;">
+                  <p><strong>Are you sure to delete this Professor?</strong></p>
+                  <div style="display:flex;flex-direction:row;justify-content:center; gap:20px">
+                    <a href="{{ url('/destroyy/'.$prof->id) }}" class="btn btn-sm btn-warning" style="background: rgb(224, 54, 54);color:white;border:none">Delete</a>
+                    <a href="" onclick="document.getElementById('overlay').style.display='none';" class="btn btn-sm btn-warning" style="background: lightgray;border:none">Cancel</a>
+                  </div>
                 </div>
               </div>
-            </div>
-            <tr>
-              <td>{{ $prof->name }}</td>
-              <td>{{ $prof->email }}</td>
-              <td>
-                <button onclick="document.getElementById('overlay').style.display='flex'" class="btn btn-sm btn-warning">Delete</button>
-              </td>
-            </tr>
-            @endif
-            @endforeach
-          </tbody>
-        </table>
+              <tr>
+                <td>{{ $prof->name }}</td>
+                <td>{{ $prof->email }}</td>
+                <td>
+                  <button onclick="document.getElementById('overlay').style.display='flex'" class="btn btn-sm btn-warning">Delete</button>
+                </td>
+              </tr>
+              @endif
+              @endforeach
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
-  </div>
 </body>
 
 </html>

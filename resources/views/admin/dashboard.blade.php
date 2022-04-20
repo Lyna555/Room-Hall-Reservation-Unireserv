@@ -5,10 +5,13 @@
         {{session()->get('error')}}
     </div>
     @endif
-    <div style="display:flex;width:60%;height:93.9vh;justify-content:center;align-items:center;position:absolute">
-    <pre style="text-align:center;font-family: 'Script MT';font-size: 90px;">Welcome to our
-    website
-    </pre>
+    <div style="display:flex;flex-direction:column;gap:20px;width:60%;height:93.9vh;justify-content:center;align-items:center;position:absolute">
+        <div style="display:flex;flex-direction:column;text-align:center;font-family:'Script MT';font-size:90px;line-height: 80px;">
+            <div>Welcome to our</div>
+            <div>website</div>
+        </div>
+        <div style="text-align:center;font-size:15px;font-weight: bold;">Our website will make your life easier, better<br>without any hhhh</div>
+        <a href="#" class="btn btn-info" style="background-color: skyblue;border:none;font-weight: bold;box-shadow: 0px 3px 6px gray;">Explore</a>
     </div>
     <div style="display:flex;width:100%;height:93.9vh;justify-content:end;align-items:end">
         <img src="{{URL('images/douaa.png')}}" alt="event">

@@ -12,18 +12,18 @@
   <style>
     body {
       background-image: url('{{url("images/web.png")}}');
-      background-size: 100% 104%;
+      background-size: cover;
+      background-attachment: fixed;
       background-repeat: no-repeat;
     }
   </style>
 </head>
 
-<body style="background:rgb(236, 219, 162)">
+<body>
   @include('admin.navigation-menu')
 
-  <div style="display: flex;width:100%;justify-content:end">
-  </div>
-  <div class="card mb-3" style="width:90%;margin:auto">
+  <div style="display: flex;width:100%;justify-content:center;align-items:center">
+  <div class="card mb-3" style="width:90%;margin-top:30px">
     @if(session()->has('message'))
     <div id="hh" class="alert alert-danger">
       {{session()->get('message')}}

@@ -19,6 +19,7 @@
             body{
                 background-image: url('{{url("images/web.png")}}');
                 background-size: cover;
+                background-attachment: fixed;
                 background-repeat: no-repeat;
             }
         </style>
