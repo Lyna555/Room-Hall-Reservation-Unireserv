@@ -1,18 +1,20 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
 use Auth;
 
 class HomeController extends Controller
 {
-    public function index(){
-        $role=Auth::user()->role;
-
-        if($role=='admin'){
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
+    public function index()
+    {
+        if (Auth::user()->role == 'admin') {
             return view('admin.dashboard');
-        }else{
+        } else {
             return view('dashboard');
         }
     }

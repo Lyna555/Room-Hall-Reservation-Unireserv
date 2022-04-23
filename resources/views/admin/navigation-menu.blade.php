@@ -18,38 +18,38 @@
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex nav">
-                    <x-jet-nav-link href="{{ url('/admin/calendar') }}" :active="request()->routeIs('/admin/calendar')" style="font-size:13px;">
+                    <x-jet-nav-link href="{{ route('/admin/calendar') }}" :active="request()->routeIs('/admin/calendar')" style="font-size:13px;">
                         {{ __('Calendar') }}
                     </x-jet-nav-link>
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex nav">
-                    <x-jet-nav-link href="{{ url('/showList') }}" style="cursor: pointer;font-size:13px;">
+                    <x-jet-nav-link href="{{ route('/showList') }}"  :active="request()->routeIs('/showList')" style="cursor: pointer;font-size:13px;">
                         {{ __('Rooms/Halls') }}
                     </x-jet-nav-link>
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex nav" style="cursor: pointer">
-                    <x-jet-nav-link href="{{ url('/admin/showReser') }}" style="cursor: pointer;font-size:13px;">
+                    <x-jet-nav-link href="{{ route('/admin/showReser') }}"  :active="request()->routeIs('/admin/showReser')" style="cursor: pointer;font-size:13px;">
                         {{ __('Reservations') }}
                     </x-jet-nav-link>
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex nav" style="cursor: pointer">
-                    <x-jet-nav-link href="{{ url('/admin/email') }}" style="cursor: pointer;font-size:13px;">
+                    <x-jet-nav-link href="{{ route('/admin/email') }}" :active="request()->routeIs('/admin/email')" style="cursor: pointer;font-size:13px;">
                         {{ __('Contact') }}
                     </x-jet-nav-link>
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex nav" style="cursor: pointer">
-                    <x-jet-nav-link href="{{ route('/admin/notifications') }}" style="cursor: pointer;font-size:13px;">
+                    <x-jet-nav-link href="{{ route('/admin/notifications') }}" :active="request()->routeIs('/admin/notifications')" style="cursor: pointer;font-size:13px;">
                         {{ __('Notifications') }}
                     </x-jet-nav-link>
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex nav" style="cursor: pointer">
-                    <x-jet-nav-link href="{{ route('/admin/prof') }}" style="cursor: pointer;font-size:13px;">
-                        {{ __('Add Professor') }}
+                    <x-jet-nav-link href="{{ route('/admin/prof') }}" :active="request()->routeIs('/admin/prof')" style="cursor: pointer;font-size:13px;">
+                        {{ __(' Professors') }}
                     </x-jet-nav-link>
                 </div>
 
@@ -178,17 +178,17 @@
             </x-jet-nav-link>
         </div>
         <div class="pt-2 pb-3 space-y-1">
-            <x-jet-nav-link href="{{ url('/admin/calendar') }}" :active="request()->routeIs('/admin/calendar')">
+            <x-jet-nav-link href="{{ route('/admin/calendar') }}" :active="request()->routeIs('/admin/calendar')">
                 {{ __('Calendar') }}
             </x-jet-nav-link>
         </div>
         <div class="pt-2 pb-3 space-y-1">
-            <x-jet-nav-link href="{{ url('/showList') }}" style="cursor: pointer;font-size:13px;">
+            <x-jet-nav-link href="{{ route('/showList') }}" style="cursor: pointer;font-size:13px;">
                 {{ __('Rooms/Halls') }}
             </x-jet-nav-link>
         </div>
         <div class="pt-2 pb-3 space-y-1">
-            <x-jet-nav-link href="{{ url('/admin/showReser') }}" style="cursor: pointer;font-size:13px;">
+            <x-jet-nav-link href="{{ route('/admin/showReser') }}" style="cursor: pointer;font-size:13px;">
                 {{ __('Reservations') }}
             </x-jet-nav-link>
         </div>

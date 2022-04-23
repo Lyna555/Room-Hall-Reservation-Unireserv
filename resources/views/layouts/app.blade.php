@@ -7,9 +7,7 @@
 
         <title>Home</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-        <!-- Fonts -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap; position:fixed">
-
+        
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
@@ -17,6 +15,7 @@
             body{
                 background-image: url('{{url("images/web.png")}}');
                 background-size: 100% 104%;
+                background-attachment: fixed;
                 background-repeat: no-repeat;
             }
         </style>

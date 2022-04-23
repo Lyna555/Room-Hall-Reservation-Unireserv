@@ -13,12 +13,16 @@ use Auth;
 
 class ReservationController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    
+
     public $sources = [
         [
             'model'      => '\\App\\Models\\Reservation',
@@ -35,51 +39,54 @@ class ReservationController extends Controller
 
     public function adminCalendar()
     {
-        $events = [];
-        foreach ($this->sources as $source) {
-            foreach ($source['model']::all() as $model) {
-                
-                $query=User::where('id','=',$model->{$source['prefix']})->value('name');
-                $crudFieldValue = $model->getOriginal($source['date_field']);
+        if (Auth::user()->role == 'admin') {
+            $events = [];
+            foreach ($this->sources as $source) {
+                foreach ($source['model']::all() as $model) {
 
-                if (!$crudFieldValue) {
-                    continue;
+                    $query = User::where('id', '=', $model->{$source['prefix']})->value('name');
+                    $crudFieldValue = $model->getOriginal($source['date_field']);
+
+                    if (!$crudFieldValue) {
+                        continue;
+                    }
+                    if ($model->{$source['satate']} == 'reserved' || $model->{$source['satate']} == 'reserv-state') {
+
+                        if ($model->{$source['end_field']} < Carbon::now()) {
+                            $events[] = [
+                                'title' => trim($query . " " . $model->{$source['field']}
+                                    . " " . Carbon::parse($model->{$source['suffix']})->format('H:i') . " " . Carbon::parse($model->{$source['creneaua']})->format('H:i')),
+                                'start' => $crudFieldValue,
+                                'end'   => $model->{$source['end_field']},
+                                'url'   => route($source['route'], $model->id),
+                                'color' => '#7fa1bc',
+                            ];
+                        } elseif (Auth::user()->id == $model->{$source['prefix']}) {
+                            $events[] = [
+                                'title' => trim($query . " " . $model->{$source['field']}
+                                    . " " . Carbon::parse($model->{$source['suffix']})->format('H:i') . " " . Carbon::parse($model->{$source['creneaua']})->format('H:i')),
+                                'start' => $crudFieldValue,
+                                'end'   => $model->{$source['end_field']},
+                                'url'   => route($source['route'], $model->id),
+                                'color' => '#f9a35c',
+                            ];
+                        } else {
+                            $events[] = [
+                                'title' => trim($query . " " . $model->{$source['field']}
+                                    . " " . Carbon::parse($model->{$source['suffix']})->format('H:i') . " " . Carbon::parse($model->{$source['creneaua']})->format('H:i')),
+                                'start' => $crudFieldValue,
+                                'end'   => $model->{$source['end_field']},
+                                'url'   => route($source['route'], $model->id),
+                                'color' => '#92baff',
+                            ];
+                        }
+                    }
                 }
-                if($model->{$source['satate']}=='reserved' || $model->{$source['satate']}=='reserv-state'){
-
-                if($model->{$source['end_field']}<Carbon::now()){
-                    $events[] = [
-                        'title' => trim($query . " " . $model->{$source['field']}
-                            . " " . Carbon::parse($model->{$source['suffix']})->format('H:i'). " " . Carbon::parse($model->{$source['creneaua']})->format('H:i')),
-                        'start' => $crudFieldValue,
-                        'end'   => $model->{$source['end_field']},
-                        'url'   => route($source['route'], $model->id),
-                        'color' =>'gray',
-                    ];
-                }elseif(Auth::user()->id==$model->{$source['prefix']}){
-                $events[] = [
-                    'title' => trim($query . " " . $model->{$source['field']}
-                        . " " . Carbon::parse($model->{$source['suffix']})->format('H:i'). " " . Carbon::parse($model->{$source['creneaua']})->format('H:i')),
-                    'start' => $crudFieldValue,
-                    'end'   => $model->{$source['end_field']},
-                    'url'   => route($source['route'], $model->id),
-                    'color'=>'brown',
-                ];
-            }else{
-                $events[] = [
-                    'title' => trim($query . " " . $model->{$source['field']}
-                        . " " . Carbon::parse($model->{$source['suffix']})->format('H:i'). " " . Carbon::parse($model->{$source['creneaua']})->format('H:i')),
-                    'start' => $crudFieldValue,
-                    'end'   => $model->{$source['end_field']},
-                    'url'   => route($source['route'], $model->id),
-                    'color' =>'cadetblue',
-                ];
             }
-            
-            }
+            return view('admin.fullcalendar', compact('events'));
+        } else {
+            return abort(403);
         }
-    }
-        return view('admin.fullcalendar', compact('events'));
     }
     public $resources = [
         [
@@ -97,49 +104,52 @@ class ReservationController extends Controller
 
     public function userCalendar()
     {
-        $events = [];
-        foreach ($this->resources as $resource) {
-            foreach ($resource['model']::all() as $model) {
-        $query=User::where('id','=',$model->{$resource['prefix']})->value('name');
-                $crudFieldValue = $model->getOriginal($resource['date_field']);
+        if (Auth::user()->role == 'prof') {
+            $events = [];
+            foreach ($this->resources as $resource) {
+                foreach ($resource['model']::all() as $model) {
+                    $query = User::where('id', '=', $model->{$resource['prefix']})->value('name');
+                    $crudFieldValue = $model->getOriginal($resource['date_field']);
 
-                if (!$crudFieldValue) {
-                    continue;
+                    if (!$crudFieldValue) {
+                        continue;
+                    }
+                    if ($model->{$resource['satate']} == 'reserved' || $model->{$resource['satate']} == 'reserv-state') {
+                        if ($model->{$resource['end_field']} < Carbon::now()) {
+                            $events[] = [
+                                'title' => trim($query . " " . $model->{$resource['field']}
+                                    . " " . Carbon::parse($model->{$resource['suffix']})->format('H:i') . " " . Carbon::parse($model->{$resource['creneaua']})->format('H:i')),
+                                'start' => $crudFieldValue,
+                                'end'   => $model->{$resource['end_field']},
+                                'url'   => route($resource['route'], $model->id),
+                                'color' => '#7fa1bc',
+                            ];
+                        } elseif (Auth::user()->id == $model->{$resource['prefix']}) {
+                            $events[] = [
+                                'title' => trim($query . " " . $model->{$resource['field']}
+                                    . " " . Carbon::parse($model->{$resource['suffix']})->format('H:i') . " " . Carbon::parse($model->{$resource['creneaua']})->format('H:i')),
+                                'start' => $crudFieldValue,
+                                'end'   => $model->{$resource['end_field']},
+                                'url'   => route($resource['route'], $model->id),
+                                'color' => '#f9a35c',
+                            ];
+                        } else {
+                            $events[] = [
+                                'title' => trim($query . " " . $model->{$resource['field']}
+                                    . " " . Carbon::parse($model->{$resource['suffix']})->format('H:i') . " " . Carbon::parse($model->{$resource['creneaua']})->format('H:i')),
+                                'start' => $crudFieldValue,
+                                'end'   => $model->{$resource['end_field']},
+                                'url'   => route($resource['route'], $model->id),
+                                'color' => '#92baff',
+                            ];
+                        }
+                    }
                 }
-                if($model->{$resource['satate']}=='reserved' || $model->{$resource['satate']}=='reserv-state'){
-                if($model->{$resource['end_field']}<Carbon::now()){
-                    $events[] = [
-                        'title' => trim($query . " " . $model->{$resource['field']}
-                            . " " . Carbon::parse($model->{$resource['suffix']})->format('H:i'). " " . Carbon::parse($model->{$resource['creneaua']})->format('H:i')),
-                        'start' => $crudFieldValue,
-                        'end'   => $model->{$resource['end_field']},
-                        'url'   => route($resource['route'], $model->id),
-                        'color' =>'gray',
-                    ];
-                }elseif(Auth::user()->id==$model->{$resource['prefix']}){
-                $events[] = [
-                    'title' => trim($query . " " . $model->{$resource['field']}
-                        . " " . Carbon::parse($model->{$resource['suffix']})->format('H:i'). " " . Carbon::parse($model->{$resource['creneaua']})->format('H:i')),
-                    'start' => $crudFieldValue,
-                    'end'   => $model->{$resource['end_field']},
-                    'url'   => route($resource['route'], $model->id),
-                    'color'=>'brown',
-                ];
-            }else{
-                $events[] = [
-                    'title' => trim($query . " " . $model->{$resource['field']}
-                        . " " . Carbon::parse($model->{$resource['suffix']})->format('H:i'). " " . Carbon::parse($model->{$resource['creneaua']})->format('H:i')),
-                    'start' => $crudFieldValue,
-                    'end'   => $model->{$resource['end_field']},
-                    'url'   => route($resource['route'], $model->id),
-                    'color' =>'cadetblue',
-                ];
             }
-            
-            }
+            return view('fullcalendar', compact('events'));
+        } else {
+            return abort(403);
         }
-    }
-        return view('fullcalendar', compact('events'));
     }
 
     /**
@@ -154,34 +164,54 @@ class ReservationController extends Controller
 
     public function showNamesAdmin()
     {
-        $rooms = Room::all();
-        return view('admin.mngReservations.addReservation',['rooms'=>$rooms]);
+        if (Auth::user()->role == 'admin') {
+            $rooms = Room::all();
+            return view('admin.mngReservations.addReservation', ['rooms' => $rooms]);
+        } else {
+            return abort(403);
+        }
     }
 
     public function showNamesUser()
     {
-        $rooms = Room::all();
-        return view('mngReservations.addReservation',['rooms'=>$rooms]);
+        if (Auth::user()->role == 'prof') {
+            $rooms = Room::all();
+            return view('mngReservations.addReservation', ['rooms' => $rooms]);
+        } else {
+            return abort(403);
+        }
     }
     public function showNotification()
     {
-        $sysdate = Carbon::now();
-        $reservations=Reservation::all();
-        return view('admin.notifications',['reservations'=>$reservations,'sysdate'=>$sysdate]);
+        if (Auth::user()->role == 'admin') {
+            $sysdate = Carbon::now();
+            $reservations = Reservation::all();
+            return view('admin.notifications', ['reservations' => $reservations, 'sysdate' => $sysdate]);
+        } else {
+            return abort(403);
+        }
     }
 
     public function showReserUser()
     {
-        $reservations = Reservation::where('user_id', Auth::user()->id)->get();
-        $sysdate = Carbon::now();
-        return view('mngReservations.ReserList',['reservations'=>$reservations,'sysdate'=>$sysdate]);
+        if (Auth::user()->role == 'prof') {
+            $reservations = Reservation::where('user_id', Auth::user()->id)->get();
+            $sysdate = Carbon::now();
+            return view('mngReservations.ReserList', ['reservations' => $reservations, 'sysdate' => $sysdate]);
+        } else {
+            return abort(403);
+        }
     }
 
     public function showReserAdmin()
     {
-        $reservations = Reservation::all();
-        $sysdate = Carbon::now();
-        return view('admin.mngReservations.ReserList',['reservations'=>$reservations,'sysdate'=>$sysdate]);
+        if (Auth::user()->role == 'admin') {
+            $reservations = Reservation::all();
+            $sysdate = Carbon::now();
+            return view('admin.mngReservations.ReserList', ['reservations' => $reservations, 'sysdate' => $sysdate]);
+        } else {
+            return abort(403);
+        }
     }
 
     /**
@@ -202,38 +232,37 @@ class ReservationController extends Controller
         $reservation->satate = 'reserved';
 
         $reservation->user_id = Auth::user()->id;
-        
-        foreach($reservations as $reser){
-            if($reser->satate!='reserv-ref'){
-            if($reser->room_name==$reservation->room_name && $reser->date==$reservation->date && (
-            ($reser->creneaude>=$reservation->creneaude && $reser->creneaua<=$reservation->creneaua)||
-            ($reser->creneaude<=$reservation->creneaude && $reser->creneaua>=$reservation->creneaua)||
-            ($reser->creneaude<$reservation->creneaude && $reser->creneaua>$reservation->creneaude)||
-            ($reser->creneaua<$reservation->creneaua && $reser->creneaua>$reservation->creneaua))){
-                return back()->with('errorMessage','Reservation already exists!');
+
+        foreach ($reservations as $reser) {
+            if ($reser->satate != 'reserv-ref') {
+                if ($reser->room_name == $reservation->room_name && $reser->date == $reservation->date && (
+                    ($reser->creneaude >= $reservation->creneaude && $reser->creneaua <= $reservation->creneaua) ||
+                    ($reser->creneaude <= $reservation->creneaude && $reser->creneaua >= $reservation->creneaua) ||
+                    ($reser->creneaude < $reservation->creneaude && $reser->creneaua > $reservation->creneaude) ||
+                    ($reser->creneaua < $reservation->creneaua && $reser->creneaua > $reservation->creneaua))) {
+                    return back()->with('errorMessage', 'Reservation already exists!');
+                }
             }
         }
-        }
-        $nowDate=Carbon::now();
-        if ($reservation->date<$nowDate){
-            return back()->with('errorMessage','Date expired');
-        }elseif ($reservation->creneaude>=$reservation->creneaua){
-                return back()->with('errorMessage','Time expired');
-        }elseif(Auth::user()->role=='admin'){
+        $nowDate = Carbon::now();
+        if ($reservation->date < $nowDate) {
+            return back()->with('errorMessage', 'Date expired');
+        } elseif ($reservation->creneaude >= $reservation->creneaua) {
+            return back()->with('errorMessage', 'Time expired');
+        } elseif (Auth::user()->role == 'admin') {
             $reservation->save();
-            return redirect('/admin/showReser')->with('message','Reservation successfully added!');
-        }else{
-            $verif=Room::where('name','=',$reservation->room_name)->value('state');
-            if($verif=='speacial'){
-                $reservation->satate='wait';
+            return redirect('/admin/showReser')->with('message', 'Reservation successfully added!');
+        } else {
+            $verif = Room::where('name', '=', $reservation->room_name)->value('state');
+            if ($verif == 'speacial') {
+                $reservation->satate = 'wait';
                 $reservation->save();
-                return back()->with('errorMessage','You need admin approaval');
-            }else{
-            $reservation->save();
-            return redirect('/user/showReser')->with('message','Reservation successfully added!');
+                return back()->with('errorMessage', 'You need admin approaval');
+            } else {
+                $reservation->save();
+                return redirect('/user/showReser')->with('message', 'Reservation successfully added!');
             }
         }
-        
     }
 
     /**
@@ -255,16 +284,24 @@ class ReservationController extends Controller
      */
     public function editUser($id)
     {
-        $reservation = Reservation::find($id);
-        $rooms = Room::all();
-        return view('mngReservations.editReservation',['reservation'=>$reservation,'rooms'=>$rooms]);
+        if (Auth::user()->role == 'prof') {
+            $reservation = Reservation::find($id);
+            $rooms = Room::all();
+            return view('mngReservations.editReservation', ['reservation' => $reservation, 'rooms' => $rooms]);
+        } else {
+            return abort(403);
+        }
     }
 
     public function editAdmin($id)
     {
-        $reservation = Reservation::find($id);
-        $rooms = Room::all();
-        return view('admin.mngReservations.editReservation',['reservation'=>$reservation,'rooms'=>$rooms]);
+        if (Auth::user()->role == 'admin') {
+            $reservation = Reservation::find($id);
+            $rooms = Room::all();
+            return view('admin.mngReservations.editReservation', ['reservation' => $reservation, 'rooms' => $rooms]);
+        } else {
+            return abort(403);
+        }
     }
 
 
@@ -277,50 +314,46 @@ class ReservationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+
         $reservations = Reservation::all();
         $reservation = Reservation::find($id);
-        $request->validate(['id'=>Rule::unique('reservations')->ignore($reservation->id)]);
+        $request->validate(['id' => Rule::unique('reservations')->ignore($reservation->id)]);
         $reservation->date = $request->input('date');
         $reservation->creneaude = $request->input('creneaude');
         $reservation->creneaua = $request->input('creneaua');
         $reservation->objective = $request->input('objective');
 
-        foreach($reservations as $reser){
-            if($reser->id!=$reservation->id && $reser->satate!='reserv-ref'){
-                if($reser->room_name==$reservation->room_name && $reser->date==$reservation->date && (
-                ($reser->creneaude>=$reservation->creneaude && $reser->creneaua<=$reservation->creneaua)||
-                ($reser->creneaude<=$reservation->creneaude && $reser->creneaua>=$reservation->creneaua)|| 
-                ($reser->creneaude<$reservation->creneaude && $reser->creneaua>$reservation->creneaude)||
-                ($reser->creneaua<$reservation->creneaua && $reser->creneaua>$reservation->creneaua))){
-                    return back()->with('errorMessage','Reservation already exists!');
+        foreach ($reservations as $reser) {
+            if ($reser->id != $reservation->id && $reser->satate != 'reserv-ref') {
+                if ($reser->room_name == $reservation->room_name && $reser->date == $reservation->date && (
+                    ($reser->creneaude >= $reservation->creneaude && $reser->creneaua <= $reservation->creneaua) ||
+                    ($reser->creneaude <= $reservation->creneaude && $reser->creneaua >= $reservation->creneaua) ||
+                    ($reser->creneaude < $reservation->creneaude && $reser->creneaua > $reservation->creneaude) ||
+                    ($reser->creneaua < $reservation->creneaua && $reser->creneaua > $reservation->creneaua))) {
+                    return back()->with('errorMessage', 'Reservation already exists!');
                 }
             }
         }
-        
-        $nowDate=Carbon::now();
-       if ($reservation->date<$nowDate){
-            return back()->with('errorMessage','Date expired');
-         
-        }elseif ($reservation->creneaua<$reservation->creneaude){
-            return back()->with('errorMessage','Time expired');
-        }elseif(Auth::user()->role=='admin'){
+
+        $nowDate = Carbon::now();
+        if ($reservation->date < $nowDate) {
+            return back()->with('errorMessage', 'Date expired');
+        } elseif ($reservation->creneaua < $reservation->creneaude) {
+            return back()->with('errorMessage', 'Time expired');
+        } elseif (Auth::user()->role == 'admin') {
             $reservation->save();
-            return redirect('/admin/showReser')->with('message','Reservation successfully added!');
-        }else{
-            $verif=Room::where('name','=',$reservation->room_name)->value('state');
-            if($verif=='speacial'){
-                $reservation->satate='wait';
+            return redirect('/admin/showReser')->with('message', 'Reservation successfully added!');
+        } else {
+            $verif = Room::where('name', '=', $reservation->room_name)->value('state');
+            if ($verif == 'speacial') {
+                $reservation->satate = 'wait';
                 $reservation->save();
-                return back()->with('errorMessage','You need admin approaval');
-            }else{
-            $reservation->save();
-            return redirect('/user/showReser')->with('message','Reservation successfully added!');
+                return back()->with('errorMessage', 'You need admin approaval');
+            } else {
+                $reservation->save();
+                return redirect('/user/showReser')->with('message', 'Reservation successfully added!');
             }
         }
-
-        
-            
     }
 
     /**
@@ -333,29 +366,42 @@ class ReservationController extends Controller
     {
         $reservation = Reservation::find($id);
         $reservation->delete();
-        return back()->with('message','Reservation successfully deleted!');
+        return back()->with('message', 'Reservation successfully deleted!');
     }
 
-    public function accept($id){
-        $reservation=Reservation::find($id);
-        $reservation->satate='reserv-state';
-        $reservation->message='Your reservation is accepted';
-        $reservation->save();
-        return redirect('/admin/notifications');
+    public function accept($id)
+    {
+        if (Auth::user()->role == 'admin') {
+            $reservation = Reservation::find($id);
+            $reservation->satate = 'reserv-state';
+            $reservation->message = 'Your reservation is accepted';
+            $reservation->save();
+            return redirect('/admin/notifications');
+        } else {
+            return abort(403);
+        }
     }
 
-    public function refuse($id){
-        $reservation=Reservation::find($id);
-        $reservation->satate='reserv-ref';
-        $reservation->message='Your reservation is refused';
-        $reservation->save();
-        return redirect('/admin/notifications');
-        
+    public function refuse($id)
+    {
+        if (Auth::user()->role == 'admin') {
+            $reservation = Reservation::find($id);
+            $reservation->satate = 'reserv-ref';
+            $reservation->message = 'Your reservation is refused';
+            $reservation->save();
+            return redirect('/admin/notifications');
+        } else {
+            return abort(403);
+        }
     }
-    public function notif(){
-        $notifications=Reservation::all();
-        $user=Auth::user()->id;
-        return view('notifications',['notifications'=>$notifications,'user'=>$user]); 
+    public function notif()
+    {
+        if (Auth::user()->role == 'prof') {
+            $notifications = Reservation::all();
+            $user = Auth::user()->id;
+            return view('notifications', ['notifications' => $notifications, 'user' => $user]);
+        } else {
+            return abort(403);
+        }
     }
-
 }

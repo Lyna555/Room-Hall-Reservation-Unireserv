@@ -102,7 +102,11 @@ Reset links to optimize for opt-in styling instead of opt-out.
 a {
   color: inherit;
   text-decoration: inherit;
-  
+}
+
+a:hover{
+  text-decoration: none;
+  color: black;
 }
 
 #overlay{

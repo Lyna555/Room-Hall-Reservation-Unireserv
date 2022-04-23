@@ -11,7 +11,7 @@
   <style>
     body {
       background-image: url('{{url("images/web.png")}}');
-      background-size: cover;
+      background-size: 100% 104%;
       background-repeat: no-repeat;
     }
   </style>
@@ -74,13 +74,12 @@
           </div>
 
         </div>
-        <div style="display: flex;justify-content:center;gap:20px">
-          <input style="margin-top: 20px" type="submit" class="btn btn-info" value="Save">
-          <input style="margin-top: 20px" type="reset" class="btn btn-info" value="Reset">
+         <div style="display: flex;justify-content:center;gap:20px">
+            <input type="submit" class="btn btn-info" style="margin-top: 20px;background-color: #f9a35c;color:white;border:none;box-shadow: 0px 2px 4px gray;border-radius:15px;padding:3.7px 23.7px" value="Save">
+            <a href="{{url('/admin/showReser')}}" style="text-decoration: none;margin-top: 20px;background-color: #a4c8d5;color:white;border:none;box-shadow: 0px 2px 4px gray;border-radius:15px;padding:3.7px 15px;">Cancel</a>
         </div>
       </form>
     </div>
   </div>
 </body>
-
 </html>

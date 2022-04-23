@@ -12,9 +12,16 @@
   <style>
     body {
       background-image: url('{{url("images/web.png")}}');
-      background-size: cover;
+      background-size: 100% 104%;
       background-attachment: fixed;
       background-repeat: no-repeat;
+    }
+    td {
+      text-align: center;
+    }
+
+    th {
+      text-align: center;
     }
   </style>
 </head>
@@ -30,7 +37,7 @@
     </div>
     @endif
     <div class="card-body">
-      <h1>Notifications</h1>
+      <h1 style="font-weight: bold">Notifications</h1>
 
       <table class="table">
         <thead class="thread-light">
@@ -60,9 +67,9 @@
             <td>{{$reservation->date}}</td>
             <td>{{$reservation->creneaude}} - {{$reservation->creneaua}}</td>
 
-            <td>
-              <a href="{{url('/accept/'.$reservation->id)}}" class="btn btn-sm btn-warning">Accept</a>
-              <button onclick="document.getElementById('overlay').style.display='flex'" class="btn btn-sm btn-warning">Refuse</button>
+            <td style="display: flex;gap:10px;justify-content: center;" >
+              <a href="{{url('/accept/'.$reservation->id)}}" class="btn btn-sm btn-warning " style="background-color: #f9a35c;color:white;border:none;box-shadow: 0px 2px 4px gray;border-radius:15px;padding:3.7px 18px">Accept</a>
+              <button onclick="document.getElementById('overlay').style.display='flex'" class="btn btn-sm btn-warning" style="background-color: #a4c8d5;color:white;border:none;box-shadow: 0px 2px 4px gray;border-radius:15px;padding:3.7px 18px;">Refuse</button>
             </td>
           </tr>
           @endif

@@ -64,13 +64,17 @@
       padding: 0;
       box-sizing: border-box;
     }
-body{
-  background: rgb(236, 219, 162);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center
-}
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-image: url('{{url("images/web.png")}}');
+      background-size: 100% 104%;
+      background-repeat: no-repeat;
+    }
+
     input,
     textarea {
       font-family: "Poppins", sans-serif;
@@ -79,8 +83,7 @@ body{
     .container {
       position: relative;
       width: 100%;
-      min-height: 100vh;
-     
+      height: 90vh;
       overflow: hidden;
       display: flex;
       align-items: center;
@@ -88,8 +91,8 @@ body{
     }
 
     .form {
-      width: 100%;
-      max-width: 820px;
+      max-width: 70%;
+      height: 70vh;
       background-color: #fff;
       border-radius: 10px;
       box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.1);
@@ -100,29 +103,13 @@ body{
     }
 
     .contact-form {
-      position: relative;
-      background-color: rgb(235, 191, 111);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background-color: #9fb6fa;
 
-    }
-
-    .circle {
-      border-radius: 50%;
-      background: linear-gradient(135deg, transparent 20%, #05a3a4);
-      position: absolute;
-    }
-
-    .circle.one {
-      width: 130px;
-      height: 130px;
-      top: 130px;
-      right: -40px;
-    }
-
-    .circle.two {
-      width: 80px;
-      height: 80px;
-      top: 10px;
-      right: 30px;
     }
 
     .contact-form:before {
@@ -139,7 +126,6 @@ body{
     }
 
     #form {
-      padding: 2.3rem 2.2rem;
       overflow: hidden;
       position: relative;
     }
@@ -148,9 +134,9 @@ body{
     .title {
       color: #fff;
       font-weight: 500;
-      font-size: 1.5rem;
+      font-size: 30px;
       line-height: 1;
-      margin-bottom: 0.7rem;
+      margin-bottom: 2rem;
     }
 
     .input-container {
@@ -162,29 +148,30 @@ body{
       width: 100%;
       outline: none;
       border: 2px solid #fff;
-      background: none;
+      background: white;
+      border: 1px solid gray;
       padding: 0.6rem 1.2rem;
       color: #fff;
       font-weight: 500;
       font-size: 0.95rem;
       letter-spacing: 0.5px;
-      border-radius: 25px;
+      border-radius: 10px;
       transition: 0.3s;
     }
 
     textarea.input {
       padding: 0.8rem 1.2rem;
       min-height: 100px;
-      border-radius: 22px;
+      border-radius: 10px;
       resize: none;
       overflow-y: auto;
     }
+
     .btn {
       padding: 0.6rem 1.3rem;
       background-color: #fff;
       border: 2px solid #fff;
       font-size: 0.95rem;
-      color: #05a3a4;
       line-height: 1;
       border-radius: 25px;
       outline: none;
@@ -198,6 +185,7 @@ body{
       background-color: #05a3a4;
       color: #fff;
     }
+
     @media (max-width: 850px) {
       .form {
         grid-template-columns: 1fr;
@@ -216,23 +204,8 @@ body{
         right: 70px;
       }
 
-      .square {
-        transform: translate(140%, 43%);
-        height: 350px;
-      }
-
-      .big-circle {
-        bottom: 75%;
-        transform: scale(0.9) translate(-40%, 30%);
-        right: 50%;
-      }
-
       .text {
         margin: 1rem 0 1.5rem 0;
-      }
-
-      .social-media {
-        padding: 1.5rem 0 0 0;
       }
     }
 
@@ -242,11 +215,6 @@ body{
       }
 
       .contact-info:before {
-        display: none;
-      }
-
-      .square,
-      .big-circle {
         display: none;
       }
 
@@ -291,32 +259,18 @@ body{
 
   @include('navigation-menu')
   @if(session()->has('message'))
-        <div id="hh" class="alert alert-success">
-            {{session()->get('message')}}
-        </div>
+  <div id="hh" class="alert alert-success">
+    {{session()->get('message')}}
+  </div>
   @endif
-
   <div class="container">
-    <span class="big-circle"></span>
-    <img src="img/shape.png" class="square" alt="" />
     <div class="form">
-      <div class="contact-info">
-
-
-
-        <div class="social-media">
-          <div class="social-icons">
-
-          </div>
-        </div>
+      <div class="contact-info" style="display: flex;align-items:center">
+        <img src="{{url('images/triggers.png')}}" alt="">
       </div>
-
       <div class="contact-form">
-        <span class="circle one"></span>
-        <span class="circle two"></span>
-
         <form id="form" action="{{ url('/user/sendedEmail') }}" method="get">
-          <h3 class="title">Contact </h3>
+          <h2 class="title">Contact</h2>
           <div class="input-container">
             <select style="color:grey" required name="email" class="input">
               <option>Select an email</option>

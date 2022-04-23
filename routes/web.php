@@ -21,23 +21,23 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function(){ r
 Route::middleware(['auth:sanctum', 'verified'])->get('/redirects','HomeController@index');
 
 ////home
-Route::get('/admin/home', function(){ return view('admin.dashboard');})->name('/admin/home');
-Route::get('/user/home', function(){ return view('dashboard');})->name('/user/home');
+Route::get('/admin/home','HomeController@index')->name('/admin/home');
+Route::get('/user/home','HomeController@index')->name('/user/home');
 
 ////admin
 
 //admin/navbar
 Route::get('/admin/calendar', "ReservationController@adminCalendar")->name('/admin/calendar');
 Route::get('/admin/profile', function(){ return view('admin.profile.show');})->name('/admin/profile');
-Route::get('/admin/showReser',"ReservationController@showReserAdmin");
-Route::get('/admin/email', "MessageController@emails");
+Route::get('/admin/showReser',"ReservationController@showReserAdmin")->name('/admin/showReser');
+Route::get('/admin/email', "MessageController@emails")->name('/admin/email');
 Route::get('addRoom', function(){ return view('admin.mngRooms.addRoom');})->name('addRoom');
 Route::get('/admin/notifications', "ReservationController@showNotification")->name('/admin/notifications');
 Route::get('/admin/prof', "ProfController@showProf")->name('/admin/prof');
 
 //admin/rooms
 Route::get('/store',"RoomController@store");
-Route::get('/showList',"RoomController@showList");
+Route::get('/showList',"RoomController@showList")->name('/showList');
 Route::post('/update/{id}', "RoomController@update");
 Route::get('/edit/{id}', "RoomController@edit");
 Route::get('/destroy/{id}', "RoomController@destroy");
@@ -62,8 +62,8 @@ Route::get('/destroyy/{id}', "ProfController@destroy");
 
 //user/navbar
 Route::get('calendar', "ReservationController@userCalendar")->name('calendar');
-Route::get('/user/showReser',"ReservationController@showReserUser");
-Route::get('/user/email', "MessageController@emailsUser");
+Route::get('/user/showReser',"ReservationController@showReserUser")->name('/user/showReser');
+Route::get('/user/email', "MessageController@emailsUser")->name('/user/email');
 Route::get('/user/notifications', "ReservationController@notif")->name('/user/notifications');
 
 //user/reservation

@@ -111,25 +111,11 @@
       background-color: #9fb6fa;
 
     }
-    
-    .contact-form:before {
-      content: "";
-      position: absolute;
-      width: 26px;
-      height: 26px;
-      background-color: rgb(235, 191, 111)
-        /*#f6ac8b*/
-      ;
-      transform: rotate(45deg);
-      top: 50px;
-      left: -13px;
-    }
 
     #form {
       overflow: hidden;
       position: relative;
     }
-
 
     .title {
       color: #fff;
@@ -182,7 +168,7 @@
     }
 
     .btn:hover {
-      background-color: #05a3a4;
+      background-color: #f9a35c;
       color: #fff;
     }
 
@@ -256,7 +242,7 @@
 </head>
 
 <body>
-
+<div style="backdrop-filter: blur(4px);width:100%;height:100vh;display:flex;flex-direction: column;align-items:center">
   @include('admin.navigation-menu')
   @if(session()->has('message'))
   <div id="hh" class="alert alert-success">
@@ -287,7 +273,7 @@
       </div>
     </div>
   </div>
-
+  </div>
 
 
 </body>

@@ -7,40 +7,62 @@ use App\Models\User;
 use App\Mail\SendEmail;
 use App\Mail\WelcomEmail;
 use Mail;
+use Auth;
 
 class MessageController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function emails()
     {
-        $users = User::all();
-        return view('admin.contact', ['users' => $users]);
+        if (Auth::user()->role == 'admin') {
+            $users = User::all();
+            return view('admin.contact', ['users' => $users]);
+        } else {
+            return abort(403);
+        }
     }
 
     public function sendEmail(Request $request)
     {
-        $connection = @fsockopen("www.google.com", 80);
-        if ($connection == true) {
-            Mail::to($request->input('email'))->send(new WelcomEmail());
-            return back()->with('message', 'Email Successfully Sended!');
+        if (Auth::user()->role == 'admin') {
+            $connection = @fsockopen("www.google.com", 80);
+            if ($connection == true) {
+                Mail::to($request->input('email'))->send(new WelcomEmail());
+                return back()->with('message', 'Email Successfully Sended!');
+            } else {
+                return back()->with('message', 'check your internet connection.');
+            }
         } else {
-            return back()->with('message', 'check your internet connection.');
+            return abort(403);
         }
     }
 
     public function emailsUser()
     {
-        $users = User::all();
-        return view('contact', ['users' => $users]);
+        if (Auth::user()->role == 'prof') {
+            $users = User::all();
+            return view('contact', ['users' => $users]);
+        } else {
+            return abort(403);
+        }
     }
 
     public function sendEmailUser(Request $request)
     {
-        $connection = @fsockopen("www.google.com", 80);
-        if ($connection == true) {
-            Mail::to($request->input('email'))->send(new SendEmail());
-            return back()->with('message', 'Email Successfully Sended!');
+        if (Auth::user()->role == 'prof') {
+            $connection = @fsockopen("www.google.com", 80);
+            if ($connection == true) {
+                Mail::to($request->input('email'))->send(new SendEmail());
+                return back()->with('message', 'Email Successfully Sended!');
+            } else {
+                return back()->with('message', 'check your internet connection.');
+            }
         } else {
-            return back()->with('message', 'check your internet connection.');
+            return abort(403);
         }
     }
 }
