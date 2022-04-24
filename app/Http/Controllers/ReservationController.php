@@ -240,15 +240,19 @@ class ReservationController extends Controller
                     ($reser->creneaude <= $reservation->creneaude && $reser->creneaua >= $reservation->creneaua) ||
                     ($reser->creneaude < $reservation->creneaude && $reser->creneaua > $reservation->creneaude) ||
                     ($reser->creneaua < $reservation->creneaua && $reser->creneaua > $reservation->creneaua))) {
-                    return back()->with('errorMessage', 'Reservation already exists!');
+                    if (Auth::user()->role == 'admin') {
+                        return redirect('/admin/showReser')->with('errorMessage', 'Reservation already exists!');
+                    } else {
+                        return redirect('/user/showReser')->with('errorMessage', 'Reservation already exists!');
+                    }
                 }
             }
         }
         $nowDate = Carbon::now();
         if ($reservation->date < $nowDate) {
-            return back()->with('errorMessage', 'Date expired');
-        } elseif ($reservation->creneaude >= $reservation->creneaua) {
-            return back()->with('errorMessage', 'Time expired');
+            return back()->with('errorMessage', 'Date expired.');
+        } elseif ($reservation->creneaua <= $reservation->creneaude) {
+            return back()->with('errorMessage', 'End-Time should be greater than Start-Time.');
         } elseif (Auth::user()->role == 'admin') {
             $reservation->save();
             return redirect('/admin/showReser')->with('message', 'Reservation successfully added!');
@@ -257,7 +261,11 @@ class ReservationController extends Controller
             if ($verif == 'speacial') {
                 $reservation->satate = 'wait';
                 $reservation->save();
-                return back()->with('errorMessage', 'You need admin approaval');
+                if (Auth::user()->role == 'admin') {
+                    return redirect('/admin/showReser')->with('Message', 'Your reservation is sended successfully to the admin!');
+                } else {
+                    return redirect('/user/showReser')->with('Message', 'Your reservation is sende successfully to the admin!');
+                }
             } else {
                 $reservation->save();
                 return redirect('/user/showReser')->with('message', 'Reservation successfully added!');
@@ -330,16 +338,20 @@ class ReservationController extends Controller
                     ($reser->creneaude <= $reservation->creneaude && $reser->creneaua >= $reservation->creneaua) ||
                     ($reser->creneaude < $reservation->creneaude && $reser->creneaua > $reservation->creneaude) ||
                     ($reser->creneaua < $reservation->creneaua && $reser->creneaua > $reservation->creneaua))) {
-                    return back()->with('errorMessage', 'Reservation already exists!');
+                    if (Auth::user()->role == 'admin') {
+                        return redirect('/admin/showReser')->with('errorMessage', 'Reservation already exists!');
+                    } else {
+                        return redirect('/user/showReser')->with('errorMessage', 'Reservation already exists!');
+                    }
                 }
             }
         }
 
         $nowDate = Carbon::now();
         if ($reservation->date < $nowDate) {
-            return back()->with('errorMessage', 'Date expired');
-        } elseif ($reservation->creneaua < $reservation->creneaude) {
-            return back()->with('errorMessage', 'Time expired');
+            return back()->with('errorMessage', 'Date expired.');
+        } elseif ($reservation->creneaua <= $reservation->creneaude) {
+            return back()->with('errorMessage', 'End-Time should be greater than Start-Time.');
         } elseif (Auth::user()->role == 'admin') {
             $reservation->save();
             return redirect('/admin/showReser')->with('message', 'Reservation successfully added!');
@@ -348,7 +360,11 @@ class ReservationController extends Controller
             if ($verif == 'speacial') {
                 $reservation->satate = 'wait';
                 $reservation->save();
-                return back()->with('errorMessage', 'You need admin approaval');
+                if (Auth::user()->role == 'admin') {
+                    return redirect('/admin/showReser')->with('Message', 'Your reservation is sended successfully to the admin!');
+                } else {
+                    return redirect('/user/showReser')->with('Message', 'Your reservation is sende successfully to the admin!');
+                }
             } else {
                 $reservation->save();
                 return redirect('/user/showReser')->with('message', 'Reservation successfully added!');

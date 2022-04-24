@@ -11,7 +11,7 @@
   <style>
     body {
       background-image: url('{{url("images/web.png")}}');
-      background-size: 100% 104%;
+      background-size: cover;
       background-repeat: no-repeat;
     }
   </style>

@@ -12,7 +12,7 @@
   <style>
     body {
       background-image: url('{{url("images/web.png")}}');
-      background-size: 100% 104%;
+      background-size: cover;
       background-attachment: fixed;
       background-repeat: no-repeat;
     }
@@ -33,8 +33,14 @@
   <div style="display: flex;width:100%;justify-content:center;align-items:center">
     <div class="card mb-3" style="width:90%;margin-top:30px">
       @if(session()->has('message'))
-      <div id="hh" class="alert alert-danger">
+      <div id="hh" class="alert alert-success">
         {{session()->get('message')}}
+      </div>
+      @endif
+
+      @if(session()->has('errorMessage'))
+      <div id="hh" class="alert alert-danger">
+        {{session()->get('errorMessage')}}
       </div>
       @endif
 
