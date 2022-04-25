@@ -14,6 +14,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
     <script src="{{ mix('js/app.js') }}" defer></script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <style>
         body {
@@ -28,7 +29,6 @@
 <body>
     <div >
 @include('navigation-menu')
-  
 <div style="display: flex;justify-content:center;">
         <div style=" border-radius:20px;margin-bottom:30px;margin-top:30px;padding:30px;background-color: rgba(255, 255, 255,0.9);width: 90%;display:flex;justify-content:start;align-items:start;gap:20px">
         <div style="display:flex;gap:20px;flex-direction: column;align-items:center;width:100%;height:100%;">
@@ -52,7 +52,7 @@
    
 <script>
 $(document).ready(function () {
-    events={!! json_encode($events) !!};
+    events={!!json_encode($events)!!};
 
     $('#calendar').fullCalendar({
         editable: false,

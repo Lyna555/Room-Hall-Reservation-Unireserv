@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.js"></script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
@@ -29,25 +30,26 @@
 <body>
     <div>
         @include('admin.navigation-menu')
+
         <div style="display: flex;justify-content:center;">
-        <div style=" border-radius:20px;margin-bottom:30px;margin-top:30px;padding:30px;background-color: rgba(255, 255, 255,0.9);width: 90%;display:flex;justify-content:start;align-items:start;gap:20px">
-        <div style="display:flex;gap:20px;flex-direction: column;align-items: center;width:100%;height:100%;">
-        <img src="{{url('images/key.png')}}" alt="key" style="height: 3em;width:3em">
-        <div style="display:flex;flex-direction:column;align-items:center;gap:2px">
-            <div style="height:13px;width: 13px;border-radius: 50%;background:#f9a35c"></div>
-            <div>Yours</div>
-        </div>
-        <div style="display:flex;flex-direction:column;align-items:center;gap:2px">
-            <div style="height:13px;width: 13px;border-radius: 50%;background:#92baff"></div>
-            <div>Others</div>
-        </div>
-        <div style="display:flex;flex-direction:column;align-items:center;gap:2px">
-            <div style="height:13px;width: 13px;border-radius: 50%;background:#7fa1bc"></div>
-            <div>expired</div>
-        </div>
-        </div>
-            <div id='calendar'></div>
-        </div>
+            <div style=" border-radius:20px;margin-bottom:30px;margin-top:30px;padding:30px;background-color: rgba(255, 255, 255,0.9);width: 90%;display:flex;justify-content:start;align-items:start;gap:20px">
+                <div style="display:flex;gap:20px;flex-direction: column;align-items: center;width:100%;height:100%;">
+                    <img src="{{url('images/key.png')}}" alt="key" style="height: 3em;width:3em">
+                    <div style="display:flex;flex-direction:column;align-items:center;gap:2px">
+                        <div style="height:13px;width: 13px;border-radius: 50%;background:#f9a35c"></div>
+                        <div>Yours</div>
+                    </div>
+                    <div style="display:flex;flex-direction:column;align-items:center;gap:2px">
+                        <div style="height:13px;width: 13px;border-radius: 50%;background:#92baff"></div>
+                        <div>Others</div>
+                    </div>
+                    <div style="display:flex;flex-direction:column;align-items:center;gap:2px">
+                        <div style="height:13px;width: 13px;border-radius: 50%;background:#7fa1bc"></div>
+                        <div>expired</div>
+                    </div>
+                </div>
+                <div id='calendar'></div>
+            </div>
         </div>
         <script>
             $(document).ready(function() {

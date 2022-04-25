@@ -13,12 +13,35 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
     <style>
         body {
             background-image: url('{{url("images/web.png")}}');
-            background-size:cover;
+            background-size: cover;
             background-attachment: fixed;
             background-repeat: no-repeat;
+        }
+
+        .translated-ltr {
+            margin-top: -40px;
+        }
+
+        .translated-ltr {
+            margin-top: -40px;
+        }
+
+        .goog-te-banner-frame {
+            display: none;
+            margin-top: -20px;
+        }
+
+        .goog-logo-link {
+            display: none !important;
+        }
+
+        .goog-te-gadget {
+            color: transparent !important;
         }
     </style>
 

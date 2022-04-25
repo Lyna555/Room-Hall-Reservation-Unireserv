@@ -7,7 +7,9 @@
   <title>Contact</title>
   <link rel="stylesheet" href="contactC.css" />
   <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
   <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
   <script>
     const inputs = document.querySelectorAll(".input");
@@ -242,6 +244,7 @@
 </head>
 
 <body>
+
 <div style="backdrop-filter: blur(4px);width:100%;height:100vh;display:flex;flex-direction: column;align-items:center">
   @include('admin.navigation-menu')
   @if(session()->has('message'))

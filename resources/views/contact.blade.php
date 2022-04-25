@@ -7,6 +7,7 @@
   <title>Contact</title>
   <link rel="stylesheet" href="contactC.css" />
   <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
   <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
   <script>
@@ -69,7 +70,6 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
       background-image: url('{{url("images/web.png")}}');
       background-size: cover;
       background-repeat: no-repeat;
