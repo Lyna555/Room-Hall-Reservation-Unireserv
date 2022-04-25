@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Reservation;
 use Auth;
 
 class ProfController extends Controller
@@ -26,6 +27,13 @@ class ProfController extends Controller
     {
         if (Auth::user()->role == 'admin') {
             $prof = User::find($id);
+            $reservations=Reservation::all();
+            $reservations = Reservation::all();
+            foreach ($reservations as $reservation) {
+                if ($reservation->user_id == $prof->id) {
+                    $reservation->delete();
+                }
+            }
             $prof->delete();
             return back()->with('message', 'Professor successfully deleted!');
         } else {

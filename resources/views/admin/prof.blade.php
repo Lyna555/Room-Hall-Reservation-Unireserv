@@ -34,7 +34,7 @@
     <div style="display: flex;width:100%;justify-content:center">
       <div class="card mb-3" style="width:90%;margin-top:30px">
         @if(session()->has('message'))
-        <div id="hh" class="alert alert-danger">
+        <div id="hh" class="alert alert-success">
           {{session()->get('message')}}
         </div>
         @endif

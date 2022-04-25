@@ -43,7 +43,7 @@
         }
 
         body {
-            font-family: 'Nunito', sans-serif;
+            font-family: 'Nunito','Hayah', sans-serif;
             background-image: url('{{url("images/web.png")}}');
             background-size: cover;
             background-repeat: no-repeat;
@@ -141,7 +141,7 @@
                 <p>Choose the language : </p>
                 <div id="google_translate_element"></div>
             </div>
-            <p style="font-family: 'Script MT';font-size: 50px;">unireserve</p>
+            <p style="font-family: 'Script MT','Hayah';font-size: 50px;">unireserve</p>
             <h1 style="font-family:Nunito;font-size:30px; text-align:center;font-weight:150; text-shadow:3px 3px 4px black;">Join us!</h1>
             @if (Route::has('login'))
             <div id="auth">
