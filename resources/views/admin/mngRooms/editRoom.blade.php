@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,99 +15,101 @@
       background-image: url('{{url("images/web.png")}}');
       background-size: cover;
       background-repeat: no-repeat;
+
     }
   </style>
 </head>
+
 <body>
-  <div >
   @include('admin.navigation-menu')
-  
-  <div style="width:40%;margin:80px auto 0 auto;border-radius:15px;background:rgba(255, 255, 255, 0.7);padding:20px">
-    
-    <form action="{{ url('/update/'.$room->id) }}" method="post">
-                  @csrf
-                  <div  style="display:flex;flex-direction:column;gap:10px;">
-                    @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-                  <div class="form-group">
-                    <label>Name</label>
-                    <input required name="name" value="{{ $room->name }}" class="form-control" type="text" placeholder="Enter TD or TP or Hall + Room/Hall Number">
-                </div>
-                <div class="form-group">
-                  <label>Capacity</label>
-                  <input required name="capacity" value="{{ $room->capacity }}" class="form-control" type="number" min="1" placeholder="Enter Capacity">
-                  </div>
-                  <div class="form-group">
-                    <label>Floor</label>
-                    <input required name="floor" value="{{ $room->floor }}" class="form-control" type="number" min="1" placeholder="Enter Floor">
-                  </div>
-                  @if($room->type=='TD')
-              <div class="form-group">
-                <label>Type</label>
-                <select required name="type">
-                  <option value="TD">TD</option>
-                  <option value="TP">TP</option>
-                  <option value="Hall">Hall</option>
-              </select>
-            </div>
-            @elseif($room->type=='TP')
-            <div class="form-group">
+  <div style="width:100%;height:93.9vh;display: flex;flex-direction: column;justify-content: center;align-items: center;">
+    <div style="width:40%;border-radius:15px;background:rgba(255, 255, 255, 0.9);padding:20px;box-shadow: 0px 4px 15px gray;">
+
+      <form action="{{ url('/update/'.$room->id) }}" method="post">
+        @csrf
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          @if ($errors->any())
+          <div class="alert alert-danger">
+            <ul>
+              @foreach ($errors->all() as $error)
+              <li>{{ $error }}</li>
+              @endforeach
+            </ul>
+          </div>
+          @endif
+          <div class="form-group">
+            <label>Name</label>
+            <input required name="name" value="{{ $room->name }}" class="form-control" type="text" placeholder="Enter TD or TP or Hall + Room/Hall Number">
+          </div>
+          <div class="form-group">
+            <label>Capacity</label>
+            <input required name="capacity" value="{{ $room->capacity }}" class="form-control" type="number" min="1" placeholder="Enter Capacity">
+          </div>
+          <div class="form-group">
+            <label>Floor</label>
+            <input required name="floor" value="{{ $room->floor }}" class="form-control" type="number" min="1" placeholder="Enter Floor">
+          </div>
+          @if($room->type=='TD')
+          <div class="form-group">
+            <label>Type</label>
+            <select required name="type">
+              <option value="TD">TD</option>
+              <option value="TP">TP</option>
+              <option value="Hall">Hall</option>
+            </select>
+          </div>
+          @elseif($room->type=='TP')
+          <div class="form-group">
             <label>Type</label>
             <select required name="type">
               <option value="TP">TP</option>
               <option value="TD">TD</option>
               <option value="Hall">Hall</option>
-          </select>
-            </div>
+            </select>
+          </div>
           @elseif($room->type=='Hall')
           <div class="form-group">
-          <label>Type</label>
+            <label>Type</label>
             <select required name="type">
               <option value="Hall">Hall</option>
               <option value="TD">TD</option>
               <option value="TP">TP</option>
-          </select>
+            </select>
           </div>
           @endif
 
           @if($room->state=='ordinary')
-            <div class="form-group">
-              <label>State</label>
-              <select name="state">
-                  <option value="ordinary">Ordinary</option>
-                  <option value="speacial">Speacial</option>
-              </select>
+          <div class="form-group">
+            <label>State</label>
+            <select name="state">
+              <option value="ordinary">Ordinary</option>
+              <option value="speacial">Speacial</option>
+            </select>
           </div>
           @elseif($room->state=='speacial')
           <div class="form-group">
             <label>State</label>
             <select name="state">
-                <option value="speacial">Speacial</option>
-                <option value="ordinary">Ordinary</option>
+              <option value="speacial">Speacial</option>
+              <option value="ordinary">Ordinary</option>
             </select>
-        </div>
-        @endif
+          </div>
+          @endif
 
-        
+
           @if(session()->has('errorMessage'))
           <div id="hh" class="alert alert-danger">
-              {{session()->get('errorMessage')}}
+            {{session()->get('errorMessage')}}
           </div>
-        @endif
-          </div>
+          @endif
+        </div>
         <div style="display: flex;justify-content:center;gap:20px">
-            <input type="submit" class="btn btn-info" style="margin-top: 20px;background-color: #f9a35c;color:white;border:none;box-shadow: 0px 2px 4px gray;border-radius:15px;padding:3.7px 23.7px" value="Save">
-            <a href="{{url('/showList')}}" style="text-decoration: none;margin-top: 20px;background-color: #a4c8d5;color:white;border:none;box-shadow: 0px 2px 4px gray;border-radius:15px;padding:3.7px 15px;">Cancel</a>
+          <input type="submit" class="btn btn-info" style="margin-top: 20px;background-color: #f9a35c;color:white;border:none;box-shadow: 0px 2px 4px gray;border-radius:15px;padding:3.7px 23.7px" value="Save">
+          <a href="{{url('/showList')}}" style="text-decoration: none;margin-top: 20px;background-color: #a4c8d5;color:white;border:none;box-shadow: 0px 2px 4px gray;border-radius:15px;padding:3.7px 15px;">Cancel</a>
         </div>
-          </form>
-        </div>
+      </form>
+    </div>
+  </div>
 </body>
-</html>
 
+</html>

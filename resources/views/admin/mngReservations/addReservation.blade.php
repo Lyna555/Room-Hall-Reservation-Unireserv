@@ -20,9 +20,9 @@
 </head>
 
 <body>
-  <div>
-    @include('admin.navigation-menu')
-    <div id="div" style="width:40%;margin:80px auto 0 auto;border-radius:15px;background:rgba(255, 255, 255, 0.658);padding:20px">
+  @include('admin.navigation-menu')
+  <div style="width:100%;height:93.9vh;display: flex;flex-direction: column;justify-content: center;align-items: center;">
+    <div id="div" style="width:40%;border-radius:15px;background:rgba(255, 255, 255, 0.9);padding:20px;box-shadow: 0px 4px 15px gray;">
       @if(session()->has('message'))
       <div id="hh" class="alert alert-success">
         {{session()->get('message')}}
@@ -33,7 +33,7 @@
         {{session()->get('errorMessage')}}
       </div>
       @endif
-    
+
       <form id="form" action="{{ url('/storeR')}}" method="get">
         @csrf
         <div style="display:flex;flex-direction:column;gap:10px;">
@@ -75,12 +75,13 @@
           </div>
 
         </div>
-         <div style="display: flex;justify-content:center;gap:20px">
-            <input type="submit" class="btn btn-info" style="margin-top: 20px;background-color: #f9a35c;color:white;border:none;box-shadow: 0px 2px 4px gray;border-radius:15px;padding:3.7px 23.7px" value="Save">
-            <a href="{{url('/admin/showReser')}}" style="text-decoration: none;margin-top: 20px;background-color: #a4c8d5;color:white;border:none;box-shadow: 0px 2px 4px gray;border-radius:15px;padding:3.7px 15px;">Cancel</a>
+        <div style="display: flex;justify-content:center;gap:20px">
+          <input type="submit" class="btn btn-info" style="margin-top: 20px;background-color: #f9a35c;color:white;border:none;box-shadow: 0px 2px 4px gray;border-radius:15px;padding:3.7px 23.7px" value="Save">
+          <a href="{{url('/admin/showReser')}}" style="text-decoration: none;margin-top: 20px;background-color: #a4c8d5;color:white;border:none;box-shadow: 0px 2px 4px gray;border-radius:15px;padding:3.7px 15px;">Cancel</a>
         </div>
       </form>
     </div>
   </div>
 </body>
+
 </html>

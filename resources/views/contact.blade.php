@@ -256,38 +256,38 @@
 </head>
 
 <body>
-
+<div style="backdrop-filter: blur(4px);width:100%;height:100vh;display:flex;flex-direction: column;align-items:center">
   @include('navigation-menu')
   @if(session()->has('message'))
   <div id="hh" class="alert alert-success">
     {{session()->get('message')}}
   </div>
   @endif
-  <div class="container">
-    <div class="form">
-      <div class="contact-info" style="display: flex;align-items:center">
-        <img src="{{url('images/triggers.png')}}" alt="">
-      </div>
-      <div class="contact-form">
-        <form id="form" action="{{ url('/user/sendedEmail') }}" method="get">
-          <h2 class="title">Contact</h2>
-          <div class="input-container">
-            <select style="color:grey" required name="email" class="input">
-              <option>Select an email</option>
-              @foreach($users as $user)
-              <option style="color:black">{{ $user->email }}</option>
-              @endforeach
-            </select>
-          </div>
-          <div class="input-container textarea">
-            <textarea style="color:black" required name="message" class="input" placeholder="Enter your Message"></textarea>
-          </div>
-          <input type="submit" value="Send" class="btn" />
-        </form>
+    <div class="container">
+      <div class="form">
+        <div class="contact-info" style="display: flex;align-items:center">
+          <img src="{{url('images/triggers.png')}}" alt="">
+        </div>
+        <div class="contact-form">
+          <form id="form" action="{{ url('/user/sendedEmail') }}" method="get">
+            <h2 class="title">Contact</h2>
+            <div class="input-container">
+              <select style="color:grey" required name="email" class="input">
+                <option>Select an email</option>
+                @foreach($users as $user)
+                <option style="color:black">{{ $user->email }}</option>
+                @endforeach
+              </select>
+            </div>
+            <div class="input-container textarea">
+              <textarea style="color:black" required name="message" class="input" placeholder="Enter your Message"></textarea>
+            </div>
+            <input type="submit" value="Send" class="btn" />
+          </form>
+        </div>
       </div>
     </div>
   </div>
-
 
 
 </body>
