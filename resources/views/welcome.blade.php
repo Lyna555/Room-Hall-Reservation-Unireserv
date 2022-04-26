@@ -95,6 +95,7 @@
             color: white;
             background: #f89746;
             margin-top: 30px;
+            text-decoration: none;
         }
 
         #dashb:hover {
