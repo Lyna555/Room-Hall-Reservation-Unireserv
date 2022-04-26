@@ -45,7 +45,11 @@ class ReservationController extends Controller
                 foreach ($source['model']::all() as $model) {
 
                     $query = User::where('id', '=', $model->{$source['prefix']})->value('name');
-                    $crudFieldValue = $model->getOriginal($source['date_field']);
+                    $date = $model->getOriginal($source['date_field']);
+                    $timestart = $model->getOriginal($source['suffix']);
+                    $timeend = $model->getOriginal($source['creneaua']);
+                    $crudFieldValue = date('Y-m-d H:i',strtotime("$date $timestart"));
+                    $crudFieldValue1 = date('Y-m-d H:i',strtotime("$date $timeend"));
 
                     if (!$crudFieldValue) {
                         continue;
@@ -55,27 +59,27 @@ class ReservationController extends Controller
                         if ($model->{$source['end_field']} < Carbon::now()) {
                             $events[] = [
                                 'title' => trim($query . " " . $model->{$source['field']}
-                                    . " " . Carbon::parse($model->{$source['suffix']})->format('H:i') . " " . Carbon::parse($model->{$source['creneaua']})->format('H:i')),
+                                    . " " . Carbon::parse($model->{$source['suffix']})->format('H:i') . " - " . Carbon::parse($model->{$source['creneaua']})->format('H:i')),
                                 'start' => $crudFieldValue,
-                                'end'   => $model->{$source['end_field']},
+                                'end'   => $crudFieldValue1,
                                 'url'   => route($source['route'], $model->id),
                                 'color' => '#7fa1bc',
                             ];
                         } elseif (Auth::user()->id == $model->{$source['prefix']}) {
                             $events[] = [
                                 'title' => trim($query . " " . $model->{$source['field']}
-                                    . " " . Carbon::parse($model->{$source['suffix']})->format('H:i') . " " . Carbon::parse($model->{$source['creneaua']})->format('H:i')),
+                                    . " " . Carbon::parse($model->{$source['suffix']})->format('H:i') . " - " . Carbon::parse($model->{$source['creneaua']})->format('H:i')),
                                 'start' => $crudFieldValue,
-                                'end'   => $model->{$source['end_field']},
+                                'end'   => $crudFieldValue1,
                                 'url'   => route($source['route'], $model->id),
                                 'color' => '#f9a35c',
                             ];
                         } else {
                             $events[] = [
                                 'title' => trim($query . " " . $model->{$source['field']}
-                                    . " " . Carbon::parse($model->{$source['suffix']})->format('H:i') . " " . Carbon::parse($model->{$source['creneaua']})->format('H:i')),
+                                    . " " . Carbon::parse($model->{$source['suffix']})->format('H:i') . " - " . Carbon::parse($model->{$source['creneaua']})->format('H:i')),
                                 'start' => $crudFieldValue,
-                                'end'   => $model->{$source['end_field']},
+                                'end'   => $crudFieldValue1,
                                 'url'   => route($source['route'], $model->id),
                                 'color' => '#92baff',
                             ];
@@ -109,7 +113,11 @@ class ReservationController extends Controller
             foreach ($this->resources as $resource) {
                 foreach ($resource['model']::all() as $model) {
                     $query = User::where('id', '=', $model->{$resource['prefix']})->value('name');
-                    $crudFieldValue = $model->getOriginal($resource['date_field']);
+                    $date = $model->getOriginal($resource['date_field']);
+                    $timestart = $model->getOriginal($resource['suffix']);
+                    $timeend = $model->getOriginal($resource['creneaua']);
+                    $crudFieldValue = date('Y-m-d H:i',strtotime("$date $timestart"));
+                    $crudFieldValue1 = date('Y-m-d H:i',strtotime("$date $timeend"));
 
                     if (!$crudFieldValue) {
                         continue;
@@ -118,27 +126,27 @@ class ReservationController extends Controller
                         if ($model->{$resource['end_field']} < Carbon::now()) {
                             $events[] = [
                                 'title' => trim($query . " " . $model->{$resource['field']}
-                                    . " " . Carbon::parse($model->{$resource['suffix']})->format('H:i') . " " . Carbon::parse($model->{$resource['creneaua']})->format('H:i')),
+                                    . " " . Carbon::parse($model->{$resource['suffix']})->format('H:i') . " - " . Carbon::parse($model->{$resource['creneaua']})->format('H:i')),
                                 'start' => $crudFieldValue,
-                                'end'   => $model->{$resource['end_field']},
+                                'end'   => $crudFieldValue1,
                                 'url'   => route($resource['route'], $model->id),
                                 'color' => '#7fa1bc',
                             ];
                         } elseif (Auth::user()->id == $model->{$resource['prefix']}) {
                             $events[] = [
                                 'title' => trim($query . " " . $model->{$resource['field']}
-                                    . " " . Carbon::parse($model->{$resource['suffix']})->format('H:i') . " " . Carbon::parse($model->{$resource['creneaua']})->format('H:i')),
+                                    . " " . Carbon::parse($model->{$resource['suffix']})->format('H:i') . " - " . Carbon::parse($model->{$resource['creneaua']})->format('H:i')),
                                 'start' => $crudFieldValue,
-                                'end'   => $model->{$resource['end_field']},
+                                'end'   => $crudFieldValue1,
                                 'url'   => route($resource['route'], $model->id),
                                 'color' => '#f9a35c',
                             ];
                         } else {
                             $events[] = [
                                 'title' => trim($query . " " . $model->{$resource['field']}
-                                    . " " . Carbon::parse($model->{$resource['suffix']})->format('H:i') . " " . Carbon::parse($model->{$resource['creneaua']})->format('H:i')),
+                                    . " " . Carbon::parse($model->{$resource['suffix']})->format('H:i') . " - " . Carbon::parse($model->{$resource['creneaua']})->format('H:i')),
                                 'start' => $crudFieldValue,
-                                'end'   => $model->{$resource['end_field']},
+                                'end'   => $crudFieldValue1,
                                 'url'   => route($resource['route'], $model->id),
                                 'color' => '#92baff',
                             ];

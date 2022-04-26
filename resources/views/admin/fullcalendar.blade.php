@@ -57,7 +57,7 @@
 
                 $('#calendar').fullCalendar({
                     editable: false,
-                    displayEventTime: true,
+                    displayEventTime: false,
                     selectable: true,
                     header: {
                         left: 'prev,next today',

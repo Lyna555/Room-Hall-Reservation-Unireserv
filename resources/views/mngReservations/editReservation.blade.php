@@ -33,7 +33,6 @@
         {{session()->get('errorMessage')}}
       </div>
       @endif
-      <div id="google_translate_element"></div>
       <form id="form" action="{{ url('/updateR/'.$reservation->id)}}" method="get">
         @csrf
         <div style="display:flex;flex-direction:column;gap:10px;">
