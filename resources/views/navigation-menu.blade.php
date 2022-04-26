@@ -7,7 +7,7 @@
                 <!-- Logo -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <a style="font-family: 'Script MT';font-size: 20px;">
-                        {{ __('unireserv') }}
+                        {{ __('Unireserv') }}
                     </a>
                 </div>
 

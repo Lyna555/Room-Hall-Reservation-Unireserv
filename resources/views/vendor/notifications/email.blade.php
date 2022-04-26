@@ -1,4 +1,3 @@
-
 @component('mail::message')
 {{-- Greeting --}}
 @if (! empty($greeting))
@@ -7,7 +6,8 @@
 @if ($level === 'error')
 # @lang('Whoops!')
 @else
-# @lang('Welcome to Unireserv!')
+<p style="text-align: center;font-family: 'Script MT';color:black;font-size:30px;">@lang('Welcome to Unireserv!')</p>
+<p style="text-align: center;color:black;font-size:13px;font-weight:bold;"> Once you press the verification button please click on "Forgot your password?" to reset your password</p>
 @endif
 @endif
 
@@ -16,18 +16,18 @@
 {{ $line }}
 
 @endforeach
-Your Password is: <span style="background-color:skyblue;color:black">12345678</span>
+
 {{-- Action Button --}}
 @isset($actionText)
 <?php
-    switch ($level) {
-        case 'success':
-        case 'error':
-            $color = $level;
-            break;
-        default:
-            $color = 'primary';
-    }
+switch ($level) {
+    case 'success':
+    case 'error':
+        $color = $level;
+        break;
+    default:
+        $color = 'primary';
+}
 ?>
 @component('mail::button', ['url' => $actionUrl, 'color' => $color])
 {{ $actionText }}
@@ -45,18 +45,18 @@ Your Password is: <span style="background-color:skyblue;color:black">12345678</s
 {{ $salutation }}
 @else
 @lang('Regards'),<br>
-{{ config('app.name') }}
+Unireserv team
 @endif
 
 {{-- Subcopy --}}
 @isset($actionText)
 @slot('subcopy')
 @lang(
-    "If you're having trouble clicking the \":actionText\" button, copy and paste the URL below\n".
-    'into your web browser:',
-    [
-        'actionText' => $actionText,
-    ]
+"If you're having trouble clicking the \":actionText\" button, copy and paste the URL below\n".
+'into your web browser:',
+[
+'actionText' => $actionText,
+]
 ) <span class="break-all">[{{ $displayableActionUrl }}]({{ $actionUrl }})</span>
 @endslot
 @endisset

@@ -15,19 +15,19 @@
         <div style="width:100%;height:80%;display:grid;grid-template-columns: repeat(2,25em);justify-content: center;gap:50px">
             <div class="cards" style="display:flex;justify-content:center;align-items: center;gap:20px;padding:10px">
                 <img src="{{URL('images/calendar.png')}}" alt="calendar" style="height:6em;width:6em">
-                <p>Our website provides you to see all reservations in your faculty using a calendar.</p>
+                <div><h2 style="font-size: 20px;font-weight: bold;">Calendar</h2>Our website provides you to see all reservations in your faculty using a calendar.</div>
             </div>
             <div class="cards" style="display:flex;justify-content: center;align-items: center;gap:20px;padding:10px">
                 <img src="{{URL('images/timetable.png')}}" alt="calendar" style="height:6em;width:6em">
-                <p>You can reserve a Room/Hall easily and save your time!</p>
+                <div><h2 style="font-size: 20px;font-weight: bold;">Reservations</h2>You can reserve a Room/Hall easily and save your time!</div>
             </div>
             <div class="cards" style="display:flex;justify-content: center;align-items: center;gap:20px;padding:10px">
                 <img src="{{URL('images/email.png')}}" alt="calendar" style="height:6em;width:6em">
-                <p>Contact other professors in your faculty if needed!</p>
+                <div><h2 style="font-size: 20px;font-weight: bold;">Contact</h2>Contact other professors in your faculty if needed!</div>
             </div>
             <div class="cards" style="display:flex;justify-content: center;align-items: center;gap:20px;padding:10px">
                 <img src="{{URL('images/notification.png')}}" alt="calendar" style="height:6em;width:6em;padding:10px">
-                <p>If you reserve a speacial room, a notification will reach you that your reservation is accepted or refused !</p>
+                <div><h2 style="font-size: 20px;font-weight: bold;">Notifications</h2>If you reserve a speacial room, a notification will reach you that your reservation is accepted or refused !</div>
             </div>
         </div>
         <img onclick="document.getElementById('more').style.display='none'" src="{{url('images/up.png')}}" alt="up_arrow" style="position: absolute;cursor: pointer;height:3em;width:3em;">

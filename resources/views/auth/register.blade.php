@@ -3,7 +3,7 @@
 @include('admin.navigation-menu')
     <x-jet-authentication-card>
         <x-slot name="logo">
-    
+            <div style="font-weight: bold;">Add professor</div>
         </x-slot>
 
         <x-jet-validation-errors class="mb-4" />
