@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>unireserv</title>
+    <title>Unireserv</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -142,7 +142,7 @@
                 <p>Choose the language : </p>
                 <div id="google_translate_element"></div>
             </div>
-            <p style="font-family: 'Script MT','Hayah';font-size: 50px;">unireserve</p>
+            <p style="font-family: 'Script MT','Hayah';font-size: 50px;">Unireserve</p>
             <h1 style="font-family:Nunito;font-size:30px; text-align:center;font-weight:150; text-shadow:3px 3px 4px black;">Join us!</h1>
             @if (Route::has('login'))
             <div id="auth">
