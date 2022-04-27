@@ -30,30 +30,31 @@
 <body>
     <div>
         @include('admin.navigation-menu')
-
-        <div style="display: flex;justify-content:center;">
-            <div style=" border-radius:20px;margin-bottom:30px;margin-top:30px;padding:30px;background-color: rgba(255, 255, 255,0.9);width: 90%;display:flex;justify-content:start;align-items:start;gap:20px">
-                <div style="display:flex;gap:20px;flex-direction: column;align-items: center;width:100%;height:100%;">
-                    <img src="{{url('images/key.png')}}" alt="key" style="height: 3em;width:3em">
-                    <div style="display:flex;flex-direction:column;align-items:center;gap:2px">
-                        <div style="height:13px;width: 13px;border-radius: 50%;background:#f9a35c"></div>
-                        <div>Yours</div>
+        <div style="display: flex;width:100%;height:93.9vh;justify-content: center;align-items: center;">
+            <div style="display: flex;justify-content:center">
+                <div class="calendar" style="border-radius: 20px;margin-bottom: 30px;margin-top: 30px;padding: 30px;background-color: rgba(255, 255, 255, 0.9);width: 90%;display: flex;justify-content: start;align-items: start;gap: 20px;height: auto;">
+                    <div style="display:flex;gap:20px;flex-direction: column;align-items: center;width:100%;height:100%;">
+                        <img src="{{url('images/key.png')}}" alt="key" style="height: 3em;width:3em">
+                        <div style="display:flex;flex-direction:column;align-items:center;gap:2px">
+                            <div style="height:13px;width: 13px;border-radius: 50%;background:#f9a35c"></div>
+                            <div>Yours</div>
+                        </div>
+                        <div style="display:flex;flex-direction:column;align-items:center;gap:2px">
+                            <div style="height:13px;width: 13px;border-radius: 50%;background:#92baff"></div>
+                            <div>Others</div>
+                        </div>
+                        <div style="display:flex;flex-direction:column;align-items:center;gap:2px">
+                            <div style="height:13px;width: 13px;border-radius: 50%;background:#7fa1bc"></div>
+                            <div>expired</div>
+                        </div>
                     </div>
-                    <div style="display:flex;flex-direction:column;align-items:center;gap:2px">
-                        <div style="height:13px;width: 13px;border-radius: 50%;background:#92baff"></div>
-                        <div>Others</div>
-                    </div>
-                    <div style="display:flex;flex-direction:column;align-items:center;gap:2px">
-                        <div style="height:13px;width: 13px;border-radius: 50%;background:#7fa1bc"></div>
-                        <div>expired</div>
-                    </div>
+                    <div id='calendar'></div>
                 </div>
-                <div id='calendar'></div>
             </div>
         </div>
         <script>
             $(document).ready(function() {
-                events = {!!json_encode($events)!!};
+                events = {!!json_encode($events) !!};
 
                 $('#calendar').fullCalendar({
                     editable: false,

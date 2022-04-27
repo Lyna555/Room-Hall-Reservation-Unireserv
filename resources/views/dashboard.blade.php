@@ -1,6 +1,6 @@
 <x-app-layout>
     @include('navigation-menu')
-    <div style="display:flex;flex-direction:column;gap:20px;width:60%;height:93.9vh;justify-content:center;align-items:center;position:absolute">
+    <div class="welc-cont">
         <div style="display:flex;flex-direction:column;text-align:center;font-family:'Script MT';font-size:90px;line-height: 80px;">
             <div>Welcome to our</div>
             <div>unireserv</div>
@@ -12,7 +12,7 @@
         <img src="{{URL('images/hall.png')}}" alt="">
     </div>
     <div id="more" style="width:99%;height:100vh;display:none;;justify-content:end;align-items:center">
-        <div style="width:100%;height:80%;display:grid;grid-template-columns: repeat(2,25em);justify-content: center;gap:50px">
+        <div class="card-cont">
             <div class="cards" style="display:flex;justify-content:center;align-items: center;gap:20px;padding:10px">
                 <img src="{{URL('images/calendar.png')}}" alt="calendar" style="height:6em;width:6em">
                 <div><h2 style="font-size: 20px;font-weight: bold;">Calendar</h2>Our website provides you to see all reservations in your faculty using a calendar.</div>

@@ -43,9 +43,9 @@
       @endif
 
       <div class="card-body">
-        <div style="display: flex;justify-content: space-between;width:94%">
+        <div style="display: flex;justify-content: space-between;width:93%">
         <h1 style="font-weight: bold;">Reservations List</h1>
-        <a href="{{ url('/admin/showNames') }}" class="btn btn-sm btn-warning" style="width:134px;background:#a2c0da;box-shadow: 0px 2px 4px gray;border-radius:15px;color:white;border:none ;">Add </a>
+        <a id="add" href="{{ url('/admin/showNames') }}" class="btn btn-sm btn-warning" style="width:134px;background:#a2c0da;box-shadow: 0px 2px 4px gray;border-radius:15px;color:white;border:none ;">Add</a>
         </div>
         <table class="table">
           <thead class="thread-light">

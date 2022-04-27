@@ -20,9 +20,8 @@
 </head>
 
 <body>
+@include('admin.navigation-menu')
   <div style="width:100%;height:93.9vh;display: flex;flex-direction: column;justify-content: center;align-items: center;">
-    @include('admin.navigation-menu')
-
     <div id="div" style="width:40%;border-radius:15px;background:rgba(255, 255, 255, 0.9);padding:20px;box-shadow: 0px 4px 15px gray;">
       <form id="form" action="{{ url('/store')}}" method="get">
         @csrf
