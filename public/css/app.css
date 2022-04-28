@@ -1420,6 +1420,10 @@ select {
   width: 100%;
 }
 
+.card-30{
+  width: 30%;
+}
+
 .w-0 {
   width: 0px;
 }
@@ -2772,6 +2776,8 @@ select {
 }
 
 @media (max-width: 1044px) and (max-width: 768px) {
+
+  
   .welc-cont {
     width: 100%;
   }
@@ -2811,12 +2817,19 @@ select {
     width: 100%;
   }
 
+  
+
 }
 
 @media (max-width: 1050px) {
   .delete {
     width: 60%;
   }
+  .card-30{
+    width: 50%;
+  }
+
+  
 }
 
 @media (max-width: 850px) {
@@ -2831,5 +2844,8 @@ select {
   }
   .delete {
     width: 70%;
+  }
+  .card-30{
+    width: 80%;
   }
 }
