@@ -14,7 +14,7 @@
   <style>
     body {
       background-image: url('{{url("images/web.png")}}');
-      background-size:cover;
+      background-size: cover;
       background-attachment: fixed;
       background-repeat: no-repeat;
     }
@@ -24,29 +24,29 @@
 <body>
   @include('navigation-menu')
   <div style="display: flex;width:100%;justify-content:center">
-  <div class="card mb-3" style="width:90%;margin-top:30px">
-    <div class="card-body">
-      <h1 style="font-weight: bold;">Notifications</h1>
-      <hr>
+    <div class="card mb-3" style="width:90%;margin-top:30px">
+      <div class="card-body">
+        <h1 style="font-weight: bold;">Notifications</h1>
+        <hr>
 
-      <table class="table">
-        <thead class="thread-light">
-        </thead>
-        <tbody>
-          @foreach($notifications as $notification)
-          @if($notification->satate=='reserv-state' && $user==$notification->user_id)
-          <tr>
-            <td>{{$notification->room_name}}</td>
-            <td>{{$notification->date}}</td>
-            <td>{{$notification->creneaude}} - {{$notification->creneaua}}</td>
-            <td>{{$notification->message}}</td>
-          </tr>
-          @endif
-          @endforeach
-        </tbody>
-      </table>
+        <table class="table">
+          <thead class="thread-light">
+          </thead>
+          <tbody>
+            @foreach($notifications as $notification)
+            @if(($notification->satate=='reserv-state' || $notification->satate=='reserv-ref') && $user==$notification->user_id)
+            <tr>
+              <td>{{$notification->room_name}}</td>
+              <td>{{$notification->date}}</td>
+              <td>{{$notification->creneaude}} - {{$notification->creneaua}}</td>
+              <td>{{$notification->message}}</td>
+            </tr>
+            @endif
+            @endforeach
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
   </div>
 </body>
 

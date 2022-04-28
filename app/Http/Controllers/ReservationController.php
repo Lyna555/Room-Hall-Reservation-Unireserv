@@ -270,9 +270,9 @@ class ReservationController extends Controller
                 $reservation->satate = 'wait';
                 $reservation->save();
                 if (Auth::user()->role == 'admin') {
-                    return redirect('/admin/showReser')->with('Message', 'Your reservation is sended successfully to the admin!');
+                    return redirect('/admin/showReser')->with('message', 'Your reservation is sended successfully to the admin!');
                 } else {
-                    return redirect('/user/showReser')->with('Message', 'Your reservation is sende successfully to the admin!');
+                    return redirect('/user/showReser')->with('message', 'Your reservation is sended successfully to the admin!');
                 }
             } else {
                 $reservation->save();
@@ -369,9 +369,9 @@ class ReservationController extends Controller
                 $reservation->satate = 'wait';
                 $reservation->save();
                 if (Auth::user()->role == 'admin') {
-                    return redirect('/admin/showReser')->with('Message', 'Your reservation is sended successfully to the admin!');
+                    return redirect('/admin/showReser')->with('message', 'Your reservation is sended successfully to the admin!');
                 } else {
-                    return redirect('/user/showReser')->with('Message', 'Your reservation is sende successfully to the admin!');
+                    return redirect('/user/showReser')->with('message', 'Your reservation is sended successfully to the admin!');
                 }
             } else {
                 $reservation->save();

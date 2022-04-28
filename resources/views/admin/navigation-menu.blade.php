@@ -171,37 +171,32 @@
     </div>
 
     <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden" style="background-color: white;">
-        <div class="pt-2 pb-3 space-y-1">
-            <x-jet-nav-link href="{{ route('/admin/home') }}" :active="request()->routeIs('/admin/home')">
+    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden" style="background-color: rgba(255,255,255,1.0);position: absolute;z-index: 100;width:100%;">
+    
+            <x-jet-responsive-nav-link href="{{ route('/admin/home') }}" :active="request()->routeIs('/admin/home')">
                 {{ __('Home') }}
-            </x-jet-nav-link>
-        </div>
-        <div class="pt-2 pb-3 space-y-1">
-            <x-jet-nav-link href="{{ route('/admin/calendar') }}" :active="request()->routeIs('/admin/calendar')">
+            </x-jet-responsive-nav-link>
+
+            <x-jet-responsive-nav-link href="{{ route('/admin/calendar') }}" :active="request()->routeIs('/admin/calendar')">
                 {{ __('Calendar') }}
-            </x-jet-nav-link>
-        </div>
-        <div class="pt-2 pb-3 space-y-1">
-            <x-jet-nav-link href="{{ route('/showList') }}" style="cursor: pointer;font-size:13px;">
+            </x-jet-responsive-nav-link>
+
+            <x-jet-responsive-nav-link href="{{ route('/showList') }}" :active="request()->routeIs('/showList')">
                 {{ __('Rooms/Halls') }}
-            </x-jet-nav-link>
-        </div>
-        <div class="pt-2 pb-3 space-y-1">
-            <x-jet-nav-link href="{{ route('/admin/showReser') }}" style="cursor: pointer;font-size:13px;">
+            </x-jet-responsive-nav-link>
+
+            <x-jet-responsive-nav-link href="{{ route('/admin/showReser') }}" :active="request()->routeIs('/admin/showReser')">
                 {{ __('Reservations') }}
-            </x-jet-nav-link>
-        </div>
-        <div class="pt-2 pb-3 space-y-1">
-            <x-jet-nav-link href="{{ route('/admin/notifications') }}" style="cursor: pointer;font-size:13px;">
+            </x-jet-responsive-nav-link>
+
+            <x-jet-responsive-nav-link href="{{ route('/admin/notifications') }}" :active="request()->routeIs('/admin/notifications')">
                 {{ __('Notifications') }}
-            </x-jet-nav-link>
-        </div>
-        <div class="pt-2 pb-3 space-y-1">
-            <x-jet-nav-link href="{{ route('/admin/prof') }}" style="cursor: pointer;font-size:13px;">
+            </x-jet-responsive-nav-link>
+
+            <x-jet-responsive-nav-link href="{{ route('/admin/prof') }}" :active="request()->routeIs('/admin/prof')">
                 {{ __('Add Professor') }}
-            </x-jet-nav-link>
-        </div>
+            </x-jet-responsive-nav-link>
+
 
 
 

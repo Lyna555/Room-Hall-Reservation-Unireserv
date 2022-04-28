@@ -2,12 +2,12 @@
 <nav x-data="{ open: false }" style="background-color: transparent;">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between" style="display:flex;justify-content:center;align-items:center;height: 40px">
+        <div class="flex justify-between" style="height: 40px">
             <div class="flex">
                 <!-- Logo -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <a style="font-family: 'Script MT';font-size: 20px;">
-                        {{ __('Unireserv') }}
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="{{route('/user/home')}}" style="font-family: 'Script MT';font-size:25px;color:black">
+                        <x-jet-application-mark class="block h-9 w-auto" />
                     </a>
                 </div>
 
@@ -161,26 +161,22 @@
 
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden" style="background-color: white;">
-        <div class="pt-2 pb-3 space-y-1">
-            <x-jet-nav-link href="{{ route('/user/home') }}" :active="request()->routeIs('/admin/home')">
+        
+            <x-jet-responsive-nav-link href="{{ route('/user/home') }}" :active="request()->routeIs('/admin/home')">
                 {{ __('Home') }}
-            </x-jet-nav-link>
-        </div>
-        <div class="pt-2 pb-3 space-y-1">
-            <x-jet-nav-link href="{{ route('calendar') }}" :active="request()->routeIs('/admin/calendar')">
+            </x-jet-responsive-nav-link>
+        
+            <x-jet-responsive-nav-link href="{{ route('calendar') }}" :active="request()->routeIs('/admin/calendar')">
                 {{ __('Calendar') }}
-            </x-jet-nav-link>
-        </div>
-        <div class="pt-2 pb-3 space-y-1">
-            <x-jet-nav-link href="{{ route('/user/showReser') }}" style="cursor: pointer;font-size:13px;">
+            </x-jet-responsive-nav-link>
+        
+            <x-jet-responsive-nav-link href="{{ route('/user/showReser') }}" :active="request()->routeIs('/user/showReser')">
                 {{ __('Reservations') }}
-            </x-jet-nav-link>
-        </div>
-        <div class="pt-2 pb-3 space-y-1">
-            <x-jet-nav-link href="{{ route('/user/notifications') }}" style="cursor: pointer;font-size:13px;">
+            </x-jet-responsive-nav-link>
+        
+            <x-jet-responsive-nav-link href="{{ route('/user/notifications') }}" :active="request()->routeIs('/user/notifications')">
                 {{ __('Notifications') }}
-            </x-jet-nav-link>
-        </div>
+            </x-jet-responsive-nav-link>
 
 
         <!-- Responsive Settings Options -->

@@ -31,7 +31,7 @@
 <body>
   @include('navigation-menu')
   <div style="display: flex;width:100%;justify-content:center;align-items:center">
-    <div class="card mb-3" style="width:90%;margin-top:30px">
+    <div class="hello">
       @if(session()->has('message'))
       <div id="hh" class="alert alert-success">
         {{session()->get('message')}}
@@ -45,7 +45,7 @@
       @endif
 
       <div class="card-body">
-        <div style="display: flex;justify-content: space-between;width:92.5%">
+        <div style="display: flex;justify-content: space-between;width:96%">
           <h1 style="font-weight: bold;">Reservations List</h1>
           <a href="{{ url('/user/showNames') }}" class="btn btn-sm btn-warning" style="width:134px;background:#a2c0da;box-shadow: 0px 2px 4px gray;border-radius:15px;color:white;border:none ;">Add </a>
         </div>
@@ -63,7 +63,7 @@
           </thead>
           <tbody>
             @foreach($reservations as $reservation)
-            @if($reservation->date>=$sysdate && $reservation->satate!='reserv-ref')
+            @if($reservation->date>=$sysdate && $reservation->satate!='reserv-ref' && $reservation->satate!='wait')
             <div id="overlay">
               <div style="display:flex; flex-direction:column;justify-content:center;align-items:center;gap:20px;width:30%;height:40%;background:white;border-radius:20px;">
                 <p><strong>Are you sure to delete this Room/Hall?</strong></p>
@@ -81,8 +81,8 @@
               <td>{{ $reservation->creneaua }}</td>
               <td>{{ $reservation->objective }}</td>
               <td style="display: flex;gap:20px;justify-content:center">
-                <button onclick="document.getElementById('overlay').style.display='flex'" class="btn btn-sm btn-warning" style="background-color: #f9a35c;color:white;border:none;box-shadow: 0px 2px 4px gray;border-radius:15px;padding:3.7px 10px">Delete</button>
-                <a href="{{ url('/user/editR/'.$reservation->id) }}" class="btn btn-sm btn-warning" style="background-color: #a4c8d5;color:white;border:none;box-shadow: 0px 2px 4px gray;border-radius:15px;padding:3.7px 18px;">Edit</a>
+                <button onclick="document.getElementById('overlay').style.display='flex'"><img src="{{url('images/delete.png')}}" alt=""></button>
+                <a href="{{ url('/user/editR/'.$reservation->id) }}" ><img src="{{url('images/edit.png')}}" alt=""></a>
               </td>
             </tr>
             @endif

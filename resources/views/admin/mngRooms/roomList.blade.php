@@ -31,16 +31,16 @@
 <body>
   @include('admin.navigation-menu')
   <div style="display: flex;width:100%;justify-content:center;align-items:center">
-    <div class="card mb-3" style="width:90%;margin-top:30px">
+    <div class="hello">
       @if(session()->has('message'))
       <div id="hh" class="alert alert-success">
         {{session()->get('message')}}
       </div>
       @endif
       <div class="card-body">
-        <div style="display: flex;justify-content: space-between;width:90%">
+        <div style="display: flex;justify-content: space-between;align-items:center;width:94%">
           <h1 style="font-weight: bold;">Rooms/Halls List</h1>
-          <a href="{{ route('addRoom') }}" class="btn btn-sm btn-warning" style="width:134px;background:#a2c0da;box-shadow: 0px 2px 4px gray;border-radius:15px;color:white;border:none ; ">Add</a>
+          <a calss="add-button" href="{{ route('addRoom') }}" class="btn btn-sm btn-warning" style="width:134px;background:#a2c0da;box-shadow: 0px 2px 4px gray;border-radius:15px;color:white;border:none ; ">Add</a>
         </div>
         <table class="table">
           <thead class="thread-light">
@@ -72,8 +72,8 @@
               <td>{{ $room->type }}</td>
               <td>{{ $room->state }}</td>
               <td style="display: flex;gap:10px;justify-content:center">
-                <button onclick="document.getElementById('overlay').style.display='flex'" class="btn btn-sm btn-warning" style="background-color: #f9a35c;color:white;border:none;box-shadow: 0px 2px 4px gray;border-radius:15px;padding:3.7px 10px">Delete</button>
-                <a href="{{ url('/edit/'.$room->id) }}" class="btn btn-sm btn-warning" style="background-color: #a4c8d5;color:white;border:none;box-shadow: 0px 2px 4px gray;border-radius:15px;padding:3.7px 18px;">Edit</a>
+                <button calss="button" onclick="document.getElementById('overlay').style.display='flex'"><img src="{{url('images/delete.png')}}" alt=""></button>
+                <a calss="button" href="{{ url('/edit/'.$room->id) }}"><img src="{{url('images/edit.png')}}" alt=""></a>
               </td>
             </tr>
             @endforeach

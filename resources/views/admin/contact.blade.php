@@ -11,52 +11,7 @@
   <link rel="stylesheet" href="{{ mix('css/app.css') }}">
   <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
-  <script>
-    const inputs = document.querySelectorAll(".input");
 
-    function focusFunc() {
-      let parent = this.parentNode;
-      parent.classList.add("focus");
-    }
-
-    function blurFunc() {
-      let parent = this.parentNode;
-      if (this.value == "") {
-        parent.classList.remove("focus");
-      }
-    }
-
-    inputs.forEach((input) => {
-      input.addEventListener("focus", focusFunc);
-      input.addEventListener("blur", blurFunc);
-
-    });
-    // countries drop down list 
-
-    document.addEventListener('DOMContentLoaded', () => {
-
-      const selectDrop = document.querySelector('#countries');
-      // const selectDrop = document.getElementById('countries');
-
-
-      fetch('https://restcountries.com/v2/all?fields=name,capital,currencies').then(res => {
-        return res.json();
-      }).then(data => {
-        let output = "";
-        data.forEach(country => {
-          output += `
-      
-      <option value="${country.name}">${country.name}</option>`;
-        })
-
-        selectDrop.innerHTML = output;
-      }).catch(err => {
-        console.log(err);
-      })
-
-
-    });
-  </script>
 
   <style>
     @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap");
@@ -85,7 +40,7 @@
     .container {
       position: relative;
       width: 100%;
-      height: 90vh;
+      height: 93.9vh;
       overflow: hidden;
       display: flex;
       align-items: center;
@@ -93,12 +48,12 @@
     }
 
     .form {
-      max-width:70%;
-      height: 70vh;
+      max-width: 70%;
+      min-height: 70vh;
       background-color: #fff;
       border-radius: 10px;
       box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.1);
-      z-index: 1000;
+      z-index: 2;
       overflow: hidden;
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -133,13 +88,9 @@
     }
 
     .input {
-      width: 100%;
-      outline: none;
-      border: 2px solid #fff;
-      background: white;
+      width: 90%;
       border: 1px solid gray;
       padding: 0.6rem 1.2rem;
-      color: #fff;
       font-weight: 500;
       font-size: 0.95rem;
       letter-spacing: 0.5px;
@@ -238,6 +189,7 @@
       .btn {
         padding: 0.45rem 1.2rem;
       }
+
     }
   </style>
   <script src="{{ mix('js/app.js') }}" defer></script>
@@ -245,37 +197,39 @@
 
 <body>
 
-<div style="backdrop-filter: blur(4px);width:100%;height:100vh;display:flex;flex-direction: column;align-items:center">
-  @include('admin.navigation-menu')
-  @if(session()->has('message'))
-  <div id="hh" class="alert alert-success">
-    {{session()->get('message')}}
-  </div>
-  @endif
-  <div class="container">
-    <div class="form">
-      <div class="contact-info" style="display: flex;align-items:center">
-        <img src="{{url('images/triggers.png')}}" alt="">
-      </div>
-      <div class="contact-form">
-        <form id="form" action="{{ url('/admin/sendedEmail') }}" method="get">
-          <h2 class="title">Contact</h2>
-          <div class="input-container">
-            <select style="color:grey" required name="email" class="input">
-              <option>Select an email</option>
-              @foreach($users as $user)
-              <option style="color:black">{{ $user->email }}</option>
-              @endforeach
-            </select>
-          </div>
-          <div class="input-container textarea">
-            <textarea style="color:black" required name="message" class="input" placeholder="Enter your Message"></textarea>
-          </div>
-          <input type="submit" value="Send" class="btn" />
-        </form>
+  <div style="backdrop-filter: blur(4px);width:100%;height:100vh;display:flex;flex-direction: column;">
+    @include('admin.navigation-menu')
+    @if(session()->has('message'))
+    <div id="hh" class="alert alert-success">
+      {{session()->get('message')}}
+    </div>
+    @endif
+    <div class="container">
+      <div class="form">
+        <div class="contact-info" style="display: flex;align-items:center">
+          <img src="{{url('images/triggers.png')}}" alt="">
+        </div>
+        <div class="contact-form">
+          <form id="form" action="{{ url('/admin/sendedEmail') }}" method="get">
+            <h2 class="title">Contact</h2>
+            <div class="input-container">
+              <p style="color: #fff;text-align: start;margin-left:1.2rem">Email</p>
+              <select style="color:grey;cursor: pointer;" required name="email" class="input">
+                <option>Select</option>
+                  @foreach($users as $user)
+                    <option style="color:black">{{ $user->email }}</option>
+                  @endforeach
+              </select>
+            </div>
+            <div class="input-container textarea">
+            <p style="color: #fff;text-align: start;margin-left:1.2rem">Message</p>
+              <textarea style="color:black" required name="message" class="input" placeholder="Write.."></textarea>
+            </div>
+            <input type="submit" value="Send" class="btn" />
+          </form>
+        </div>
       </div>
     </div>
-  </div>
   </div>
 
 

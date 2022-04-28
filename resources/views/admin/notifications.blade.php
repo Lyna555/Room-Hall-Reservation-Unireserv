@@ -31,7 +31,7 @@
   @include('admin.navigation-menu')
 
   <div style="display: flex;width:100%;justify-content:center;align-items:center">
-  <div class="card mb-3" style="width:90%;margin-top:30px">
+  <div class="hello">
     @if(session()->has('message'))
     <div id="hh" class="alert alert-danger">
       {{session()->get('message')}}
@@ -57,7 +57,7 @@
             <div style="display:flex; flex-direction:column;justify-content:center;align-items:center;gap:20px;width:30%;height:20%;background:white;border-radius:20px;">
               <p><strong>Are you sure to Refuse this reservation ?</strong></p>
               <div style="display:flex;flex-direction:row;justify-content:center; gap:20px">
-                <a href="{{url('/refuse/'.$reservation->id)}}" onclick="document.getElementById('overlay').style.display='none';" class="btn btn-sm btn-danger" style="border:none">Accept</a>
+                <a href="{{url('/refuse/'.$reservation->id)}}" onclick="document.getElementById('overlay').style.display='none';" class="btn btn-sm btn-danger" style="border:none">Refuse</a>
                 <a href="" onclick="document.getElementById('overlay').style.display='none';" class="btn btn-sm btn-warning" style="background: lightgray;border:none">Cancel</a>
               </div>
             </div>
@@ -69,8 +69,8 @@
             <td>{{$reservation->creneaude}} - {{$reservation->creneaua}}</td>
 
             <td style="display: flex;gap:10px;justify-content: center;" >
-              <a href="{{url('/accept/'.$reservation->id)}}" class="btn btn-sm btn-warning " style="background-color: #f9a35c;color:white;border:none;box-shadow: 0px 2px 4px gray;border-radius:15px;padding:3.7px 18px">Accept</a>
-              <button onclick="document.getElementById('overlay').style.display='flex'" class="btn btn-sm btn-warning" style="background-color: #a4c8d5;color:white;border:none;box-shadow: 0px 2px 4px gray;border-radius:15px;padding:3.7px 18px;">Refuse</button>
+              <a href="{{url('/accept/'.$reservation->id)}}"><img src="{{url('images/accept.png')}}" alt=""></a>
+              <button onclick="document.getElementById('overlay').style.display='flex'"><img src="{{url('images/failed.png')}}" alt=""></button>
             </td>
           </tr>
           @endif

@@ -32,7 +32,7 @@
     @include('admin.navigation-menu')
     
     <div style="display: flex;width:100%;justify-content:center">
-      <div class="card mb-3" style="width:90%;margin-top:30px">
+      <div class="hello">
         @if(session()->has('message'))
         <div id="hh" class="alert alert-success">
           {{session()->get('message')}}
@@ -69,7 +69,7 @@
                 <td>{{ $prof->name }}</td>
                 <td>{{ $prof->email }}</td>
                 <td>
-                  <button onclick="document.getElementById('overlay').style.display='flex'" class="btn btn-sm btn-warning " style="background-color: #f9a35c;color:white;border:none;box-shadow: 0px 2px 4px gray;border-radius:15px;padding:3.7px 18px">Delete</button>
+                  <button onclick="document.getElementById('overlay').style.display='flex'"><img src="{{url('images/delete.png')}}" alt=""></button>
                 </td>
               </tr>
               @endif
