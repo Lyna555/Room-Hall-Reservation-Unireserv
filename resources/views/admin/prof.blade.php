@@ -56,7 +56,7 @@
               @foreach($profs as $prof)
               @if( $prof->role=='prof')
               <div id="overlay">
-              <div style="display:flex; flex-direction:column;justify-content:center;align-items:center;width:30%;height:40%;gap: 17px;background:white;border-radius:20px;box-shadow: 10px 10px 20px rgba(0,0,0,0.5);">
+              <div class="delete">
                   <p><strong>Are you sure to delete this Professor ?</strong></p>
                   <img src="{{url('images/deleted.png')}}" style="width:40%;height:40%" alt="">
                   <div style="display:flex;flex-direction:row;justify-content:center; gap:20px">

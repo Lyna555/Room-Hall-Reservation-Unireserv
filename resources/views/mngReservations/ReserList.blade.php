@@ -65,7 +65,7 @@
             @foreach($reservations as $reservation)
             @if($reservation->date>=$sysdate && $reservation->satate!='reserv-ref' && $reservation->satate!='wait')
             <div id="overlay">
-              <div style="display:flex; flex-direction:column;justify-content:center;align-items:center;gap:20px;width:30%;height:40%;background:white;border-radius:20px;">
+              <div class="delete">
                 <p><strong>Are you sure to delete this Room/Hall?</strong></p>
                 <img src="{{url('images/deleted.png')}}" style="width:40%;height:40%" alt="">
                 <div style="display:flex;flex-direction:row;justify-content:center; gap:20px">
@@ -80,9 +80,11 @@
               <td>{{ $reservation->creneaude }}</td>
               <td>{{ $reservation->creneaua }}</td>
               <td>{{ $reservation->objective }}</td>
-              <td style="display: flex;gap:20px;justify-content:center">
-                <button onclick="document.getElementById('overlay').style.display='flex'"><img src="{{url('images/delete.png')}}" alt=""></button>
-                <a href="{{ url('/user/editR/'.$reservation->id) }}" ><img src="{{url('images/edit.png')}}" alt=""></a>
+              <td>
+                <div style="display: flex;gap:10px;justify-content:center">
+                  <button onclick="document.getElementById('overlay').style.display='flex'"><img class="icons" src="{{url('images/delete.png')}}" alt=""></button>
+                  <a href="{{ url('/user/editR/'.$reservation->id) }}"><img class="icons" src="{{url('images/edit.png')}}" alt=""></a>
+                </div>
               </td>
             </tr>
             @endif

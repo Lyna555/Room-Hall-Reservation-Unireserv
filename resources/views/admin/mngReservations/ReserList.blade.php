@@ -17,10 +17,12 @@
       background-attachment: fixed;
       background-repeat: no-repeat;
     }
-    td{
+
+    td {
       text-align: center;
     }
-    th{
+
+    th {
       text-align: center;
     }
   </style>
@@ -44,8 +46,8 @@
 
       <div class="card-body">
         <div style="display: flex;justify-content: space-between;width:97%">
-        <h1 style="font-weight: bold;">Reservations List</h1>
-        <a id="add" href="{{ url('/admin/showNames') }}" class="btn btn-sm btn-warning" style="width:134px;background:#a2c0da;box-shadow: 0px 2px 4px gray;border-radius:15px;color:white;border:none ;">Add</a>
+          <h1 style="font-weight: bold;">Reservations List</h1>
+          <a id="add" href="{{ url('/admin/showNames') }}" class="btn btn-sm btn-warning" style="width:134px;background:#a2c0da;box-shadow: 0px 2px 4px gray;border-radius:15px;color:white;border:none ;">Add</a>
         </div>
         <table class="table">
           <thead class="thread-light">
@@ -62,7 +64,7 @@
             @foreach($reservations as $reservation)
             @if($reservation->date>=$sysdate && $reservation->satate!='wait' && $reservation->satate!='not-reserved' && $reservation->satate!='reserv-ref')
             <div id="overlay">
-              <div style="display:flex; flex-direction:column;justify-content:center;align-items:center;gap:17px;width:30%;height:40%;background:white;border-radius:20px;">
+              <div class="delete">
                 <p><strong>Are you sure to delete this reservation?</strong></p>
                 <img src="{{url('images/deleted.png')}}" style="width:40%;height:40%" alt="">
                 <div style="display:flex;flex-direction:row;justify-content:center; gap:20px">
@@ -77,9 +79,11 @@
               <td>{{ $reservation->creneaude }}</td>
               <td>{{ $reservation->creneaua }}</td>
               <td>{{ $reservation->objective }}</td>
-              <td style="display: flex;gap:10px;justify-content:center">
-                <button onclick="document.getElementById('overlay').style.display='flex'"><img src="{{url('images/delete.png')}}" alt=""></button>
-                <a href="{{ url('/admin/editR/'.$reservation->id) }}"><img src="{{url('images/edit.png')}}" alt=""></a>
+              <td>
+                <div style="display: flex;gap:10px;justify-content:center">
+                  <button onclick="document.getElementById('overlay').style.display='flex'"><img src="{{url('images/delete.png')}}" alt=""></button>
+                  <a href="{{ url('/admin/editR/'.$reservation->id) }}"><img src="{{url('images/edit.png')}}" alt=""></a>
+                </div>
               </td>
             </tr>
             @endif

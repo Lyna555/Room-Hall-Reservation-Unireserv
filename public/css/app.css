@@ -2759,6 +2759,18 @@ select {
   background-color: white;
 }
 
+.delete {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 17px;
+  width: 30%;
+  height: 40%;
+  background: white;
+  border-radius: 20px;
+}
+
 @media (max-width: 1044px) and (max-width: 768px) {
   .welc-cont {
     width: 100%;
@@ -2788,18 +2800,23 @@ select {
 
   td,
   th {
-    font-size: 12px;
+    font-size: 11px;
   }
 
   .add-button {
-    font-size: 12px;
+    font-size: 11px;
   }
 
- .hello{
+  .hello {
     width: 100%;
   }
 
+}
 
+@media (max-width: 1050px) {
+  .delete {
+    width: 60%;
+  }
 }
 
 @media (max-width: 850px) {
@@ -2811,5 +2828,8 @@ select {
 @media (max-width: 690px) {
   .div {
     width: 90%;
+  }
+  .delete {
+    width: 70%;
   }
 }

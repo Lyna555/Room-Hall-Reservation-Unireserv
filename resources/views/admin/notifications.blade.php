@@ -17,6 +17,7 @@
       background-attachment: fixed;
       background-repeat: no-repeat;
     }
+
     td {
       text-align: center;
     }
@@ -31,54 +32,57 @@
   @include('admin.navigation-menu')
 
   <div style="display: flex;width:100%;justify-content:center;align-items:center">
-  <div class="hello">
-    @if(session()->has('message'))
-    <div id="hh" class="alert alert-danger">
-      {{session()->get('message')}}
-    </div>
-    @endif
-    <div class="card-body">
-      <h1 style="font-weight: bold">Notifications</h1>
+    <div class="hello">
+      @if(session()->has('message'))
+      <div id="hh" class="alert alert-danger">
+        {{session()->get('message')}}
+      </div>
+      @endif
+      <div class="card-body">
+        <h1 style="font-weight: bold">Notifications</h1>
 
-      <table class="table">
-        <thead class="thread-light">
-          <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Room</th>
-            <th scope="col">Date</th>
-            <th scope="col">Time</th>
-            <th scope="col">Operations</th>
-          </tr>
-        </thead>
-        <tbody>
-          @foreach($reservations as $reservation)
-          @if($reservation->satate=='wait')
-          <div id="overlay">
-            <div style="display:flex; flex-direction:column;justify-content:center;align-items:center;gap:20px;width:30%;height:20%;background:white;border-radius:20px;">
-              <p><strong>Are you sure to Refuse this reservation ?</strong></p>
-              <div style="display:flex;flex-direction:row;justify-content:center; gap:20px">
-                <a href="{{url('/refuse/'.$reservation->id)}}" onclick="document.getElementById('overlay').style.display='none';" class="btn btn-sm btn-danger" style="border:none">Refuse</a>
-                <a href="" onclick="document.getElementById('overlay').style.display='none';" class="btn btn-sm btn-warning" style="background: lightgray;border:none">Cancel</a>
+        <table class="table">
+          <thead class="thread-light">
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Room</th>
+              <th scope="col">Date</th>
+              <th scope="col">Time</th>
+              <th scope="col">Operations</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach($reservations as $reservation)
+            @if($reservation->satate=='wait')
+            <div id="overlay">
+              <div class="delete">
+                <p><strong>Are you sure to Refuse this Reservation ?</strong></p>
+                <img src="{{url('images/deleted.png')}}" style="width:40%;height:40%" alt="">
+                <div style="display:flex;flex-direction:row;justify-content:center; gap:20px">
+                  <a href="{{url('/refuse/'.$reservation->id)}}" onclick="document.getElementById('overlay').style.display='none';" class="btn btn-sm btn-danger" style="border:none">Refuse</a>
+                  <a href="" onclick="document.getElementById('overlay').style.display='none';" class="btn btn-sm btn-warning" style="background: lightgray;border:none">Cancel</a>
+                </div>
               </div>
             </div>
-          </div>
-          <tr>
-            <td>name</td>
-            <td>{{$reservation->room_name}}</td>
-            <td>{{$reservation->date}}</td>
-            <td>{{$reservation->creneaude}} - {{$reservation->creneaua}}</td>
+            <tr>
+              <td>name</td>
+              <td>{{$reservation->room_name}}</td>
+              <td>{{$reservation->date}}</td>
+              <td>{{$reservation->creneaude}} - {{$reservation->creneaua}}</td>
 
-            <td style="display: flex;gap:10px;justify-content: center;" >
-              <a href="{{url('/accept/'.$reservation->id)}}"><img src="{{url('images/accept.png')}}" alt=""></a>
-              <button onclick="document.getElementById('overlay').style.display='flex'"><img src="{{url('images/failed.png')}}" alt=""></button>
-            </td>
-          </tr>
-          @endif
-          @endforeach
-        </tbody>
-      </table>
+              <td>
+                <div style="display: flex;gap:10px;justify-content:center">
+                  <a href="{{url('/accept/'.$reservation->id)}}"><img src="{{url('images/accept.png')}}" alt=""></a>
+                  <button onclick="document.getElementById('overlay').style.display='flex'"><img src="{{url('images/failed.png')}}" alt=""></button>
+                </div>
+              </td>
+            </tr>
+            @endif
+            @endforeach
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
   </div>
 </body>
 

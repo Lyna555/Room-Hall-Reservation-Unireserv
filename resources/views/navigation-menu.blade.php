@@ -160,7 +160,7 @@
     </div>
 
     <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden" style="background-color: white;">
+    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden" style="background-color: white;position: absolute;z-index:100;width:100%">
         
             <x-jet-responsive-nav-link href="{{ route('/user/home') }}" :active="request()->routeIs('/admin/home')">
                 {{ __('Home') }}
