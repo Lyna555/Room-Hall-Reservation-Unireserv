@@ -10,6 +10,8 @@
   <link rel="stylesheet" href="{{ mix('css/app.css') }}">
   <script src="{{ mix('js/app.js') }}" defer></script>
   <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <script src=//code.jquery.com/jquery-3.5.1.slim.min.js integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin=anonymous></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <style>
     body {
       background-image: url('{{url("images/web.png")}}');
@@ -55,21 +57,11 @@
             <tbody>
               @foreach($profs as $prof)
               @if( $prof->role=='prof')
-              <div id="overlay">
-              <div class="delete">
-                  <p><strong>Are you sure to delete this Professor ?</strong></p>
-                  <img src="{{url('images/deleted.png')}}" style="width:40%;height:40%" alt="">
-                  <div style="display:flex;flex-direction:row;justify-content:center; gap:20px">
-                    <a href="{{ url('/destroyy/'.$prof->id) }}" class="btn btn-sm btn-warning" style="background: rgb(224, 54, 54);color:white;border:none;box-shadow: 0px 2px 4px gray;border-radius:15px;">Delete</a>
-                    <a href="" onclick="document.getElementById('overlay').style.display='none';" class="btn btn-sm btn-warning" style="background: lightgray;border:none;box-shadow: 0px 2px 4px gray;border-radius:15px;">Cancel</a>
-                  </div>
-                </div>
-              </div>
               <tr>
                 <td>{{ $prof->name }}</td>
                 <td>{{ $prof->email }}</td>
                 <td>
-                  <button onclick="document.getElementById('overlay').style.display='flex'"><img src="{{url('images/delete.png')}}" alt=""></button>
+                  <a class="delete" href="{{ url('/destroyy/'.$prof->id) }}"><img src="{{url('images/delete.png')}}" alt=""></a>
                 </td>
               </tr>
               @endif
@@ -79,6 +71,21 @@
         </div>
       </div>
     </div>
+    <script>
+    $('.delete').on('click', function(event) {
+      event.preventDefault();
+      const url = $(this).attr('href');
+      swal({
+        title: 'Are you sure you want to delete this professor?',
+        text: 'This record will be permanantly deleted!',
+        icon: 'warning',
+        buttons: ["Cancel", "Yes!"],
+      }).then(function(value) {
+        if (value) {
+          window.location.href = url;
+        }
+      });
+    });
+</script>
 </body>
-
 </html>

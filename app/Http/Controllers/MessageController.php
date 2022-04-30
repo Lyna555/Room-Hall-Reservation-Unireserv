@@ -20,7 +20,8 @@ class MessageController extends Controller
     {
         if (Auth::user()->role == 'admin') {
             $users = User::all();
-            return view('admin.contact', ['users' => $users]);
+            $auth = Auth::user()->email;
+            return view('admin.contact', ['users' => $users ,'auth' => $auth]);
         } else {
             return abort(403);
         }
@@ -45,7 +46,8 @@ class MessageController extends Controller
     {
         if (Auth::user()->role == 'prof') {
             $users = User::all();
-            return view('contact', ['users' => $users]);
+            $auth = Auth::user()->email;
+            return view('contact', ['users' => $users ,'auth' => $auth]);
         } else {
             return abort(403);
         }

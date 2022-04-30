@@ -213,7 +213,9 @@
               <select style="color:grey" required name="email" class="input">
                 <option>Select</option>
                 @foreach($users as $user)
+                @if($user->email != $auth)
                 <option style="color:black">{{ $user->email }}</option>
+                @endif
                 @endforeach
               </select>
             </div>
