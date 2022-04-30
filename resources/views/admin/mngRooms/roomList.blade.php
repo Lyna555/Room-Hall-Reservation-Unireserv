@@ -10,6 +10,8 @@
   <link rel="stylesheet" href="{{ mix('css/app.css') }}">
   <script src="{{ mix('js/app.js') }}" defer></script>
   <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <script src=//code.jquery.com/jquery-3.5.1.slim.min.js integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin=anonymous></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <style>
     body {
       background-image: url('{{url("images/web.png")}}');
@@ -26,6 +28,10 @@
       text-align: center;
     }
   </style>
+
+
+
+
 </head>
 
 <body>
@@ -37,6 +43,7 @@
         {{session()->get('message')}}
       </div>
       @endif
+
       <div class="card-body">
         <div style="display: flex;justify-content: space-between;align-items:center;width:94%">
           <h1 style="font-weight: bold;">Rooms/Halls List</h1>
@@ -55,16 +62,6 @@
           </thead>
           <tbody>
             @foreach($rooms as $room)
-            <div id="overlay">
-              <div class="delete">
-                <p><strong>Are you sure to delete this Room/Hall?</strong></p>
-                <img src="{{url('images/deleted.png')}}" style="width:40%;height:40%" alt="">
-                <div style="display:flex;flex-direction:row;justify-content:center; gap:20px">
-                  <a href="{{ url('/destroy/'.$room->id) }}" class="btn btn-sm btn-warning" style="background: rgb(224, 54, 54);color:white;border:none;box-shadow: 0px 2px 4px gray;border-radius:15px;">Delete</a>
-                  <a href="" onclick="document.getElementById('overlay').style.display='none';" class="btn btn-sm btn-warning" style="background: lightgray;border:none;box-shadow: 0px 2px 4px gray;border-radius:15px;">Cancel</a>
-                </div>
-              </div>
-            </div>
             <tr>
               <td>{{ $room->name }}</td>
               <td>{{ $room->capacity }}</td>
@@ -72,9 +69,17 @@
               <td>{{ $room->type }}</td>
               <td>{{ $room->state }}</td>
               <td>
+                
                 <div style="display: flex;gap:10px;justify-content:center">
-                  <button calss="button" onclick="document.getElementById('overlay').style.display='flex'"><img src="{{url('images/delete.png')}}" alt=""></button>
-                  <a calss="button" href="{{ url('/edit/'.$room->id) }}"><img src="{{url('images/edit.png')}}" alt=""></a>
+                @foreach($reservations as $reservation)
+                  @if($reservation->room_name==$room->name)
+                  <a href="{{ url('/destroy/'.$room->id) }}" class="delete1"><img src="{{url('images/delete.png')}}" alt=""></a>
+                    @break
+                  @else
+                  <a href="{{ url('/destroy/'.$room->id) }}" class="delete2"><img src="{{url('images/delete.png')}}" alt=""></a>
+                  @endif
+                @endforeach
+                  <a href="{{ url('/edit/'.$room->id) }}"><img src="{{url('images/edit.png')}}" alt=""></a>
                 </div>
               </td>
             </tr>
@@ -84,6 +89,37 @@
       </div>
     </div>
   </div>
+  <script>
+    $('.delete1').on('click', function(event) {
+      event.preventDefault();
+      const url = $(this).attr('href');
+      swal({
+        title: 'this room is reserved, are you sure to delete it?',
+        text: 'This record and it`s details will be permanantly deleted!',
+        icon: 'warning',
+        buttons: ["Cancel", "Yes!"],
+      }).then(function(value) {
+        if (value) {
+          window.location.href = url;
+        }
+      });
+    });
+
+    $('.delete2').on('click', function(event) {
+      event.preventDefault();
+      const url = $(this).attr('href');
+      swal({
+        title: 'Are you sure to delete this room?',
+        text: 'This record and it`s details will be permanantly deleted!',
+        icon: 'warning',
+        buttons: ["Cancel", "Yes!"],
+      }).then(function(value) {
+        if (value) {
+          window.location.href = url;
+        }
+      });
+    });
+  </script>
 </body>
 
 </html>
