@@ -75,7 +75,7 @@
               <td>
                 <div style="display: flex;gap:10px;justify-content:center;align-items: center;">
                   <a class="delete" href="{{ url('/destroyR/'.$reservation->id) }}"><img class="icons" src="{{url('images/delete.png')}}" alt=""></a>
-                  <a class="delete" href="{{ url('/user/editR/'.$reservation->id) }}"><img class="icons" src="{{url('images/edit.png')}}" alt=""></a>
+                  <a class="edited" href="{{ url('/user/editR/'.$reservation->id) }}"><img class="icons" src="{{url('images/edit.png')}}" alt=""></a>
                 </div>
               </td>
             </tr>

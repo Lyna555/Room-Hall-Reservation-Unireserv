@@ -2821,6 +2821,9 @@ select {
   .delete {
     width: 60%;
   }
+  .edited {
+    width: 60%;
+  }
   .card-30{
     width: 50%;
   }
@@ -2840,6 +2843,9 @@ select {
   }
   .delete {
     width: 70%;
+  }
+  .delete {
+    width: 60%;
   }
   .card-30{
     width: 80%;
