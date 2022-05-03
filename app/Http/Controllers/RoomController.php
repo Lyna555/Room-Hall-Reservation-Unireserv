@@ -75,7 +75,9 @@ class RoomController extends Controller
         if (Auth::user()->role == 'admin') {
             $rooms = Room::all();
             $reservations = Reservation::all();
-            return view('admin.mngRooms.roomList', ['rooms' => $rooms,'reservations'=>$reservations]);
+            $count=Reservation::count();
+            $i=0;
+            return view('admin.mngRooms.roomList', ['rooms' => $rooms,'reservations'=>$reservations,'i'=>$i,'count'=>$count]);
         } else {
             return abort(403);
         }

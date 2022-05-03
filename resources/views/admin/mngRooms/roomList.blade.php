@@ -45,9 +45,9 @@
       @endif
 
       <div class="card-body">
-        <div style="display: flex;justify-content: space-between;align-items:center;width:94%">
+        <div style="display: flex;justify-content: space-between;align-items:center;align-items: center;width:90%">
           <h1 style="font-weight: bold;">Rooms/Halls List</h1>
-          <a calss="add-button" href="{{ route('addRoom') }}" class="btn btn-sm btn-warning" style="width:134px;background:#a2c0da;box-shadow: 0px 2px 4px gray;border-radius:15px;color:white;border:none ; ">Add</a>
+          <a calss="add-button" href="{{ route('addRoom') }}"><img style="max-width:40px;max-height:40px ;" src="{{url('images/plus.png')}}" alt=""></a>
         </div>
         <table class="table">
           <thead class="thread-light">
@@ -69,16 +69,20 @@
               <td>{{ $room->type }}</td>
               <td>{{ $room->state }}</td>
               <td>
-                
-                <div style="display: flex;gap:10px;justify-content:center">
-                @foreach($reservations as $reservation)
-                  @if($reservation->room_name==$room->name)
+
+                <div style="display: flex;gap:10px;justify-content:center;align-items: center;">
+                @php
+                  foreach($reservations as $reservation){
+                    if($reservation->room_name==$room->name){
+                     $i++;
+                    }  
+                  }
+                  @endphp
+                  @if($i!=$count)
                   <a href="{{ url('/destroy/'.$room->id) }}" class="delete1"><img src="{{url('images/delete.png')}}" alt=""></a>
-                    @break
                   @else
                   <a href="{{ url('/destroy/'.$room->id) }}" class="delete2"><img src="{{url('images/delete.png')}}" alt=""></a>
                   @endif
-                @endforeach
                   <a href="{{ url('/edit/'.$room->id) }}"><img src="{{url('images/edit.png')}}" alt=""></a>
                 </div>
               </td>

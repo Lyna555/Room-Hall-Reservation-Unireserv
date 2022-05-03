@@ -214,9 +214,11 @@ class ReservationController extends Controller
     public function showReserAdmin()
     {
         if (Auth::user()->role == 'admin') {
+            $users = User::all();
             $reservations = Reservation::all();
             $sysdate = Carbon::now();
-            return view('admin.mngReservations.ReserList', ['reservations' => $reservations, 'sysdate' => $sysdate]);
+            $auth = Auth::user()->id;
+            return view('admin.mngReservations.ReserList', ['reservations' => $reservations, 'sysdate' => $sysdate,'users'=>$users,'auth'=>$auth]);
         } else {
             return abort(403);
         }

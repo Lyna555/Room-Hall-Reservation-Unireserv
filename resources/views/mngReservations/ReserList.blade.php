@@ -47,9 +47,9 @@
       @endif
 
       <div class="card-body">
-        <div style="display: flex;justify-content: space-between;width:96%">
+        <div style="display: flex;justify-content: space-between;align-items: center;width:92.5%">
           <h1 style="font-weight: bold;">Reservations List</h1>
-          <a href="{{ url('/user/showNames') }}" class="btn btn-sm btn-warning" style="width:134px;background:#a2c0da;box-shadow: 0px 2px 4px gray;border-radius:15px;color:white;border:none ;">Add </a>
+          <a href="{{ url('/user/showNames') }}"><img style="max-width:40px;max-height:40px ;" src="{{url('images/plus.png')}}" alt=""></a>
         </div>
 
         <table class="table">
@@ -73,9 +73,9 @@
               <td>{{ $reservation->creneaua }}</td>
               <td>{{ $reservation->objective }}</td>
               <td>
-                <div style="display: flex;gap:10px;justify-content:center">
+                <div style="display: flex;gap:10px;justify-content:center;align-items: center;">
                   <a class="delete" href="{{ url('/destroyR/'.$reservation->id) }}"><img class="icons" src="{{url('images/delete.png')}}" alt=""></a>
-                  <a href="{{ url('/user/editR/'.$reservation->id) }}"><img class="icons" src="{{url('images/edit.png')}}" alt=""></a>
+                  <a class="delete" href="{{ url('/user/editR/'.$reservation->id) }}"><img class="icons" src="{{url('images/edit.png')}}" alt=""></a>
                 </div>
               </td>
             </tr>

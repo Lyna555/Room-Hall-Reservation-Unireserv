@@ -47,7 +47,7 @@
           </div>
           <div class="form-group">
             <label>Floor</label>
-            <input required name="floor" value="{{ $room->floor }}" class="form-control" type="number" min="1" placeholder="Enter Floor">
+            <input required name="floor" value="{{ $room->floor }}" class="form-control" type="number" min="0" placeholder="Enter Floor">
           </div>
           @if($room->type=='TD')
           <div class="form-group">

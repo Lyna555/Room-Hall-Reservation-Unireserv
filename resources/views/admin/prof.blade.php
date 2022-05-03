@@ -15,10 +15,11 @@
   <style>
     body {
       background-image: url('{{url("images/web.png")}}');
-      background-size:cover;
+      background-size: cover;
       background-attachment: fixed;
       background-repeat: no-repeat;
     }
+
     td {
       text-align: center;
     }
@@ -32,7 +33,7 @@
 <body>
   <div>
     @include('admin.navigation-menu')
-    
+
     <div style="display: flex;width:100%;justify-content:center">
       <div class="hello">
         @if(session()->has('message'))
@@ -42,9 +43,9 @@
         @endif
 
         <div class="card-body">
-        <div style="display: flex;justify-content: space-between;width:94%">
+          <div style="display: flex;justify-content: space-between;width:91%;align-items: center;">
             <h1 style="font-weight: bold;">Professors List</h1>
-            <a href="{{ route('register') }}" class="btn btn-sm btn-warning" style="width:120px;background:#a2c0da;box-shadow: 0px 2px 4px gray;border-radius:15px;color:white;border:none ;">Add </a>
+            <a href="{{ route('register') }}"><img style="max-width:40px;max-height:40px ;" src="{{url('images/plus.png')}}" alt=""></a>
           </div>
           <table class="table">
             <thead class="thread-light">
@@ -61,7 +62,9 @@
                 <td>{{ $prof->name }}</td>
                 <td>{{ $prof->email }}</td>
                 <td>
-                  <a class="delete" href="{{ url('/destroyy/'.$prof->id) }}"><img src="{{url('images/delete.png')}}" alt=""></a>
+                  <div style="display: flex;gap:10px;justify-content:center">
+                    <a class="delete" href="{{ url('/destroyy/'.$prof->id) }}"><img src="{{url('images/delete.png')}}" alt=""></a>
+                  </div>
                 </td>
               </tr>
               @endif
@@ -72,20 +75,21 @@
       </div>
     </div>
     <script>
-    $('.delete').on('click', function(event) {
-      event.preventDefault();
-      const url = $(this).attr('href');
-      swal({
-        title: 'Are you sure you want to delete this professor?',
-        text: 'This record will be permanantly deleted!',
-        icon: 'warning',
-        buttons: ["Cancel", "Yes!"],
-      }).then(function(value) {
-        if (value) {
-          window.location.href = url;
-        }
+      $('.delete').on('click', function(event) {
+        event.preventDefault();
+        const url = $(this).attr('href');
+        swal({
+          title: 'Are you sure you want to delete this professor?',
+          text: 'This record will be permanantly deleted!',
+          icon: 'warning',
+          buttons: ["Cancel", "Yes!"],
+        }).then(function(value) {
+          if (value) {
+            window.location.href = url;
+          }
+        });
       });
-    });
-</script>
+    </script>
 </body>
+
 </html>
