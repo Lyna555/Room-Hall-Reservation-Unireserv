@@ -47,14 +47,14 @@
       @endif
 
       <div class="card-body">
-        <div style="display: flex;justify-content: space-between;align-items: center;width:92.5%">
+        <div style="display: flex;justify-content: space-between;align-items: center;width:93.7%">
           <h1 style="font-weight: bold;">Reservations List</h1>
           <a id="add" href="{{ url('/admin/showNames') }}"><img style="max-width:40px;max-height:40px ;" src="{{url('images/plus.png')}}" alt=""></a>
         </div>
         <table class="table">
           <thead class="thread-light">
             <tr>
-              <th scope="col">Property</th>
+              <th scope="col">Proprietor</th>
               <th scope="col">Room</th>
               <th scope="col">Date</th>
               <th scope="col">Entery-Time</th>

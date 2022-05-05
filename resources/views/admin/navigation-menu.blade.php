@@ -36,6 +36,12 @@
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex nav" style="cursor: pointer">
+                    <x-jet-nav-link href="{{ route('/admin/prof') }}" :active="request()->routeIs('/admin/prof')" style="cursor: pointer;font-size:13px;">
+                        {{ __(' Professors') }}
+                    </x-jet-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex nav" style="cursor: pointer">
                     <x-jet-nav-link href="{{ route('/admin/email') }}" :active="request()->routeIs('/admin/email')" style="cursor: pointer;font-size:13px;">
                         {{ __('Contact') }}
                     </x-jet-nav-link>
@@ -44,12 +50,6 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex nav" style="cursor: pointer">
                     <x-jet-nav-link href="{{ route('/admin/notifications') }}" :active="request()->routeIs('/admin/notifications')" style="cursor: pointer;font-size:13px;">
                         {{ __('Notifications') }}
-                    </x-jet-nav-link>
-                </div>
-
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex nav" style="cursor: pointer">
-                    <x-jet-nav-link href="{{ route('/admin/prof') }}" :active="request()->routeIs('/admin/prof')" style="cursor: pointer;font-size:13px;">
-                        {{ __(' Professors') }}
                     </x-jet-nav-link>
                 </div>
 
@@ -189,15 +189,17 @@
                 {{ __('Reservations') }}
             </x-jet-responsive-nav-link>
 
-            <x-jet-responsive-nav-link href="{{ route('/admin/notifications') }}" :active="request()->routeIs('/admin/notifications')">
-                {{ __('Notifications') }}
-            </x-jet-responsive-nav-link>
-
             <x-jet-responsive-nav-link href="{{ route('/admin/prof') }}" :active="request()->routeIs('/admin/prof')">
                 {{ __('Add Professor') }}
             </x-jet-responsive-nav-link>
 
+            <x-jet-responsive-nav-link href="{{ route('/admin/email') }}" :active="request()->routeIs('/admin/email')">
+                {{ __('Contact') }}
+            </x-jet-responsive-nav-link>
 
+            <x-jet-responsive-nav-link href="{{ route('/admin/notifications') }}" :active="request()->routeIs('/admin/notifications')">
+                {{ __('Notifications') }}
+            </x-jet-responsive-nav-link>
 
 
         <!-- Responsive Settings Options -->

@@ -40,7 +40,7 @@
           <div class="form-group">
             <label>Room/Hall Name</label>
             <select required name="name">
-              <option></option>
+              <option>{{old('name')}}</option>
               @foreach($rooms as $room)
               @if($room->state!='speacial')
               <option value="{{$room->name}}">{{$room->name}} (Capacity: {{$room->capacity}}, Floor: {{$room->floor}})</option>
@@ -52,15 +52,15 @@
           </div>
           <div class="form-group">
             <label>Date</label>
-            <input required name="date" class="form-control" type="date" placeholder="Enter The Date">
+            <input value="{{old('date')}}" required name="date" class="form-control" type="date" placeholder="Enter The Date">
           </div>
           <div class="form-group">
             <label>Time </label>
             <div style="display: flex; flex-direction:row; align-items:center; gap:10px;">
               <label>From</label>
-              <input required name="creneaude" class="form-control" type="time" placeholder="Choose Entery-time">
+              <input value="{{old('creneaude')}}" required name="creneaude" class="form-control" type="time" placeholder="Choose Entery-time">
               <label>To</label>
-              <input required name="creneaua" class="form-control" type="time" placeholder="Choose Exit-time">
+              <input value="{{old('creneaua')}}" required name="creneaua" class="form-control" type="time" placeholder="Choose Exit-time">
             </div>
           </div>
           <div class="form-group">
@@ -68,7 +68,7 @@
           <div class="form-group">
             <label>Objective</label>
             <select required name="objective">
-              <option></option>
+              <option>{{old('objective')}}</option>
               <option value="event">Event</option>
               <option value="lecture">Lecture</option>
             </select>

@@ -173,6 +173,10 @@
             <x-jet-responsive-nav-link href="{{ route('/user/showReser') }}" :active="request()->routeIs('/user/showReser')">
                 {{ __('Reservations') }}
             </x-jet-responsive-nav-link>
+
+            <x-jet-responsive-nav-link href="{{ route('/user/email') }}" :active="request()->routeIs('/user/email')">
+                {{ __('Contact') }}
+            </x-jet-responsive-nav-link>
         
             <x-jet-responsive-nav-link href="{{ route('/user/notifications') }}" :active="request()->routeIs('/user/notifications')">
                 {{ __('Notifications') }}

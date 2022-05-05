@@ -56,7 +56,7 @@ class RoomController extends Controller
                 $room->save();
                 return redirect('/showList')->with('message', 'Room/Hall successfully added!');
             } else {
-                return back()->with('errorMessage', 'Room/Hall name doesn\'t match with the type');
+                return back()->with('errorMessage', 'Room/Hall name doesn\'t match with the type')->withInput();
             }
         } else {
             return abort(403);

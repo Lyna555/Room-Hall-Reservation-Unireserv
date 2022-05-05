@@ -260,12 +260,12 @@ class ReservationController extends Controller
         }
         $nowDate = Carbon::now();
         if ($reservation->date < $nowDate) {
-            return back()->with('errorMessage', 'Date expired.');
+            return back()->with('errorMessage', 'Date expired.')->withInput();
         } elseif ($reservation->creneaua <= $reservation->creneaude) {
-            return back()->with('errorMessage', 'End-Time should be greater than Start-Time.');
+            return back()->with('errorMessage', 'End-Time should be greater than Start-Time.')->withInput();
         } elseif (Auth::user()->role == 'admin') {
             $reservation->save();
-            return redirect('/admin/showReser')->with('message', 'Reservation successfully added!');
+            return redirect('/admin/showReser')->with('message', 'Reservation successfully added!')->withInput();
         } else {
             $verif = Room::where('name', '=', $reservation->room_name)->value('state');
             if ($verif == 'speacial') {
@@ -349,9 +349,9 @@ class ReservationController extends Controller
                     ($reser->creneaude < $reservation->creneaude && $reser->creneaua > $reservation->creneaude) ||
                     ($reser->creneaua < $reservation->creneaua && $reser->creneaua > $reservation->creneaua))) {
                     if (Auth::user()->role == 'admin') {
-                        return redirect('/admin/showReser')->with('errorMessage', 'Reservation already exists!');
+                        return redirect('/admin/showReser')->with('errorMessage', 'Reservation already exists!')->withInput();
                     } else {
-                        return redirect('/user/showReser')->with('errorMessage', 'Reservation already exists!');
+                        return redirect('/user/showReser')->with('errorMessage', 'Reservation already exists!')->withInput();
                     }
                 }
             }
@@ -359,9 +359,9 @@ class ReservationController extends Controller
 
         $nowDate = Carbon::now();
         if ($reservation->date < $nowDate) {
-            return back()->with('errorMessage', 'Date expired.');
+            return back()->with('errorMessage', 'Date expired.')->withInput();
         } elseif ($reservation->creneaua <= $reservation->creneaude) {
-            return back()->with('errorMessage', 'End-Time should be greater than Start-Time.');
+            return back()->with('errorMessage', 'End-Time should be greater than Start-Time.')->withInput();
         } elseif (Auth::user()->role == 'admin') {
             $reservation->save();
             return redirect('/admin/showReser')->with('message', 'Reservation successfully added!');

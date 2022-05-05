@@ -45,29 +45,29 @@
           @endif
           <div class="form-group">
             <label>Name</label>
-            <input id="a" required name="name" class="form-control" type="text" placeholder="Enter TD or TP or Hall + Room/Hall Number">
+            <input value="{{old('name')}}" required name="name" class="form-control" type="text" placeholder="Enter TD or TP or Hall + Room/Hall Number">
           </div>
           <div class="form-group">
             <label>Capacity</label>
-            <input min="1" id="b" required name="capacity" class="form-control" type="number" placeholder="Choose Capacity Number">
+            <input value="{{old('capacity')}}" min="1" required name="capacity" class="form-control" type="number" placeholder="Choose Capacity Number">
           </div>
           <div class="form-group">
             <label>Floor</label>
-            <input min="0" required name="floor" class="form-control" type="number" placeholder="Choose Floor Number">
+            <input value="{{old('floor')}}" min="0" required name="floor" class="form-control" type="number" placeholder="Choose Floor Number">
           </div>
           <div class="form-group">
             <label>Type</label>
-            <select id="c" required name="type">
-              <option></option>
+            <select required name="type">
+              <option>{{old('type')}}</option>
               <option value="TD">TD</option>
               <option value="TP">TP</option>
               <option value="Hall">Hall</option>
             </select>
           </div>
-          <div id="d" class="form-group">
+          <div class="form-group">
             <label>State</label>
             <select name="state">
-              <option></option>
+              <option>{{old('state')}}</option>
               <option value="ordinary">Ordinary</option>
               <option value="speacial">Speacial</option>
             </select>
