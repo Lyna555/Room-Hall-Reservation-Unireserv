@@ -1,4 +1,3 @@
-
 <nav x-data="{ open: false }" style="background-color: transparent;">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -39,6 +38,7 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex nav" style="cursor: pointer">
                     <x-jet-nav-link href="{{ route('/user/notifications') }}" :active="request()->routeIs('/user/notifications')" style="cursor: pointer;">
                         {{ __('Notifications') }}
+                        <span style="width:7px;height:7px;background-color: GoldenRod;border-radius: 50%;margin-left:5px"></span>
                     </x-jet-nav-link>
                 </div>
 
@@ -161,26 +161,27 @@
 
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden" style="background-color: white;position: absolute;z-index:100;width:100%">
-        
-            <x-jet-responsive-nav-link href="{{ route('/user/home') }}" :active="request()->routeIs('/admin/home')">
-                {{ __('Home') }}
-            </x-jet-responsive-nav-link>
-        
-            <x-jet-responsive-nav-link href="{{ route('calendar') }}" :active="request()->routeIs('/admin/calendar')">
-                {{ __('Calendar') }}
-            </x-jet-responsive-nav-link>
-        
-            <x-jet-responsive-nav-link href="{{ route('/user/showReser') }}" :active="request()->routeIs('/user/showReser')">
-                {{ __('Reservations') }}
-            </x-jet-responsive-nav-link>
 
-            <x-jet-responsive-nav-link href="{{ route('/user/email') }}" :active="request()->routeIs('/user/email')">
-                {{ __('Contact') }}
-            </x-jet-responsive-nav-link>
-        
-            <x-jet-responsive-nav-link href="{{ route('/user/notifications') }}" :active="request()->routeIs('/user/notifications')">
-                {{ __('Notifications') }}
-            </x-jet-responsive-nav-link>
+        <x-jet-responsive-nav-link href="{{ route('/user/home') }}" :active="request()->routeIs('/admin/home')">
+            {{ __('Home') }}
+        </x-jet-responsive-nav-link>
+
+        <x-jet-responsive-nav-link href="{{ route('calendar') }}" :active="request()->routeIs('/admin/calendar')">
+            {{ __('Calendar') }}
+        </x-jet-responsive-nav-link>
+
+        <x-jet-responsive-nav-link href="{{ route('/user/showReser') }}" :active="request()->routeIs('/user/showReser')">
+            {{ __('Reservations') }}
+        </x-jet-responsive-nav-link>
+
+        <x-jet-responsive-nav-link href="{{ route('/user/email') }}" :active="request()->routeIs('/user/email')">
+            {{ __('Contact') }}
+        </x-jet-responsive-nav-link>
+
+        <x-jet-responsive-nav-link href="{{ route('/user/notifications') }}" :active="request()->routeIs('/user/notifications')">
+            {{ __('Notifications') }}
+            <span style="width:7px;height:7px;background-color: GoldenRod;border-radius: 50%;margin-left:5px"></span>
+        </x-jet-responsive-nav-link>
 
 
         <!-- Responsive Settings Options -->
