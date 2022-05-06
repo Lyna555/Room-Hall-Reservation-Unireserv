@@ -38,7 +38,7 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex nav" style="cursor: pointer">
                     <x-jet-nav-link href="{{ route('/user/notifications') }}" :active="request()->routeIs('/user/notifications')" style="cursor: pointer;">
                         {{ __('Notifications') }}
-                        <span style="width:7px;height:7px;background-color: GoldenRod;border-radius: 50%;margin-left:5px"></span>
+                        <span style="color:white;width:15px;height:15px;background-color:Tomato;border-radius: 50%;margin-left:5px;display: flex;justify-content: center;align-items: center;">{{$count}}</span>
                     </x-jet-nav-link>
                 </div>
 
@@ -180,7 +180,7 @@
 
         <x-jet-responsive-nav-link href="{{ route('/user/notifications') }}" :active="request()->routeIs('/user/notifications')">
             {{ __('Notifications') }}
-            <span style="width:7px;height:7px;background-color: GoldenRod;border-radius: 50%;margin-left:5px"></span>
+            <span style="color:white;width:15px;height:15px;background-color:Tomato;border-radius: 50%;margin-left:5px;display: flex;justify-content: center;align-items: center;">{{$count}}</span>
         </x-jet-responsive-nav-link>
 
 

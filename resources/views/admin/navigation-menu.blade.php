@@ -50,7 +50,7 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex nav" style="cursor: pointer">
                     <x-jet-nav-link href="{{ route('/admin/notifications') }}" :active="request()->routeIs('/admin/notifications')" style="cursor: pointer;font-size:13px;">
                         {{ __('Notifications') }}
-                    <span style="width:7px;height:7px;background-color: GoldenRod;border-radius: 50%;margin-left:5px"></span>
+                    <span style="display: flex;justify-content: center;align-items: center;width:15px;height:15px;background-color: Tomato;border-radius: 50%;margin-left:5px;color: white;">{{$count}}</span>
 
                     </x-jet-nav-link>
                 </div>
@@ -201,6 +201,7 @@
 
             <x-jet-responsive-nav-link href="{{ route('/admin/notifications') }}" :active="request()->routeIs('/admin/notifications')">
                 {{ __('Notifications') }}
+                <span style="display: flex;justify-content: center;align-items: center;width:15px;height:15px;background-color: Tomato;border-radius: 50%;margin-left:5px;color: white;">{{$count}}</span>
             </x-jet-responsive-nav-link>
 
 

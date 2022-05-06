@@ -18,26 +18,28 @@ class ProfController extends Controller
     {
         if (Auth::user()->role == 'admin') {
             $search = $request->input('cherche');
+            $count = Reservation::where('satate', '=', 'wait')->count();
             if ($search == '') {
                 $profs = User::all();
-                return view('admin.prof', ['profs' => $profs]);
+                return view('admin.prof', ['profs' => $profs,'count' => $count]);
             } else {
                 $profs = User::where('name', 'like', '%' . $search . '%')
                     ->orWhere('email', 'like', '%' . $search . '%')
                     ->orderBy('name')
                     ->get();
-                    return view('admin.prof', ['profs' => $profs]);
+                return view('admin.prof', ['profs' => $profs,'count' => $count]);
             }
         } else {
             return abort(403);
         }
     }
-    
+
     public function showProf()
     {
         if (Auth::user()->role == 'admin') {
             $profs = User::all();
-            return view('admin.prof', ['profs' => $profs]);
+            $count = Reservation::where('satate', '=', 'wait')->count();
+            return view('admin.prof', ['profs' => $profs,'count' => $count]);
         } else {
             return abort(403);
         }
@@ -47,7 +49,6 @@ class ProfController extends Controller
     {
         if (Auth::user()->role == 'admin') {
             $prof = User::find($id);
-            $reservations=Reservation::all();
             $reservations = Reservation::all();
             foreach ($reservations as $reservation) {
                 if ($reservation->user_id == $prof->id) {

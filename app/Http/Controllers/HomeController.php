@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Auth;
+use App\Models\Reservation;
 
 class HomeController extends Controller
 {
@@ -9,13 +11,15 @@ class HomeController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     public function index()
     {
         if (Auth::user()->role == 'admin') {
-            return view('admin.dashboard');
+            $count = Reservation::where('satate','=','wait')->count();
+            return view('admin.dashboard',compact('count'));
         } else {
-            return view('dashboard');
+            $count = Reservation::where('user_id','=',Auth::user()->id)->where('satate','=','reserv-state')->orWhere('satate','=','reserv-ref')->count();
+            return view('dashboard',compact('count'));
         }
     }
 }

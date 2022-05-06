@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Mail\SendEmail;
 use App\Mail\WelcomEmail;
+use App\Models\Reservation;
 use Mail;
 use Auth;
 
@@ -21,7 +22,8 @@ class MessageController extends Controller
         if (Auth::user()->role == 'admin') {
             $users = User::all();
             $auth = Auth::user()->email;
-            return view('admin.contact', ['users' => $users ,'auth' => $auth]);
+            $count = Reservation::where('satate','=','wait')->count();
+            return view('admin.contact', ['users' => $users ,'auth' => $auth,'count' => $count]);
         } else {
             return abort(403);
         }
@@ -47,7 +49,8 @@ class MessageController extends Controller
         if (Auth::user()->role == 'prof') {
             $users = User::all();
             $auth = Auth::user()->email;
-            return view('contact', ['users' => $users ,'auth' => $auth]);
+            $count = Reservation::where('user_id','=',Auth::user()->id)->where('satate','=','reserv-state')->orWhere('satate','=','reserv-ref')->count();
+            return view('contact', ['users' => $users ,'auth' => $auth,'count'=> $count]);
         } else {
             return abort(403);
         }

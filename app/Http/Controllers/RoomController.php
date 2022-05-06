@@ -24,11 +24,12 @@ class RoomController extends Controller
     {
         if (Auth::user()->role == 'admin') {
             $search = $request->input('cherche');
+            $count = Reservation::where('satate','=','wait')->count();
             if ($search == '') {
                 $rooms = Room::all();
                 $reservations = Reservation::all();
                 $i = 0;
-                return view('admin.mngRooms.roomList', ['rooms' => $rooms, 'reservations' => $reservations, 'i' => $i]);
+                return view('admin.mngRooms.roomList', ['rooms' => $rooms, 'reservations' => $reservations, 'i' => $i,'count'=>$count]);
             } else {
                 $rooms = Room::where('name', 'like', '%' . $search . '%')
                     ->orWhere('capacity', 'like', '%' . $search . '%')
@@ -39,7 +40,7 @@ class RoomController extends Controller
                     ->get();
                 $reservations = Reservation::all();
                 $i = 0;
-                return view('admin.mngRooms.roomList', ['rooms' => $rooms, 'reservations' => $reservations, 'i' => $i]);
+                return view('admin.mngRooms.roomList', ['rooms' => $rooms, 'reservations' => $reservations, 'i' => $i,'count'=>$count]);
             }
         } else {
             return abort(403);
@@ -86,11 +87,17 @@ class RoomController extends Controller
         if (Auth::user()->role == 'admin') {
             $rooms = Room::all();
             $reservations = Reservation::all();
+            $count = Reservation::where('satate','=','wait')->count();
             $i = 0;
-            return view('admin.mngRooms.roomList', ['rooms' => $rooms, 'reservations' => $reservations, 'i' => $i]);
+            return view('admin.mngRooms.roomList', ['rooms' => $rooms, 'reservations' => $reservations, 'i' => $i,'count'=>$count]);
         } else {
             return abort(403);
         }
+    }
+
+    public function addRoom(){
+        $count = Reservation::where('satate','=','wait')->count();
+        return view('admin.mngRooms.addRoom',compact('count'));
     }
 
 
@@ -105,7 +112,8 @@ class RoomController extends Controller
         if (Auth::user()->role == 'admin') {
             $room = Room::find($id);
             $rooms = Room::all();
-            return view('admin.mngRooms.editRoom', ['rooms' => $rooms, 'room' => $room]);
+            $count = Reservation::where('satate','=','wait')->count();
+            return view('admin.mngRooms.editRoom', ['rooms' => $rooms, 'room' => $room,'count'=>$count]);
         } else {
             return abort(403);
         }
