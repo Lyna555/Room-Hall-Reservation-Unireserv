@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Reservation;
+use Illuminate\Http\Request;
 use Auth;
 
 class ProfController extends Controller
@@ -11,6 +12,25 @@ class ProfController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+    }
+
+    public function search(Request $request)
+    {
+        if (Auth::user()->role == 'admin') {
+            $search = $request->input('cherche');
+            if ($search == '') {
+                $profs = User::all();
+                return view('admin.prof', ['profs' => $profs]);
+            } else {
+                $profs = User::where('name', 'like', '%' . $search . '%')
+                    ->orWhere('email', 'like', '%' . $search . '%')
+                    ->orderBy('name')
+                    ->get();
+                    return view('admin.prof', ['profs' => $profs]);
+            }
+        } else {
+            return abort(403);
+        }
     }
     
     public function showProf()

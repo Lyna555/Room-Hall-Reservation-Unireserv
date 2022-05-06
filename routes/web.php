@@ -42,11 +42,12 @@ Route::get('/showList',"RoomController@showList")->name('/showList');
 Route::post('/update/{id}', "RoomController@update");
 Route::get('/edit/{id}', "RoomController@edit");
 Route::get('/destroy/{id}', "RoomController@destroy");
-
+Route::get('/searchRoom','RoomController@search')->name('/searchRoom');
 //admin/reservations
 Route::get('/user/showNames',"ReservationController@showNamesUser");
 Route::get('/admin/showNames',"ReservationController@showNamesAdmin");
 Route::get('/admin/editR/{id}',"ReservationController@editAdmin");
+Route::get('/admin/searchReser','ReservationController@searchAdmin')->name('/admin/searchReser');
 
 //admin/contact
 Route::get('/admin/sendedEmail', "MessageController@sendEmail");
@@ -57,6 +58,7 @@ Route::get('/refuse/{id}',"ReservationController@refuse");
 
 //admin/prof
 Route::get('/destroyy/{id}', "ProfController@destroy");
+Route::get('/searchProf', "ProfController@search");
 
 
 ////user
@@ -72,7 +74,7 @@ Route::get('/storeR',"ReservationController@store");
 Route::get('/user/editR/{id}',"ReservationController@editUser");
 Route::get('/updateR/{id}',"ReservationController@update");
 Route::get('/destroyR/{id}', "ReservationController@destroy");
-
+Route::get('/user/searchReser','ReservationController@searchUser')->name('/user/searchReser');
 
 //user/contact
 Route::get('/user/sendedEmail', "MessageController@sendEmailUser");

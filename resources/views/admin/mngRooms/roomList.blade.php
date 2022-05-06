@@ -12,6 +12,7 @@
   <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
   <script src=//code.jquery.com/jquery-3.5.1.slim.min.js integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin=anonymous></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <style>
     body {
       background-image: url('{{url("images/web.png")}}');
@@ -47,6 +48,10 @@
       <div class="card-body">
         <div style="display: flex;justify-content: space-between;align-items:center;align-items: center;width:90%">
           <h1 style="font-weight: bold;">Rooms/Halls List</h1>
+          <form style="display: flex;align-items: center;gap:10px" action="{{url('/searchRoom')}}" method="get">
+            <button style="background-color: transparent;"><img src="{{url('images/search.png')}}" alt=""></button>
+            <input name="cherche" style="border:2px solid #C3B1E1;border-radius: 20px;height: 30px;width:70%" placeholder="Search.." type="search">
+          </form>
           <a calss="add-button" href="{{ route('addRoom') }}"><img style="max-width:40px;max-height:40px ;" src="{{url('images/plus.png')}}" alt=""></a>
         </div>
         <table class="table">
@@ -60,6 +65,7 @@
               <th scope="col">Operations</th>
             </tr>
           </thead>
+
           <tbody>
             @foreach($rooms as $room)
             <tr>
@@ -69,16 +75,16 @@
               <td>{{ $room->type }}</td>
               <td>{{ $room->state }}</td>
               <td>
-
                 <div style="display: flex;gap:10px;justify-content:center;align-items: center;">
-                @php
+                  @php
+                  $i=0;
                   foreach($reservations as $reservation){
-                    if($reservation->room_name==$room->name){
-                     $i++;
-                    }  
+                  if($reservation->room_name==$room->name){
+                  $i++;
+                  }
                   }
                   @endphp
-                  @if($i!=$count)
+                  @if($i>0)
                   <a href="{{ url('/destroy/'.$room->id) }}" class="delete1"><img src="{{url('images/delete.png')}}" alt=""></a>
                   @else
                   <a href="{{ url('/destroy/'.$room->id) }}" class="delete2"><img src="{{url('images/delete.png')}}" alt=""></a>
@@ -89,41 +95,39 @@
             </tr>
             @endforeach
           </tbody>
-        </table>
       </div>
     </div>
-  </div>
-  <script>
-    $('.delete1').on('click', function(event) {
-      event.preventDefault();
-      const url = $(this).attr('href');
-      swal({
-        title: 'this room is reserved, are you sure to delete it?',
-        text: 'This record and it`s details will be permanantly deleted!',
-        icon: 'warning',
-        buttons: ["Cancel", "Yes!"],
-      }).then(function(value) {
-        if (value) {
-          window.location.href = url;
-        }
+    <script>
+      $('.delete1').on('click', function(event) {
+        event.preventDefault();
+        const url = $(this).attr('href');
+        swal({
+          title: 'this room is reserved, are you sure to delete it?',
+          text: 'This record and it`s details will be permanantly deleted!',
+          icon: 'warning',
+          buttons: ["Cancel", "Yes!"],
+        }).then(function(value) {
+          if (value) {
+            window.location.href = url;
+          }
+        });
       });
-    });
 
-    $('.delete2').on('click', function(event) {
-      event.preventDefault();
-      const url = $(this).attr('href');
-      swal({
-        title: 'Are you sure to delete this room?',
-        text: 'This record and it`s details will be permanantly deleted!',
-        icon: 'warning',
-        buttons: ["Cancel", "Yes!"],
-      }).then(function(value) {
-        if (value) {
-          window.location.href = url;
-        }
+      $('.delete2').on('click', function(event) {
+        event.preventDefault();
+        const url = $(this).attr('href');
+        swal({
+          title: 'Are you sure to delete this room?',
+          text: 'This record and it`s details will be permanantly deleted!',
+          icon: 'warning',
+          buttons: ["Cancel", "Yes!"],
+        }).then(function(value) {
+          if (value) {
+            window.location.href = url;
+          }
+        });
       });
-    });
-  </script>
+    </script>
 </body>
 
 </html>

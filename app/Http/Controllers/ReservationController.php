@@ -17,6 +17,9 @@ class ReservationController extends Controller
     {
         $this->middleware('auth');
     }
+
+
+
     /**
      * Display a listing of the resource.
      *
@@ -48,8 +51,8 @@ class ReservationController extends Controller
                     $date = $model->getOriginal($source['date_field']);
                     $timestart = $model->getOriginal($source['suffix']);
                     $timeend = $model->getOriginal($source['creneaua']);
-                    $crudFieldValue = date('Y-m-d H:i',strtotime("$date $timestart"));
-                    $crudFieldValue1 = date('Y-m-d H:i',strtotime("$date $timeend"));
+                    $crudFieldValue = date('Y-m-d H:i', strtotime("$date $timestart"));
+                    $crudFieldValue1 = date('Y-m-d H:i', strtotime("$date $timeend"));
 
                     if (!$crudFieldValue) {
                         continue;
@@ -116,8 +119,8 @@ class ReservationController extends Controller
                     $date = $model->getOriginal($resource['date_field']);
                     $timestart = $model->getOriginal($resource['suffix']);
                     $timeend = $model->getOriginal($resource['creneaua']);
-                    $crudFieldValue = date('Y-m-d H:i',strtotime("$date $timestart"));
-                    $crudFieldValue1 = date('Y-m-d H:i',strtotime("$date $timeend"));
+                    $crudFieldValue = date('Y-m-d H:i', strtotime("$date $timestart"));
+                    $crudFieldValue1 = date('Y-m-d H:i', strtotime("$date $timeend"));
 
                     if (!$crudFieldValue) {
                         continue;
@@ -165,9 +168,58 @@ class ReservationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function searchAdmin(Request $request)
     {
-        //
+        if (Auth::user()->role == 'admin') {
+            $search = $request->input('cherche');
+            if ($search == '') {
+                $users = User::all();
+                $reservations = Reservation::all();
+                $sysdate = Carbon::now();
+                $auth = Auth::user()->id;
+                return view('admin.mngReservations.ReserList', ['reservations' => $reservations, 'sysdate' => $sysdate, 'users' => $users, 'auth' => $auth]);
+            } else {
+                $reservations = Reservation::join('users', 'reservations.user_id', '=', 'users.id')
+                    ->where('room_name', 'like', '%' . $search . '%')
+                    ->orWhere('users.name', 'like', '%' . $search . '%')
+                    ->orWhere('date', 'like', '%' . $search . '%')
+                    ->orWhere('creneaude', 'like', '%' . $search . '%')
+                    ->orWhere('creneaua', 'like', '%' . $search . '%')
+                    ->orWhere('objective', 'like', '%' . $search . '%')
+                    ->orderBy('room_name')
+                    ->get();
+                $users = User::all();
+                $sysdate = Carbon::now();
+                $auth = Auth::user()->id;
+                return view('admin.mngReservations.ReserList', ['reservations' => $reservations, 'sysdate' => $sysdate, 'users' => $users, 'auth' => $auth]);
+            }
+        } else {
+            return abort(403);
+        }
+    }
+
+    public function searchUser(Request $request)
+    {
+        if (Auth::user()->role == 'prof') {
+            $search = $request->input('cherche');
+            if ($search == '') {
+                $reservations = Reservation::all();
+                $sysdate = Carbon::now();
+                return view('mngReservations.ReserList', ['reservations' => $reservations, 'sysdate' => $sysdate]);
+            } else {
+                $reservations = Reservation::where('room_name', 'like', '%' . $search . '%')
+                    ->orWhere('date', 'like', '%' . $search . '%')
+                    ->orWhere('creneaude', 'like', '%' . $search . '%')
+                    ->orWhere('creneaua', 'like', '%' . $search . '%')
+                    ->orWhere('objective', 'like', '%' . $search . '%')
+                    ->orderBy('room_name')
+                    ->get();
+                $sysdate = Carbon::now();
+                return view('mngReservations.ReserList', ['reservations' => $reservations, 'sysdate' => $sysdate]);
+            }
+        } else {
+            return abort(403);
+        }
     }
 
     public function showNamesAdmin()
@@ -218,7 +270,7 @@ class ReservationController extends Controller
             $reservations = Reservation::all();
             $sysdate = Carbon::now();
             $auth = Auth::user()->id;
-            return view('admin.mngReservations.ReserList', ['reservations' => $reservations, 'sysdate' => $sysdate,'users'=>$users,'auth'=>$auth]);
+            return view('admin.mngReservations.ReserList', ['reservations' => $reservations, 'sysdate' => $sysdate, 'users' => $users, 'auth' => $auth]);
         } else {
             return abort(403);
         }
@@ -245,11 +297,12 @@ class ReservationController extends Controller
 
         foreach ($reservations as $reser) {
             if ($reser->satate != 'reserv-ref') {
-                if ($reser->room_name == $reservation->room_name && $reser->date == $reservation->date && (
-                    ($reser->creneaude >= $reservation->creneaude && $reser->creneaua <= $reservation->creneaua) ||
-                    ($reser->creneaude <= $reservation->creneaude && $reser->creneaua >= $reservation->creneaua) ||
-                    ($reser->creneaude < $reservation->creneaude && $reser->creneaua > $reservation->creneaude) ||
-                    ($reser->creneaua < $reservation->creneaua && $reser->creneaua > $reservation->creneaua))) {
+                if ((($reser->creneaude >= $reservation->creneaude && $reser->creneaua <= $reservation->creneaua) ||
+                        ($reser->creneaude <= $reservation->creneaude && $reser->creneaua >= $reservation->creneaua) ||
+                        ($reser->creneaude < $reservation->creneaude && $reser->creneaua > $reservation->creneaude) ||
+                        ($reser->creneaua < $reservation->creneaua && $reser->creneaua > $reservation->creneaua)) &&
+                    $reser->room_name == $reservation->room_name && $reser->date == $reservation->date
+                ) {
                     if (Auth::user()->role == 'admin') {
                         return redirect('/admin/showReser')->with('errorMessage', 'Reservation already exists!');
                     } else {
@@ -281,17 +334,6 @@ class ReservationController extends Controller
                 return redirect('/user/showReser')->with('message', 'Reservation successfully added!');
             }
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -343,11 +385,12 @@ class ReservationController extends Controller
 
         foreach ($reservations as $reser) {
             if ($reser->id != $reservation->id && $reser->satate != 'reserv-ref') {
-                if ($reser->room_name == $reservation->room_name && $reser->date == $reservation->date && (
-                    ($reser->creneaude >= $reservation->creneaude && $reser->creneaua <= $reservation->creneaua) ||
-                    ($reser->creneaude <= $reservation->creneaude && $reser->creneaua >= $reservation->creneaua) ||
-                    ($reser->creneaude < $reservation->creneaude && $reser->creneaua > $reservation->creneaude) ||
-                    ($reser->creneaua < $reservation->creneaua && $reser->creneaua > $reservation->creneaua))) {
+                if ((($reser->creneaude >= $reservation->creneaude && $reser->creneaua <= $reservation->creneaua) ||
+                        ($reser->creneaude <= $reservation->creneaude && $reser->creneaua >= $reservation->creneaua) ||
+                        ($reser->creneaude < $reservation->creneaude && $reser->creneaua > $reservation->creneaude) ||
+                        ($reser->creneaua < $reservation->creneaua && $reser->creneaua > $reservation->creneaua)) &&
+                    $reser->room_name == $reservation->room_name && $reser->date == $reservation->date
+                ) {
                     if (Auth::user()->role == 'admin') {
                         return redirect('/admin/showReser')->with('errorMessage', 'Reservation already exists!')->withInput();
                     } else {

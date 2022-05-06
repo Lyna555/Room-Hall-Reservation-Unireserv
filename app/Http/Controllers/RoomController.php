@@ -20,19 +20,30 @@ class RoomController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function search(Request $request)
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        if (Auth::user()->role == 'admin') {
+            $search = $request->input('cherche');
+            if ($search == '') {
+                $rooms = Room::all();
+                $reservations = Reservation::all();
+                $i = 0;
+                return view('admin.mngRooms.roomList', ['rooms' => $rooms, 'reservations' => $reservations, 'i' => $i]);
+            } else {
+                $rooms = Room::where('name', 'like', '%' . $search . '%')
+                    ->orWhere('capacity', 'like', '%' . $search . '%')
+                    ->orWhere('floor', 'like', '%' . $search . '%')
+                    ->orWhere('type', 'like', '%' . $search . '%')
+                    ->orWhere('state', 'like', '%' . $search . '%')
+                    ->orderBy('name')
+                    ->get();
+                $reservations = Reservation::all();
+                $i = 0;
+                return view('admin.mngRooms.roomList', ['rooms' => $rooms, 'reservations' => $reservations, 'i' => $i]);
+            }
+        } else {
+            return abort(403);
+        }
     }
 
     /**
@@ -75,9 +86,8 @@ class RoomController extends Controller
         if (Auth::user()->role == 'admin') {
             $rooms = Room::all();
             $reservations = Reservation::all();
-            $count=Reservation::count();
-            $i=0;
-            return view('admin.mngRooms.roomList', ['rooms' => $rooms,'reservations'=>$reservations,'i'=>$i,'count'=>$count]);
+            $i = 0;
+            return view('admin.mngRooms.roomList', ['rooms' => $rooms, 'reservations' => $reservations, 'i' => $i]);
         } else {
             return abort(403);
         }

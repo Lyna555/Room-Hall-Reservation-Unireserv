@@ -49,6 +49,10 @@
       <div class="card-body">
         <div style="display: flex;justify-content: space-between;align-items: center;width:92.5%">
           <h1 style="font-weight: bold;">Reservations List</h1>
+          <form style="display: flex;align-items: center;gap:10px;" action="{{url('/user/searchReser')}}" method="get">
+            <button style="background-color: transparent;"><img src="{{url('images/search.png')}}" alt=""></button>
+            <input name="cherche" style="border:2px solid #C3B1E1;border-radius: 20px;height: 30px;width:70%" placeholder="Search.." type="search">
+          </form>
           <a href="{{ url('/user/showNames') }}"><img style="max-width:40px;max-height:40px ;" src="{{url('images/plus.png')}}" alt=""></a>
         </div>
 

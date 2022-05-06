@@ -12,6 +12,7 @@
   <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
   <script src=//code.jquery.com/jquery-3.5.1.slim.min.js integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin=anonymous></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <style>
     body {
       background-image: url('{{url("images/web.png")}}');
@@ -49,6 +50,10 @@
       <div class="card-body">
         <div style="display: flex;justify-content: space-between;align-items: center;width:93.7%">
           <h1 style="font-weight: bold;">Reservations List</h1>
+          <form style="display: flex;align-items: center;gap:10px" action="{{url('/admin/searchReser')}}" method="get">
+          <button style="background-color: transparent;"><img src="{{url('images/search.png')}}" alt=""></button>
+            <input name="cherche" style="border:2px solid #C3B1E1;border-radius: 20px;height: 30px;width:70%;" placeholder="Search.." type="search">
+          </form>
           <a id="add" href="{{ url('/admin/showNames') }}"><img style="max-width:40px;max-height:40px ;" src="{{url('images/plus.png')}}" alt=""></a>
         </div>
         <table class="table">
@@ -110,6 +115,29 @@
         }
       });
     });
+
+    $(document).ready(function() {
+        fetch();
+
+        function fetch(query = '') {
+          $.ajax({
+            url: "{{route('/admin/searchReser')}}",
+            method: 'GET',
+            data: {
+              query: query
+            },
+            dataType: 'json',
+            success: function(data) {
+              $('tbody').html(data.table_data);
+            }
+          })
+        }
+
+        $(document).on('keyup', '#search', function() {
+          var query = $(this).val();
+          fetch(query);
+        });
+      });
   </script>
 </body>
 </html>
