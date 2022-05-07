@@ -4,7 +4,9 @@ namespace App\Providers;
 
 use App\Actions\Jetstream\DeleteUser;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Fortify\Fortify;
 use Laravel\Jetstream\Jetstream;
+use App\Models\Reservation;
 
 class JetstreamServiceProvider extends ServiceProvider
 {
@@ -28,6 +30,10 @@ class JetstreamServiceProvider extends ServiceProvider
         $this->configurePermissions();
 
         Jetstream::deleteUsersUsing(DeleteUser::class);
+        Fortify::registerView(function (){
+            $count = Reservation::where('satate','=','wait')->count();
+            return view('auth.register',compact('count'));
+        });
     }
 
     /**
