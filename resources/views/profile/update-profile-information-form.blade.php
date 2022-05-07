@@ -79,12 +79,6 @@
             <x-jet-input id="grade" type="text" class="mt-1 block w-full" wire:model.defer="state.grade" />
         </div>
 
-        <!-- Location -->
-        <div class="col-span-6 sm:col-span-4">
-            <x-jet-label for="location" value="{{ __('Location') }}" />
-            <x-jet-input id="location" type="text" class="mt-1 block w-full" wire:model.defer="state.location" />
-        </div>
-
     </x-slot>
 
     <x-slot name="actions">
