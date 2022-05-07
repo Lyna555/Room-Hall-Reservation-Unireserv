@@ -20,23 +20,26 @@ class CreateNewUser implements CreatesNewUsers
      */
     public function create(array $input)
     {
-        
+
         Validator::make($input, [
-            'name' => ['required', 'string', 'max:255','unique:users'],
+            'name' => ['required', 'string', 'max:255', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'phone_num' => ['numeric'],
             'password' => $this->passwordRules(),
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
         ])->validate();
 
-        $connection=@fsockopen("www.google.com",80);
-        if($connection==true){
-        return User::create([
-            'name' => $input['name'],
-            'email' => $input['email'],
-            'password' => Hash::make($input['password']),
-        ]);
-    }else{
-        return back()->with('error','No connection');
-    }
+        $connection = @fsockopen("www.google.com", 80);
+        if ($connection == true) {
+            return User::create([
+                'name' => $input['name'],
+                'email' => $input['email'],
+                'grade' => $input['grade'],
+                'phone_num' => $input['phone_num'],
+                'password' => Hash::make($input['password']),
+            ]);
+        } else {
+            return back()->with('error', 'No connection');
+        }
     }
 }
