@@ -37,6 +37,7 @@
       <form id="form" action="{{ url('/storeR')}}" method="get">
         @csrf
         <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="text-align: center;font-weight: bold;font-size: 20px;">Add Reservation</div>
           <div class="form-group">
             <label>Room/Hall Name</label>
             <select required name="name">

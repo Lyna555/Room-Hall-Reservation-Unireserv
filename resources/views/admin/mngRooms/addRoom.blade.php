@@ -20,12 +20,13 @@
 </head>
 
 <body>
-@include('admin.navigation-menu')
+  @include('admin.navigation-menu')
   <div style="width:100%;height:93.9vh;display: flex;flex-direction: column;justify-content: center;align-items: center;">
     <div class="div">
       <form id="form" action="{{ url('/store')}}" method="get">
         @csrf
         <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="text-align: center;font-weight: bold;font-size: 20px;">Add Room</div>
           @if ($errors->any())
           <div class="alert alert-danger">
             <ul>

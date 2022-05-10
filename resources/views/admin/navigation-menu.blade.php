@@ -24,13 +24,13 @@
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex nav">
-                    <x-jet-nav-link href="{{ route('/showList') }}"  :active="request()->routeIs('/showList')" style="cursor: pointer;font-size:13px;">
+                    <x-jet-nav-link href="{{ route('/showList') }}" :active="request()->routeIs('/showList')" style="cursor: pointer;font-size:13px;">
                         {{ __('Rooms/Halls') }}
                     </x-jet-nav-link>
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex nav" style="cursor: pointer">
-                    <x-jet-nav-link href="{{ route('/admin/showReser') }}"  :active="request()->routeIs('/admin/showReser')" style="cursor: pointer;font-size:13px;">
+                    <x-jet-nav-link href="{{ route('/admin/showReser') }}" :active="request()->routeIs('/admin/showReser')" style="cursor: pointer;font-size:13px;">
                         {{ __('Reservations') }}
                     </x-jet-nav-link>
                 </div>
@@ -50,8 +50,10 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex nav" style="cursor: pointer">
                     <x-jet-nav-link href="{{ route('/admin/notifications') }}" :active="request()->routeIs('/admin/notifications')" style="cursor: pointer;font-size:13px;">
                         {{ __('Notifications') }}
-                    <span style="display: flex;justify-content: center;align-items: center;width:15px;height:15px;background-color: Tomato;border-radius: 50%;margin-left:5px;color: white;">{{$count}}</span>
-
+                        @if($count==0)
+                        @else
+                        <span style="display: flex;justify-content: center;align-items: center;width:15px;height:15px;background-color: Tomato;border-radius: 50%;margin-left:5px;color: white;">{{$count}}</span>
+                        @endif
                     </x-jet-nav-link>
                 </div>
 
@@ -174,35 +176,38 @@
 
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden" style="background-color: rgba(255,255,255,1.0);position: absolute;z-index: 100;width:100%;">
-    
-            <x-jet-responsive-nav-link href="{{ route('/admin/home') }}" :active="request()->routeIs('/admin/home')">
-                {{ __('Home') }}
-            </x-jet-responsive-nav-link>
 
-            <x-jet-responsive-nav-link href="{{ route('/admin/calendar') }}" :active="request()->routeIs('/admin/calendar')">
-                {{ __('Calendar') }}
-            </x-jet-responsive-nav-link>
+        <x-jet-responsive-nav-link href="{{ route('/admin/home') }}" :active="request()->routeIs('/admin/home')">
+            {{ __('Home') }}
+        </x-jet-responsive-nav-link>
 
-            <x-jet-responsive-nav-link href="{{ route('/showList') }}" :active="request()->routeIs('/showList')">
-                {{ __('Rooms/Halls') }}
-            </x-jet-responsive-nav-link>
+        <x-jet-responsive-nav-link href="{{ route('/admin/calendar') }}" :active="request()->routeIs('/admin/calendar')">
+            {{ __('Calendar') }}
+        </x-jet-responsive-nav-link>
 
-            <x-jet-responsive-nav-link href="{{ route('/admin/showReser') }}" :active="request()->routeIs('/admin/showReser')">
-                {{ __('Reservations') }}
-            </x-jet-responsive-nav-link>
+        <x-jet-responsive-nav-link href="{{ route('/showList') }}" :active="request()->routeIs('/showList')">
+            {{ __('Rooms/Halls') }}
+        </x-jet-responsive-nav-link>
 
-            <x-jet-responsive-nav-link href="{{ route('/admin/prof') }}" :active="request()->routeIs('/admin/prof')">
-                {{ __('Add Professor') }}
-            </x-jet-responsive-nav-link>
+        <x-jet-responsive-nav-link href="{{ route('/admin/showReser') }}" :active="request()->routeIs('/admin/showReser')">
+            {{ __('Reservations') }}
+        </x-jet-responsive-nav-link>
 
-            <x-jet-responsive-nav-link href="{{ route('/admin/email') }}" :active="request()->routeIs('/admin/email')">
-                {{ __('Contact') }}
-            </x-jet-responsive-nav-link>
+        <x-jet-responsive-nav-link href="{{ route('/admin/prof') }}" :active="request()->routeIs('/admin/prof')">
+            {{ __('Add Professor') }}
+        </x-jet-responsive-nav-link>
 
-            <x-jet-responsive-nav-link href="{{ route('/admin/notifications') }}" :active="request()->routeIs('/admin/notifications')">
-                {{ __('Notifications') }}
+        <x-jet-responsive-nav-link href="{{ route('/admin/email') }}" :active="request()->routeIs('/admin/email')">
+            {{ __('Contact') }}
+        </x-jet-responsive-nav-link>
+
+        <x-jet-responsive-nav-link href="{{ route('/admin/notifications') }}" :active="request()->routeIs('/admin/notifications')">
+            {{ __('Notifications') }}
+                @if($count==0)
+                @else
                 <span style="display: flex;justify-content: center;align-items: center;width:15px;height:15px;background-color: Tomato;border-radius: 50%;margin-left:5px;color: white;">{{$count}}</span>
-            </x-jet-responsive-nav-link>
+                @endif
+        </x-jet-responsive-nav-link>
 
 
         <!-- Responsive Settings Options -->

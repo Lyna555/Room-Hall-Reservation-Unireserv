@@ -28,6 +28,7 @@
       <form action="{{ url('/update/'.$room->id) }}" method="post">
         @csrf
         <div style="display:flex;flex-direction:column;gap:10px;">
+        <div style="text-align: center;font-weight: bold;font-size: 20px;">Edit Room</div>
           @if ($errors->any())
           <div class="alert alert-danger">
             <ul>

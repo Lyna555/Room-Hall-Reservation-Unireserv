@@ -84,7 +84,7 @@
         event.preventDefault();
         const url = $(this).attr('href');
         swal({
-          title: 'Are you sure you want to delete this professor?',
+          title: 'Are you sure to delete this professor?',
           text: 'This record will be permanantly deleted!',
           icon: 'warning',
           buttons: ["Cancel", "Yes!"],

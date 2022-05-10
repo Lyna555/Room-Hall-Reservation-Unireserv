@@ -13,59 +13,22 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700&display=swap');
     </style>
-    <style type="text/css">
-        .translated-ltr {
-            margin-top: -40px;
-        }
 
-        .translated-ltr {
-            margin-top: -40px;
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en'
+            }, 'google_translate_element');
         }
-
-        .goog-te-banner-frame {
-            display: none;
-            margin-top: -20px;
-        }
-
-        .goog-logo-link {
-            display: none !important;
-        }
-
-        .goog-te-gadget {
-            color: transparent !important;
-        }
-    </style>
+    </script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: 'Nunito','Hayah', sans-serif;
             background-image: url('{{url("images/web.png")}}');
             background-size: cover;
+            background-attachment: fixed;
             background-repeat: no-repeat;
         }
-
-        #container {
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            gap: 30px;
-        }
-
-        #auth {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px
-        }
-
         .buttons {
             width: 180px;
             height: 40px;
@@ -102,48 +65,24 @@
             color: black;
             background: #f89760;
         }
-
-        #cont {
-            min-width: 40%;
-            min-height: 60%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            border-radius: 20px;
-        }
-
-        img {
-            width: 150px;
-            height: 150px;
-            margin-bottom: 30px;
-        }
-
-        select {
-            width: 80px;
-            border-radius: 15px;
-        }
     </style>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-    <script type="text/javascript">
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({
-                pageLanguage: 'en'
-            }, 'google_translate_element');
-        }
-    </script>
+    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+
 
 </head>
 
-<body class="antialiased">
+<body>
+
     <div id="container">
-        <div id="cont">
+        <div id="cont" style="position: absolute;display: flex;flex-direction: column;justify-content: center;align-items: center;height:100vh;width:60%">
             <div style="display: flex;gap:10px">
                 <p>Choose the language : </p>
                 <div id="google_translate_element"></div>
             </div>
-            <p style="font-family: 'Script MT','Hayah';font-size: 50px;">Unireserve</p>
-            <h1 style="font-family:Nunito;font-size:30px; text-align:center;font-weight:150; text-shadow:3px 3px 4px black;">Join us!</h1>
+            <div style="display:flex;flex-direction:column;text-align:center;font-family:'Script MT';font-size:90px;line-height: 80px;">
+                <div class="welc">Welcome to our</div>
+                <div class="welc">unireserv</div>
+            </div>
             @if (Route::has('login'))
             <div id="auth">
                 @auth
@@ -154,9 +93,12 @@
             </div>
             @endif
         </div>
+        <div style="display: flex;width:100%;height:100vh;justify-content:end;align-items:end">
+            <img src="{{URL('images/hall.png')}}" alt="">
+        </div>
         <stream-chat :autheduser="{{ Auth::user() }}"></stream-chat>
-
     </div>
+
 </body>
 
 </html>
