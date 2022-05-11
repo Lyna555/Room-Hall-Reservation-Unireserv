@@ -2777,7 +2777,10 @@ select {
 
 @media (max-width: 1044px) and (max-width: 768px) {
 
-  
+  #lang{
+    flex-direction: column;
+    align-items: center;
+  }
   .welc-cont {
     width: 100%;
   }

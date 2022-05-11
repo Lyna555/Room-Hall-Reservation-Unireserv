@@ -71,6 +71,10 @@
             height:20px;
             border-radius: 20px;
         }
+        .welc-cont{
+            height: 100vh;
+        }
+        
     </style>
 
 
@@ -78,9 +82,9 @@
 
 <body>
 
-    <div id="container">
+    <div class="welc-cont">
         <div id="cont" style="position: absolute;display: flex;flex-direction: column;justify-content: center;align-items: center;height:100vh;width:60%">
-            <div style="display: flex;justify-content: center;gap:10px">
+            <div id="lang" style="display: flex;justify-content: center;gap:10px">
                 <p>Choose the language : </p>
                 <div id="google_translate_element"></div>
             </div>

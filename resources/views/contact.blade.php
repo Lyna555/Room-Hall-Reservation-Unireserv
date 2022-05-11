@@ -169,16 +169,6 @@
         font-size: 1.15rem;
       }
 
-      .social-icons a {
-        width: 30px;
-        height: 30px;
-        line-height: 30px;
-      }
-
-      .icon {
-        width: 23px;
-      }
-
       .input {
         padding: 0.45rem 1.2rem;
       }
