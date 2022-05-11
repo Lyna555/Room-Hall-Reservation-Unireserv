@@ -31,6 +31,7 @@ class SendEmail extends Mailable
     public function build(Request $request)
     {
         $user = Auth::user()->name;
-        return $this->from(Auth::user()->email)->to($request->email)->view('email',['msg'=>$request->message,'user'=>$user]);
+        $email = Auth::user()->email;
+        return $this->view('email',['email'=>$email,'msg'=>$request->message,'user'=>$user]);
     }
 }

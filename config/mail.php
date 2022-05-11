@@ -36,6 +36,7 @@ return [
     'mailers' => [
         'smtp' => [
             'transport' => 'smtp',
+            'driver' =>env('MAIL_DRIVER','smtp'),
             'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
             'port' => env('MAIL_PORT', 587),
             'encryption' => env('MAIL_ENCRYPTION', 'tls'),
@@ -92,8 +93,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'address' => 'lyna.boughaba@univ-constantine2.dz',
+        'name' => '',
     ],
 
     /*

@@ -8,8 +8,10 @@
 </head>
 <body>
     <div>
+    Please replay to this message with the following email:<br>{{$email}}
+    <br><br>
     {{$msg}}
-    <br>
+    <br><br>
     {{$user}}
     </div>
 </body>

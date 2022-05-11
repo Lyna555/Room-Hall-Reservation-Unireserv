@@ -9,6 +9,7 @@
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700&display=swap');
@@ -65,8 +66,12 @@
             color: black;
             background: #f89760;
         }
+        select,option{
+            color: black;
+            height:20px;
+            border-radius: 20px;
+        }
     </style>
-    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
 
 </head>
@@ -75,7 +80,7 @@
 
     <div id="container">
         <div id="cont" style="position: absolute;display: flex;flex-direction: column;justify-content: center;align-items: center;height:100vh;width:60%">
-            <div style="display: flex;gap:10px">
+            <div style="display: flex;justify-content: center;gap:10px">
                 <p>Choose the language : </p>
                 <div id="google_translate_element"></div>
             </div>
