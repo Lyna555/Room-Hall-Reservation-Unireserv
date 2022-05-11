@@ -9,6 +9,8 @@
 <body>
     <div>
     {{$msg}}
+    <br>
+    {{$user}}
     </div>
 </body>
 </html>

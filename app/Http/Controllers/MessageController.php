@@ -61,7 +61,7 @@ class MessageController extends Controller
         if (Auth::user()->role == 'prof') {
             $connection = @fsockopen("www.google.com", 80);
             if ($connection == true) {
-                Mail::to($request->input('email'))->send(new SendEmail());
+                Mail::send(new SendEmail());
                 return back()->with('message', 'Email Successfully Sended!');
             } else {
                 return back()->with('message', 'check your internet connection.');

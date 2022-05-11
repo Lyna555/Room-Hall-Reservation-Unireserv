@@ -193,23 +193,23 @@
 </head>
 
 <body>
-<div style="backdrop-filter: blur(4px);width:100%;height:100vh;display:flex;flex-direction: column">
-  @include('navigation-menu')
-  @if(session()->has('message'))
-  <div id="hh" class="alert alert-success">
-    {{session()->get('message')}}
-  </div>
-  @endif
+  <div style="backdrop-filter: blur(4px);width:100%;height:100vh;display:flex;flex-direction: column">
+    @include('navigation-menu')
     <div class="container">
       <div class="form">
-        <div class="contact-info" style="display: flex;align-items:center">
+        <div class="contact-info" style="display: flex;flex-direction: column;justify-content: center;align-items:center">
+          @if(session()->has('message'))
+          <div id="hh" class="alert alert-success">
+            {{session()->get('message')}}
+          </div>
+          @endif
           <img src="{{url('images/triggers.png')}}" alt="">
         </div>
         <div class="contact-form">
           <form id="form" action="{{ url('/user/sendedEmail') }}" method="get">
             <h2 class="title">Contact</h2>
             <div class="input-container">
-            <p style="color: #fff;text-align: start;margin-left:1.2rem">Email</p>
+              <p style="color: #fff;text-align: start;margin-left:1.2rem">Email</p>
               <select style="color:grey" required name="email" class="input">
                 <option>Select</option>
                 @foreach($users as $user)
@@ -220,7 +220,7 @@
               </select>
             </div>
             <div class="input-container textarea">
-            <p style="color: #fff;text-align: start;margin-left:1.2rem">Message</p>
+              <p style="color: #fff;text-align: start;margin-left:1.2rem">Message</p>
               <textarea style="color:black" required name="message" class="input" placeholder="Write.."></textarea>
             </div>
             <input type="submit" value="Send" class="btn" />

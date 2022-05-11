@@ -7,6 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Http\Request;
+use Auth;
 
 class SendEmail extends Mailable
 {
@@ -29,6 +30,7 @@ class SendEmail extends Mailable
      */
     public function build(Request $request)
     {
-        return $this->view('email',['msg'=>$request->message]);
+        $user = Auth::user()->name;
+        return $this->from(Auth::user()->email)->to($request->email)->view('email',['msg'=>$request->message,'user'=>$user]);
     }
 }
