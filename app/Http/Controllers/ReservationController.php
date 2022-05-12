@@ -115,7 +115,7 @@ class ReservationController extends Controller
     {
         if (Auth::user()->role == 'prof') {
             $events = [];
-            $count = Reservation::where('user_id','=',Auth::user()->id)->where('satate','=','reserv-state')->orWhere('satate','=','reserv-ref')->count();
+            $count = Reservation::where('date','>=',Carbon::now())->where('user_id','=',Auth::user()->id)->where('satate','=','reserv-state')->orWhere('satate','=','reserv-ref')->count();
             foreach ($this->resources as $resource) {
                 foreach ($resource['model']::all() as $model) {
                     $query = User::where('id', '=', $model->{$resource['prefix']})->value('name');
@@ -206,13 +206,14 @@ class ReservationController extends Controller
     {
         if (Auth::user()->role == 'prof') {
             $search = $request->input('cherche');
-            $count = Reservation::where('user_id','=',Auth::user()->id)->where('satate','=','reserv-state')->orWhere('satate','=','reserv-ref')->count();
+            $count = Reservation::where('date','>=',Carbon::now())->where('user_id','=',Auth::user()->id)->where('satate','=','reserv-state')->orWhere('satate','=','reserv-ref')->count();
             if ($search == '') {
-                $reservations = Reservation::all();
+                $reservations = Reservation::where('user_id','=',Auth::user()->id)->get();
                 $sysdate = Carbon::now();
                 return view('mngReservations.ReserList', ['reservations' => $reservations, 'sysdate' => $sysdate,'count'=>$count]);
             } else {
-                $reservations = Reservation::where('room_name', 'like', '%' . $search . '%')
+                $reservations = Reservation::where('user_id','=',Auth::user()->id)
+                    ->where('room_name', 'like', '%' . $search . '%')
                     ->orWhere('date', 'like', '%' . $search . '%')
                     ->orWhere('creneaude', 'like', '%' . $search . '%')
                     ->orWhere('creneaua', 'like', '%' . $search . '%')
@@ -242,7 +243,7 @@ class ReservationController extends Controller
     {
         if (Auth::user()->role == 'prof') {
             $rooms = Room::all();
-            $count = Reservation::where('user_id','=',Auth::user()->id)->where('satate','=','reserv-state')->orWhere('satate','=','reserv-ref')->count();
+            $count = Reservation::where('date','>=',Carbon::now())->where('user_id','=',Auth::user()->id)->where('satate','=','reserv-state')->orWhere('satate','=','reserv-ref')->count();
             return view('mngReservations.addReservation', ['rooms' => $rooms,'count'=>$count]);
         } else {
             return abort(403);
@@ -264,7 +265,7 @@ class ReservationController extends Controller
     {
         if (Auth::user()->role == 'prof') {
             $reservations = Reservation::where('user_id', Auth::user()->id)->get();
-            $count = Reservation::where('user_id','=',Auth::user()->id)->where('satate','=','reserv-state')->orWhere('satate','=','reserv-ref')->count();
+            $count = Reservation::where('date','>=',Carbon::now())->where('user_id','=',Auth::user()->id)->where('satate','=','reserv-state')->orWhere('satate','=','reserv-ref')->count();
             $sysdate = Carbon::now();
             return view('mngReservations.ReserList', ['reservations' => $reservations, 'sysdate' => $sysdate,'count'=>$count]);
         } else {
@@ -480,7 +481,7 @@ class ReservationController extends Controller
         if (Auth::user()->role == 'prof') {
             $notifications = Reservation::all();
             $user = Auth::user()->id;
-            $count = Reservation::where('user_id','=',Auth::user()->id)->where('satate','=','reserv-state')->orWhere('satate','=','reserv-ref')->count();
+            $count = Reservation::where('date','>=',Carbon::now())->where('user_id','=',Auth::user()->id)->where('satate','=','reserv-state')->orWhere('satate','=','reserv-ref')->count();
             return view('notifications', ['notifications' => $notifications, 'user' => $user,'count'=>$count]);
         } else {
             return abort(403);

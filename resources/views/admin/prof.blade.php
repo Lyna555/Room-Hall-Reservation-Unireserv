@@ -44,7 +44,7 @@
         @endif
 
         <div class="card-body">
-          <div style="display: flex;justify-content: space-between;width:91%;align-items: center;">
+          <div style="display: flex;justify-content: space-between;width:94%;align-items: center;">
             <h1 style="font-weight: bold;">Professors List</h1>
             <form style="display: flex;align-items: center;gap:10px" action="{{url('/searchProf')}}" method="get">
               <button style="background-color: transparent;"><img src="{{url('images/search.png')}}" alt=""></button>
@@ -57,6 +57,8 @@
               <tr>
                 <th scope="col">Name</th>
                 <th scope="col">Email</th>
+                <th scope="col">Phone Number</th>
+                <th scope="col">Grade</th>
                 <th scope="col">Operations</th>
               </tr>
             </thead>
@@ -66,6 +68,8 @@
               <tr>
                 <td>{{ $prof->name }}</td>
                 <td>{{ $prof->email }}</td>
+                <td>{{ $prof->phone_num }}</td>
+                <td>{{ $prof->grade }}</td>
                 <td>
                   <div style="display: flex;gap:10px;justify-content:center">
                     <a class="delete" href="{{ url('/destroyy/'.$prof->id) }}"><img src="{{url('images/delete.png')}}" alt=""></a>

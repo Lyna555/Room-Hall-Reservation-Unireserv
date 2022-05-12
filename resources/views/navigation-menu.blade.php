@@ -180,7 +180,10 @@
 
         <x-jet-responsive-nav-link href="{{ route('/user/notifications') }}" :active="request()->routeIs('/user/notifications')">
             {{ __('Notifications') }}
-            <span style="color:white;width:15px;height:15px;background-color:Tomato;border-radius: 50%;margin-left:5px;display: flex;justify-content: center;align-items: center;">{{$count}}</span>
+                @if($count==0)
+                @else
+                <span style="color:white;width:15px;height:15px;background-color:Tomato;border-radius: 50%;margin-left:5px;display: flex;justify-content: center;align-items: center;">{{$count}}</span>
+                @endif
         </x-jet-responsive-nav-link>
 
 

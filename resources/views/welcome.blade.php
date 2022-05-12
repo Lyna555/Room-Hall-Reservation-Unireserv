@@ -30,6 +30,7 @@
             background-attachment: fixed;
             background-repeat: no-repeat;
         }
+
         .buttons {
             width: 180px;
             height: 40px;
@@ -66,47 +67,42 @@
             color: black;
             background: #f89760;
         }
-        select,option{
+
+        select,
+        option {
             color: black;
-            height:20px;
+            height: 20px;
             border-radius: 20px;
         }
-        .welc-cont{
-            height: 100vh;
-        }
-        
     </style>
 
 
 </head>
 
 <body>
-
     <div class="welc-cont">
-        <div id="cont" style="position: absolute;display: flex;flex-direction: column;justify-content: center;align-items: center;height:100vh;width:60%">
-            <div id="lang" style="display: flex;justify-content: center;gap:10px">
-                <p>Choose the language : </p>
-                <div id="google_translate_element"></div>
-            </div>
-            <div style="display:flex;flex-direction:column;text-align:center;font-family:'Script MT';font-size:90px;line-height: 80px;">
-                <div class="welc">Welcome to our</div>
-                <div class="welc">unireserv</div>
-            </div>
-            @if (Route::has('login'))
-            <div id="auth">
-                @auth
-                <a class="buttons" id="dashb" href="{{ url('/redirects') }}">Dashboard</a>
-                @else
-                <a class="buttons" id="login" href="{{ route('login') }}">Login</a>
-                @endauth
-            </div>
-            @endif
+        <div id="lang" style="display: flex;justify-content: center;gap:10px">
+            <p>Choose the language : </p>
+            <div id="google_translate_element"></div>
         </div>
-        <div style="display: flex;width:100%;height:100vh;justify-content:end;align-items:end">
-            <img src="{{URL('images/hall.png')}}" alt="">
+        <div style="display:flex;flex-direction:column;text-align:center;font-family:'Script MT';font-size:90px;line-height: 80px;">
+            <div class="welc">Welcome to our</div>
+            <div class="welc">unireserv</div>
         </div>
-        <stream-chat :autheduser="{{ Auth::user() }}"></stream-chat>
+        @if (Route::has('login'))
+        <div id="auth">
+            @auth
+            <a class="buttons" id="dashb" href="{{ url('/redirects') }}">Dashboard</a>
+            @else
+            <a class="buttons" id="login" href="{{ route('login') }}">Login</a>
+            @endauth
+        </div>
+        @endif
     </div>
+    <div style="display: flex;width:100%;height:100vh;justify-content:end;align-items:end">
+        <img src="{{URL('images/hall.png')}}" alt="">
+    </div>
+    <stream-chat :autheduser="{{ Auth::user() }}"></stream-chat>
 
 </body>
 

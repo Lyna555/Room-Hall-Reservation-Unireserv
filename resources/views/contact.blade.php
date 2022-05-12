@@ -183,7 +183,7 @@
 </head>
 
 <body>
-  <div style="backdrop-filter: blur(4px);width:100%;height:100vh;display:flex;flex-direction: column">
+  <div style="backdrop-filter: blur(4px);width:100%;height:100vh;display:flex;flex-direction: column;">
     @include('navigation-menu')
     <div class="container">
       <div class="form">
