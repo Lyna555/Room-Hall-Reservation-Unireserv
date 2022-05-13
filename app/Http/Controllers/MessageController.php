@@ -8,8 +8,8 @@ use App\Mail\SendEmail;
 use App\Mail\WelcomEmail;
 use App\Models\Reservation;
 use Carbon\Carbon;
-use Mail;
-use Auth;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Auth;
 
 class MessageController extends Controller
 {

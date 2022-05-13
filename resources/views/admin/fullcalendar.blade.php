@@ -55,7 +55,7 @@
             </div>
         <script>
             $(document).ready(function() {
-                events = {!!json_encode($events) !!};
+                events = {!!json_encode($events)!!};
 
                 $('#calendar').fullCalendar({
                     editable: false,
