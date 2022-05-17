@@ -204,7 +204,11 @@
                 <option>Select</option>
                 @foreach($users as $user)
                 @if($user->email != $auth)
-                <option style="color:black">{{ $user->email }}</option>
+                  @if($user->role == "admin")
+                  <option value="{{ $user->email }}" style="color:black">{{ $user->email }} (admin)</option>
+                  @else
+                  <option value="{{ $user->email }}" style="color:black">{{ $user->email }}</option>
+                  @endif
                 @endif
                 @endforeach
               </select>
