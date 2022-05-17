@@ -317,12 +317,12 @@ class ReservationController extends Controller
         foreach ($reservations as $reser) {
             if ($reser->satate != 'reserv-ref') {
                 if ($reservation->university==Auth::user()->university && $reservation->faculty==Auth::user()->faculty &&
-                $reser->room_name == $reservation->room_name && $reser->date == $reservation->date &&
-                (($reser->creneaude == $reservation->creneaude && $reser->creneaua == $reservation->creneaua) ||
-                    ($reser->creneaude >= $reservation->creneaude && $reser->creneaua <= $reservation->creneaua) ||
+                    $reser->room_name == $reservation->room_name && $reser->date == $reservation->date &&
+                    (($reser->creneaude == $reservation->creneaude && $reser->creneaua == $reservation->creneaua) ||
+                        ($reser->creneaude >= $reservation->creneaude && $reser->creneaua <= $reservation->creneaua) ||
                         ($reser->creneaude <= $reservation->creneaude && $reser->creneaua >= $reservation->creneaua) ||
-                        ($reser->creneaude <= $reservation->creneaude && $reser->creneaua >= $reservation->creneaude) ||
-                        ($reser->creneaua <= $reservation->creneaua && $reser->creneaua >= $reservation->creneaua))
+                        ($reser->creneaude > $reservation->creneaude && $reser->creneaude < $reservation->creneaua) ||
+                        ($reser->creneaua > $reservation->creneaude && $reser->creneaua < $reservation->creneaua))
                 ) {
                     if (Auth::user()->role == 'admin') {
                         return redirect('/admin/showReser')->with('errorMessage', 'Reservation already exists!');
@@ -412,11 +412,12 @@ class ReservationController extends Controller
         foreach ($reservations as $reser) {
             if ($reser->id != $reservation->id && $reser->satate != 'reserv-ref') {
                 if ($reservation->university==Auth::user()->university && $reservation->faculty==Auth::user()->faculty &&
-                $reser->room_name == $reservation->room_name && $reser->date == $reservation->date &&
-                    (($reser->creneaude >= $reservation->creneaude && $reser->creneaua <= $reservation->creneaua) ||
+                    $reser->room_name == $reservation->room_name && $reser->date == $reservation->date &&
+                    (($reser->creneaude == $reservation->creneaude && $reser->creneaua == $reservation->creneaua) ||
+                        ($reser->creneaude >= $reservation->creneaude && $reser->creneaua <= $reservation->creneaua) ||
                         ($reser->creneaude <= $reservation->creneaude && $reser->creneaua >= $reservation->creneaua) ||
-                        ($reser->creneaude <= $reservation->creneaude && $reser->creneaua >= $reservation->creneaude) ||
-                        ($reser->creneaua <= $reservation->creneaua && $reser->creneaua >= $reservation->creneaua))
+                        ($reser->creneaude > $reservation->creneaude && $reser->creneaude < $reservation->creneaua) ||
+                        ($reser->creneaua > $reservation->creneaude && $reser->creneaua < $reservation->creneaua))
                 ) {
                     if (Auth::user()->role == 'admin') {
                         return redirect('/admin/showReser')->with('errorMessage', 'Reservation already exists!')->withInput();
