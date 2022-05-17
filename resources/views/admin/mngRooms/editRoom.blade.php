@@ -38,18 +38,6 @@
             </ul>
           </div>
           @endif
-          <div class="form-group">
-            <label>Name</label>
-            <input required name="name" value="{{ $room->name }}" class="form-control" type="text" placeholder="Enter TD or TP or Hall + Room/Hall Number">
-          </div>
-          <div class="form-group">
-            <label>Capacity</label>
-            <input required name="capacity" value="{{ $room->capacity }}" class="form-control" type="number" min="1" placeholder="Enter Capacity">
-          </div>
-          <div class="form-group">
-            <label>Floor</label>
-            <input required name="floor" value="{{ $room->floor }}" class="form-control" type="number" min="0" placeholder="Enter Floor">
-          </div>
           @if($room->type=='TD')
           <div class="form-group">
             <label>Type</label>
@@ -78,6 +66,18 @@
             </select>
           </div>
           @endif
+          <div class="form-group">
+            <label>Number</label>
+            <input required name="number" value="{{ $num }}" class="form-control" type="number" placeholder="Enter Room/Hall Number">
+          </div>
+          <div class="form-group">
+            <label>Capacity</label>
+            <input required name="capacity" value="{{ $room->capacity }}" class="form-control" type="number" min="1" placeholder="Enter Capacity">
+          </div>
+          <div class="form-group">
+            <label>Floor</label>
+            <input required name="floor" value="{{ $room->floor }}" class="form-control" type="number" min="0" placeholder="Enter Floor">
+          </div>
 
           @if($room->state=='ordinary')
           <div class="form-group">

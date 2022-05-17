@@ -10,6 +10,7 @@ use App\Models\Reservation;
 use App\Mail\deleteMail;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use FFI;
 use Illuminate\Support\Facades\Mail;
 
 class RoomController extends Controller
@@ -27,13 +28,14 @@ class RoomController extends Controller
     {
         if (Auth::user()->role == 'admin') {
             $search = $request->input('cherche');
-            $count = Reservation::where('satate', '=', 'wait')->count();
+            $count = Reservation::where('university','=',Auth::user()->university)->where('faculty','=',Auth::user()->faculty)->where('satate', '=', 'wait')->count();
             if ($search == '') {
-                $rooms = Room::all();
-                $reservations = Reservation::all();
+                $rooms = Room::where('university','=',Auth::user()->university)->where('faculty','=',Auth::user()->faculty)->get();
+                $reservations = Reservation::where('university','=',Auth::user()->university)->where('faculty','=',Auth::user()->faculty)->get();
                 $i = 0;
                 return view('admin.mngRooms.roomList', ['rooms' => $rooms, 'reservations' => $reservations, 'i' => $i, 'count' => $count]);
             } else {
+                $auth = Auth::user();
                 $rooms = Room::where('name', 'like', '%' . $search . '%')
                     ->orWhere('capacity', 'like', '%' . $search . '%')
                     ->orWhere('floor', 'like', '%' . $search . '%')
@@ -41,9 +43,9 @@ class RoomController extends Controller
                     ->orWhere('state', 'like', '%' . $search . '%')
                     ->orderBy('name')
                     ->get();
-                $reservations = Reservation::all();
+                $reservations = Reservation::where('university','=',Auth::user()->university)->where('faculty','=',Auth::user()->faculty)->get();
                 $i = 0;
-                return view('admin.mngRooms.roomList', ['rooms' => $rooms, 'reservations' => $reservations, 'i' => $i, 'count' => $count]);
+                return view('admin.mngRooms.roomList', ['auth'=>$auth,'rooms' => $rooms, 'reservations' => $reservations, 'i' => $i, 'count' => $count]);
             }
         } else {
             return abort(403);
@@ -59,19 +61,22 @@ class RoomController extends Controller
     public function store(Request $request)
     {
         if (Auth::user()->role == 'admin') {
-            $this->validate($request, ['name' => 'unique:rooms||regex:/^[^"!*@#%$+]+$/']);
+            $rooms = Room::all();
             $room = new Room();
-            $room->name = $request->input('name');
+            $room->name = $request->input('type') . $request->input('number');
             $room->capacity = $request->input('capacity');
             $room->floor = $request->input('floor');
             $room->type = $request->input('type');
             $room->state = $request->input('state');
+            $room->university = Auth::user()->university;
+            $room->faculty = Auth::user()->faculty;
 
-            if (Str::contains($room->name, $room->type)) {
+            foreach($rooms as $rm)
+            if ($rm->name == $room->name && $rm->university==Auth::user()->university && $rm->faculty==Auth::user()->faculty) {
+                return back()->with('errorMessage', 'Room/Hall exists allready!')->withInput();
+            } else {
                 $room->save();
                 return redirect('/showList')->with('message', 'Room/Hall successfully added!');
-            } else {
-                return back()->with('errorMessage', 'Room/Hall name doesn\'t match with the type')->withInput();
             }
         } else {
             return abort(403);
@@ -88,11 +93,12 @@ class RoomController extends Controller
     public function showList()
     {
         if (Auth::user()->role == 'admin') {
-            $rooms = Room::all();
+            $auth = Auth::user();
+            $rooms = Room::where('university','=',Auth::user()->university)->where('faculty','=',Auth::user()->faculty)->get();
             $reservations = Reservation::all();
-            $count = Reservation::where('satate', '=', 'wait')->count();
+            $count = Reservation::where('university','=',Auth::user()->university)->where('faculty','=',Auth::user()->faculty)->where('satate', '=', 'wait')->count();
             $i = 0;
-            return view('admin.mngRooms.roomList', ['rooms' => $rooms, 'reservations' => $reservations, 'i' => $i, 'count' => $count]);
+            return view('admin.mngRooms.roomList', ['auth'=>$auth,'rooms' => $rooms, 'reservations' => $reservations, 'i' => $i, 'count' => $count]);
         } else {
             return abort(403);
         }
@@ -115,9 +121,12 @@ class RoomController extends Controller
     {
         if (Auth::user()->role == 'admin') {
             $room = Room::find($id);
-            $rooms = Room::all();
+            $name = $room->name;
+            $num = (int)filter_var($name,FILTER_SANITIZE_NUMBER_INT);
+            $num = strval($num);
+            $rooms = Room::where('university','=',Auth::user()->university)->where('faculty','=',Auth::user()->faculty)->get();
             $count = Reservation::where('satate', '=', 'wait')->count();
-            return view('admin.mngRooms.editRoom', ['rooms' => $rooms, 'room' => $room, 'count' => $count]);
+            return view('admin.mngRooms.editRoom', ['rooms' => $rooms, 'room' => $room, 'count' => $count,'num'=>$num]);
         } else {
             return abort(403);
         }
@@ -136,7 +145,7 @@ class RoomController extends Controller
             $room = Room::find($id);
             $request->validate(['name' => Rule::unique('rooms')->ignore($room->id)]);
             $this->validate($request, ['name' => 'regex:/^[^"!*@#%$+]+$/']);
-            $room->name = $request->input('name');
+            $room->name = $request->input('type') . $request->input('number');
             $room->capacity = $request->input('capacity');
             $room->floor = $request->input('floor');
             $room->type = $request->input('type');
@@ -162,7 +171,7 @@ class RoomController extends Controller
     {
         if (Auth::user()->role == 'admin') {
             $room = Room::find($id);
-            $reservations = Reservation::all();
+            $reservations = Reservation::where('university','=',Auth::user()->university)->where('faculty','=',Auth::user()->faculty)->get();
             foreach ($reservations as $reservation) {
                 if ($reservation->room_name == $room->name) {
                     Mail::to(User::where('id', '=', $reservation->user_id)->value('email'))->send(new deleteMail($reservation));

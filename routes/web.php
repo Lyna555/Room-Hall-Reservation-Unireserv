@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 
 ////welcome
 Route::get('/', function(){ return view('welcome');});
+Route::get('/contactus', function(){ return view('contactus');});
+Route::get('/mailcontact','ContactController@contactus');
 
 ////login
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function(){ return view('dashboard');})->name('dashboard');

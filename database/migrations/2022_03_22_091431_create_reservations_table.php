@@ -19,10 +19,11 @@ class CreateReservationsTable extends Migration
             $table->time('creneaude');
             $table->time('creneaua');
             $table->string('objective');
+            $table->string('university')->nullable();
+            $table->string('faculty')->nullable();
             $table->string('message')->nullable();
             $table->string('satate')->default('not-reserved');
             $table->string('room_name');
-            $table->foreign('room_name')->references('name')->on('rooms');
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();

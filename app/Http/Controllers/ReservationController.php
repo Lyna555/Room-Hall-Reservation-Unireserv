@@ -37,6 +37,9 @@ class ReservationController extends Controller
             'creneaua'   => 'creneaua',
             'creneaude'     => 'creneaude',
             'satate'     => 'satate',
+            'university'     => 'university',
+            'faculty'     => 'faculty',
+            'objective'     => 'objective',
             'route'      => '/admin/calendar',
         ],
     ];
@@ -47,7 +50,7 @@ class ReservationController extends Controller
             $events = [];
             $count = Reservation::where('satate', '=', 'wait')->count();
             foreach ($this->sources as $source) {
-                foreach ($source['model']::all() as $model) {
+                foreach ($source['model']::where('university','=',Auth::user()->university)->where('faculty','=',Auth::user()->faculty)->get() as $model) {
 
                     $query = User::where('id', '=', $model->{$source['user_id']})->value('name');
                     $date = $model->getOriginal($source['date']);
@@ -65,7 +68,7 @@ class ReservationController extends Controller
                         if ($model->{$source['date']} < Carbon::now()) {
                             $events[] = [
                                 'title' => trim($query . " " . $model->{$source['room_name']}
-                                    . " " . Carbon::parse($model->{$source['creneaude']})->format('H:i') . " - " . Carbon::parse($model->{$source['creneaua']})->format('H:i')),
+                                    . " " . Carbon::parse($model->{$source['creneaude']})->format('H:i') . " - " . Carbon::parse($model->{$source['creneaua']})->format('H:i')." ".$model->{$source['objective']}),
                                 'start' => $crudFieldValue,
                                 'end'   => $crudFieldValue1,
                                 'url'   => route($source['route'], $model->id),
@@ -74,7 +77,7 @@ class ReservationController extends Controller
                         } elseif (Auth::user()->id == $model->{$source['user_id']}) {
                             $events[] = [
                                 'title' => trim($query . " " . $model->{$source['room_name']}
-                                    . " " . Carbon::parse($model->{$source['creneaude']})->format('H:i') . " - " . Carbon::parse($model->{$source['creneaua']})->format('H:i')),
+                                    . " " . Carbon::parse($model->{$source['creneaude']})->format('H:i') . " - " . Carbon::parse($model->{$source['creneaua']})->format('H:i')." ".$model->{$source['objective']}),
                                 'start' => $crudFieldValue,
                                 'end'   => $crudFieldValue1,
                                 'url'   => route($source['route'], $model->id),
@@ -83,7 +86,7 @@ class ReservationController extends Controller
                         } else {
                             $events[] = [
                                 'title' => trim($query . " " . $model->{$source['room_name']}
-                                    . " " . Carbon::parse($model->{$source['creneaude']})->format('H:i') . " - " . Carbon::parse($model->{$source['creneaua']})->format('H:i')),
+                                    . " " . Carbon::parse($model->{$source['creneaude']})->format('H:i') . " - " . Carbon::parse($model->{$source['creneaua']})->format('H:i')." ".$model->{$source['objective']}),
                                 'start' => $crudFieldValue,
                                 'end'   => $crudFieldValue1,
                                 'url'   => route($source['route'], $model->id),
@@ -107,6 +110,9 @@ class ReservationController extends Controller
             'creneaua'   => 'creneaua',
             'creneaude'     => 'creneaude',
             'satate'     => 'satate',
+            'university'     => 'university',
+            'faculty'     => 'faculty',
+            'objective'     => 'objective',
             'route'      => 'calendar',
         ],
     ];
@@ -117,7 +123,7 @@ class ReservationController extends Controller
             $events = [];
             $count = Reservation::where('date', '>=', Carbon::now())->where('user_id', '=', Auth::user()->id)->where('satate', '=', 'reserv-state')->orWhere('satate', '=', 'reserv-ref')->count();
             foreach ($this->resources as $resource) {
-                foreach ($resource['model']::all() as $model) {
+                foreach ($resource['model']::where('university','=',Auth::user()->university)->where('faculty','=',Auth::user()->faculty)->get() as $model) {
                     $query = User::where('id', '=', $model->{$resource['user_id']})->value('name');
                     $date = $model->getOriginal($resource['date']);
                     $timestart = $model->getOriginal($resource['creneaude']);
@@ -132,7 +138,7 @@ class ReservationController extends Controller
                         if ($model->{$resource['date']} < Carbon::now()) {
                             $events[] = [
                                 'title' => trim($query . " " . $model->{$resource['room_name']}
-                                    . " " . Carbon::parse($model->{$resource['suffix']})->format('H:i') . " - " . Carbon::parse($model->{$resource['creneaua']})->format('H:i')),
+                                    . " " . Carbon::parse($model->{$resource['creneaude']})->format('H:i') . " - " . Carbon::parse($model->{$resource['creneaua']})->format('H:i')." ".$model->{$resource['objective']}),
                                 'start' => $crudFieldValue,
                                 'end'   => $crudFieldValue1,
                                 'url'   => route($resource['route'], $model->id),
@@ -141,7 +147,7 @@ class ReservationController extends Controller
                         } elseif (Auth::user()->id == $model->{$resource['user_id']}) {
                             $events[] = [
                                 'title' => trim($query . " " . $model->{$resource['room_name']}
-                                    . " " . Carbon::parse($model->{$resource['suffix']})->format('H:i') . " - " . Carbon::parse($model->{$resource['creneaua']})->format('H:i')),
+                                    . " " . Carbon::parse($model->{$resource['creneaude']})->format('H:i') . " - " . Carbon::parse($model->{$resource['creneaua']})->format('H:i')." ".$model->{$resource['objective']}),
                                 'start' => $crudFieldValue,
                                 'end'   => $crudFieldValue1,
                                 'url'   => route($resource['route'], $model->id),
@@ -150,7 +156,7 @@ class ReservationController extends Controller
                         } else {
                             $events[] = [
                                 'title' => trim($query . " " . $model->{$resource['room_name']}
-                                    . " " . Carbon::parse($model->{$resource['suffix']})->format('H:i') . " - " . Carbon::parse($model->{$resource['creneaua']})->format('H:i')),
+                                    . " " . Carbon::parse($model->{$resource['creneaude']})->format('H:i') . " - " . Carbon::parse($model->{$resource['creneaua']})->format('H:i')." ".$model->{$resource['objective']}),
                                 'start' => $crudFieldValue,
                                 'end'   => $crudFieldValue1,
                                 'url'   => route($resource['route'], $model->id),
@@ -175,10 +181,10 @@ class ReservationController extends Controller
     {
         if (Auth::user()->role == 'admin') {
             $search = $request->input('cherche');
-            $count = Reservation::where('satate', '=', 'wait')->count();
+            $count = Reservation::where('university','=',Auth::user()->university)->where('faculty','=',Auth::user()->faculty)->where('satate', '=', 'wait')->count();
             if ($search == '') {
-                $users = User::all();
-                $reservations = Reservation::all();
+                $users = User::where('university','=',Auth::user()->university)->where('faculty','=',Auth::user()->faculty)->get();
+                $reservations = Reservation::where('university','=',Auth::user()->university)->where('faculty','=',Auth::user()->faculty)->get();
                 $sysdate = Carbon::now();
                 $auth = Auth::user()->id;
                 return view('admin.mngReservations.ReserList', ['reservations' => $reservations, 'sysdate' => $sysdate, 'users' => $users, 'auth' => $auth, 'count' => $count]);
@@ -194,7 +200,7 @@ class ReservationController extends Controller
                     ->get();
                 $users = User::all();
                 $sysdate = Carbon::now();
-                $auth = Auth::user()->id;
+                $auth = Auth::user();
                 return view('admin.mngReservations.ReserList', ['reservations' => $reservations, 'sysdate' => $sysdate, 'users' => $users, 'auth' => $auth, 'count' => $count]);
             }
         } else {
@@ -231,8 +237,8 @@ class ReservationController extends Controller
     public function showNamesAdmin()
     {
         if (Auth::user()->role == 'admin') {
-            $rooms = Room::all();
-            $count = Reservation::where('satate', '=', 'wait')->count();
+            $rooms = Room::where('university','=',Auth::user()->university)->where('faculty','=',Auth::user()->faculty)->get();
+            $count = Reservation::where('university','=',Auth::user()->university)->where('faculty','=',Auth::user()->faculty)->where('satate', '=', 'wait')->count();
             return view('admin.mngReservations.addReservation', ['rooms' => $rooms, 'count' => $count]);
         } else {
             return abort(403);
@@ -242,8 +248,8 @@ class ReservationController extends Controller
     public function showNamesUser()
     {
         if (Auth::user()->role == 'prof') {
-            $rooms = Room::all();
-            $count = Reservation::where('date', '>=', Carbon::now())->where('user_id', '=', Auth::user()->id)->where('satate', '=', 'reserv-state')->orWhere('satate', '=', 'reserv-ref')->count();
+            $rooms = Room::where('university','=',Auth::user()->university)->where('faculty','=',Auth::user()->faculty)->get();
+            $count = Reservation::where('university','=',Auth::user()->university)->where('faculty','=',Auth::user()->faculty)->where('date', '>=', Carbon::now())->where('user_id', '=', Auth::user()->id)->where('satate', '=', 'reserv-state')->orWhere('satate', '=', 'reserv-ref')->count();
             return view('mngReservations.addReservation', ['rooms' => $rooms, 'count' => $count]);
         } else {
             return abort(403);
@@ -253,8 +259,8 @@ class ReservationController extends Controller
     {
         if (Auth::user()->role == 'admin') {
             $sysdate = Carbon::now();
-            $count = Reservation::where('satate', '=', 'wait')->count();
-            $reservations = Reservation::all();
+            $count = Reservation::where('university','=',Auth::user()->university)->where('faculty','=',Auth::user()->faculty)->where('satate', '=', 'wait')->count();
+            $reservations = Reservation::where('university','=',Auth::user()->university)->where('faculty','=',Auth::user()->faculty)->get();
             return view('admin.notifications', ['reservations' => $reservations, 'sysdate' => $sysdate, 'count' => $count]);
         } else {
             return abort(403);
@@ -264,8 +270,8 @@ class ReservationController extends Controller
     public function showReserUser()
     {
         if (Auth::user()->role == 'prof') {
-            $reservations = Reservation::where('user_id', Auth::user()->id)->get();
-            $count = Reservation::where('date', '>=', Carbon::now())->where('user_id', '=', Auth::user()->id)->where('satate', '=', 'reserv-state')->orWhere('satate', '=', 'reserv-ref')->count();
+            $reservations = Reservation::where('user_id', Auth::user()->id)->where('university','=',Auth::user()->university)->where('faculty','=',Auth::user()->faculty)->get();
+            $count = Reservation::where('university','=',Auth::user()->university)->where('faculty','=',Auth::user()->faculty)->where('date', '>=', Carbon::now())->where('user_id', '=', Auth::user()->id)->where('satate', '=', 'reserv-state')->orWhere('satate', '=', 'reserv-ref')->count();
             $sysdate = Carbon::now();
             return view('mngReservations.ReserList', ['reservations' => $reservations, 'sysdate' => $sysdate, 'count' => $count]);
         } else {
@@ -277,10 +283,10 @@ class ReservationController extends Controller
     {
         if (Auth::user()->role == 'admin') {
             $users = User::all();
-            $reservations = Reservation::all();
-            $count = Reservation::where('satate', '=', 'wait')->count();
+            $reservations = Reservation::where('university','=',Auth::user()->university)->where('faculty','=',Auth::user()->faculty)->get();
+            $count = Reservation::where('satate', '=', 'wait')->where('university','=',Auth::user()->university)->where('faculty','=',Auth::user()->faculty)->count();
             $sysdate = Carbon::now();
-            $auth = Auth::user()->id;
+            $auth = Auth::user();
             return view('admin.mngReservations.ReserList', ['reservations' => $reservations, 'sysdate' => $sysdate, 'users' => $users, 'auth' => $auth, 'count' => $count]);
         } else {
             return abort(403);
@@ -302,22 +308,27 @@ class ReservationController extends Controller
         $reservation->creneaua = $request->input('creneaua');
         $reservation->objective = $request->input('objective');
         $reservation->date = $request->input('date');
+        $reservation->university = Auth::user()->university;
+        $reservation->faculty = Auth::user()->faculty;
         $reservation->satate = 'reserved';
 
         $reservation->user_id = Auth::user()->id;
 
         foreach ($reservations as $reser) {
             if ($reser->satate != 'reserv-ref') {
-                if ((($reser->creneaude >= $reservation->creneaude && $reser->creneaua <= $reservation->creneaua) ||
+                if ($reservation->university==Auth::user()->university && $reservation->faculty==Auth::user()->faculty &&
+                $reser->room_name == $reservation->room_name && $reser->date == $reservation->date &&
+                (($reser->creneaude >= $reservation->creneaude && $reser->creneaua <= $reservation->creneaua) ||
                         ($reser->creneaude <= $reservation->creneaude && $reser->creneaua >= $reservation->creneaua) ||
-                        ($reser->creneaude < $reservation->creneaude && $reser->creneaua > $reservation->creneaude) ||
-                        ($reser->creneaua < $reservation->creneaua && $reser->creneaua > $reservation->creneaua)) &&
-                    $reser->room_name == $reservation->room_name && $reser->date == $reservation->date
+                        ($reser->creneaude <= $reservation->creneaude && $reser->creneaua >= $reservation->creneaude) ||
+                        ($reser->creneaua <= $reservation->creneaua && $reser->creneaua >= $reservation->creneaua))
                 ) {
                     if (Auth::user()->role == 'admin') {
                         return redirect('/admin/showReser')->with('errorMessage', 'Reservation already exists!');
+                        break;
                     } else {
                         return redirect('/user/showReser')->with('errorMessage', 'Reservation already exists!');
+                        break;
                     }
                 }
             }
@@ -357,7 +368,7 @@ class ReservationController extends Controller
     {
         if (Auth::user()->role == 'prof') {
             $reservation = Reservation::find($id);
-            $rooms = Room::all();
+            $rooms = Room::where('university','=',Auth::user()->university)->where('faculty','=',Auth::user()->faculty)->get();
             $count = Reservation::where('user_id', '=', Auth::user()->id)->where('user_id', '=', Auth::user()->id)->where('satate', '=', 'reserv-state')->orWhere('satate', '=', 'reserv-ref')->count();
             return view('mngReservations.editReservation', ['reservation' => $reservation, 'rooms' => $rooms, 'count' => $count]);
         } else {
@@ -369,8 +380,8 @@ class ReservationController extends Controller
     {
         if (Auth::user()->role == 'admin') {
             $reservation = Reservation::find($id);
-            $rooms = Room::all();
-            $count = Reservation::where('satate', '=', 'wait')->count();
+            $rooms = Room::where('university','=',Auth::user()->university)->where('faculty','=',Auth::user()->faculty)->get();
+            $count = Reservation::where('user_id', '=', Auth::user()->id)->where('user_id', '=', Auth::user()->id)->where('satate', '=', 'reserv-state')->where('satate', '=', 'wait')->count();
             return view('admin.mngReservations.editReservation', ['reservation' => $reservation, 'rooms' => $rooms, 'count' => $count]);
         } else {
             return abort(403);
@@ -391,6 +402,7 @@ class ReservationController extends Controller
         $reservations = Reservation::all();
         $reservation = Reservation::find($id);
         $request->validate(['id' => Rule::unique('reservations')->ignore($reservation->id)]);
+        $reservation->room_name = $request->input('name');
         $reservation->date = $request->input('date');
         $reservation->creneaude = $request->input('creneaude');
         $reservation->creneaua = $request->input('creneaua');
@@ -398,16 +410,19 @@ class ReservationController extends Controller
 
         foreach ($reservations as $reser) {
             if ($reser->id != $reservation->id && $reser->satate != 'reserv-ref') {
-                if ((($reser->creneaude >= $reservation->creneaude && $reser->creneaua <= $reservation->creneaua) ||
+                if ($reservation->university==Auth::user()->university && $reservation->faculty==Auth::user()->faculty &&
+                $reser->room_name == $reservation->room_name && $reser->date == $reservation->date &&
+                    (($reser->creneaude >= $reservation->creneaude && $reser->creneaua <= $reservation->creneaua) ||
                         ($reser->creneaude <= $reservation->creneaude && $reser->creneaua >= $reservation->creneaua) ||
-                        ($reser->creneaude < $reservation->creneaude && $reser->creneaua > $reservation->creneaude) ||
-                        ($reser->creneaua < $reservation->creneaua && $reser->creneaua > $reservation->creneaua)) &&
-                    $reser->room_name == $reservation->room_name && $reser->date == $reservation->date
+                        ($reser->creneaude <= $reservation->creneaude && $reser->creneaua >= $reservation->creneaude) ||
+                        ($reser->creneaua <= $reservation->creneaua && $reser->creneaua >= $reservation->creneaua))
                 ) {
                     if (Auth::user()->role == 'admin') {
                         return redirect('/admin/showReser')->with('errorMessage', 'Reservation already exists!')->withInput();
+                        break;
                     } else {
                         return redirect('/user/showReser')->with('errorMessage', 'Reservation already exists!')->withInput();
+                        break;
                     }
                 }
             }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Mail\SendEmail;
 use App\Mail\WelcomEmail;
+use App\Mail\contactusMail;
 use App\Models\Reservation;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
@@ -21,9 +22,9 @@ class MessageController extends Controller
     public function emails()
     {
         if (Auth::user()->role == 'admin') {
-            $users = User::all();
+            $users = User::where('university','=',Auth::user()->university)->where('faculty','=',Auth::user()->faculty)->get();
             $auth = Auth::user()->email;
-            $count = Reservation::where('satate','=','wait')->count();
+            $count = Reservation::where('university','=',Auth::user()->university)->where('faculty','=',Auth::user()->faculty)->where('satate','=','wait')->count();
             return view('admin.contact', ['users' => $users ,'auth' => $auth,'count' => $count]);
         } else {
             return abort(403);
@@ -48,7 +49,7 @@ class MessageController extends Controller
     public function emailsUser()
     {
         if (Auth::user()->role == 'prof') {
-            $users = User::all();
+            $users = User::where('university','=',Auth::user()->university)->where('faculty','=',Auth::user()->faculty)->get();
             $auth = Auth::user()->email;
             $count = Reservation::where('date','>=',Carbon::now())->where('user_id','=',Auth::user()->id)->where('satate','=','reserv-state')->orWhere('satate','=','reserv-ref')->count();
             return view('contact', ['users' => $users ,'auth' => $auth,'count'=> $count]);

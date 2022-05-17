@@ -18,12 +18,13 @@ class ProfController extends Controller
     {
         if (Auth::user()->role == 'admin') {
             $search = $request->input('cherche');
-            $count = Reservation::where('satate', '=', 'wait')->count();
+            $count = Reservation::where('university','=',Auth::user()->university)->where('faculty','=',Auth::user()->faculty)->where('satate', '=', 'wait')->count();
             if ($search == '') {
                 $profs = User::all();
                 return view('admin.prof', ['profs' => $profs,'count' => $count]);
             } else {
-                $profs = User::where('name', 'like', '%' . $search . '%')
+                $profs = User::where('university','=',Auth::user()->university)->where('faculty','=',Auth::user()->faculty)->
+                    where('name', 'like', '%' . $search . '%')
                     ->orWhere('email', 'like', '%' . $search . '%')
                     ->orderBy('name')
                     ->get();
@@ -37,8 +38,8 @@ class ProfController extends Controller
     public function showProf()
     {
         if (Auth::user()->role == 'admin') {
-            $profs = User::all();
-            $count = Reservation::where('satate', '=', 'wait')->count();
+            $profs = User::where('university','=',Auth::user()->university)->where('faculty','=',Auth::user()->faculty)->get();
+            $count = Reservation::where('university','=',Auth::user()->university)->where('faculty','=',Auth::user()->faculty)->where('satate', '=', 'wait')->count();
             return view('admin.prof', ['profs' => $profs,'count' => $count]);
         } else {
             return abort(403);

@@ -44,9 +44,21 @@
             {{session()->get('errorMessage')}}
           </div>
           @endif
-          <div class="form-group">
-            <label>Name</label>
-            <input value="{{old('name')}}" required name="name" class="form-control" type="text" placeholder="Enter TD or TP or Hall + Room/Hall Number">
+          <label>Room Name</label>
+          <div style="display: flex;align-items: center;gap:20px">
+          <div class="form-group" style="display: flex;align-items: center;gap:5px">
+            <label>Type</label>
+            <select required name="type">
+              <option>{{old('type')}}</option>
+              <option value="TD">TD</option>
+              <option value="TP">TP</option>
+              <option value="Hall">Hall</option>
+            </select>
+          </div>
+          <div class="form-group" style="display: flex;align-items: center;gap:5px">
+            <label>Number</label>
+            <input value="{{old('number')}}" required name="number" class="form-control" type="number" min="1" placeholder="Enter Room/Hall Number">
+          </div>
           </div>
           <div class="form-group">
             <label>Capacity</label>
@@ -56,15 +68,7 @@
             <label>Floor</label>
             <input value="{{old('floor')}}" min="0" required name="floor" class="form-control" type="number" placeholder="Choose Floor Number">
           </div>
-          <div class="form-group">
-            <label>Type</label>
-            <select required name="type">
-              <option>{{old('type')}}</option>
-              <option value="TD">TD</option>
-              <option value="TP">TP</option>
-              <option value="Hall">Hall</option>
-            </select>
-          </div>
+
           <div class="form-group">
             <label>State</label>
             <select name="state">

@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('phone_num')->nullable();
             $table->string('location')->nullable();
             $table->string('grade')->nullable();
+            $table->string('university')->nullable();
+            $table->string('faculty')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

@@ -70,9 +70,9 @@
           </thead>
           <tbody>
             @foreach($reservations as $reservation)
-            @if($reservation->date>=$sysdate && $reservation->satate!='wait' && $reservation->satate!='not-reserved' && $reservation->satate!='reserv-ref')
+            @if($reservation->date>=$sysdate && $reservation->satate!='wait' && $reservation->satate!='not-reserved' && $reservation->satate!='reserv-ref' && $reservation->university==$auth->university && $reservation->faculty==$auth->faculty)
             <tr>
-              @if($auth==$reservation->user_id)
+              @if($auth->id==$reservation->user_id)
                 <td style="background-color: rgba(255,127,6,0.5);">Yours</td>
                 @else
                   @foreach($users as $user)

@@ -68,6 +68,7 @@
 
           <tbody>
             @foreach($rooms as $room)
+            @if( $room->university==$auth->university && $room->faculty==$auth->faculty)
             <tr>
               <td>{{ $room->name }}</td>
               <td>{{ $room->capacity }}</td>
@@ -93,6 +94,7 @@
                 </div>
               </td>
             </tr>
+            @endif
             @endforeach
           </tbody>
       </div>

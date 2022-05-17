@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.js"></script>
-
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <script src="{{ mix('js/app.js') }}" defer></script>
@@ -68,6 +68,14 @@
                         right: 'month,agendaWeek,agendaDay',
                     },
                     events:events,
+                    eventClick: function(calEvent) {
+                    event.preventDefault();
+                    swal({
+                        title: 'Reservation Info',
+                        text: calEvent.title,
+                        icon:'info',
+                    });
+                }
                 });
 
                 $('#calendar .fc-event').each(function(){
