@@ -38,8 +38,10 @@
             </ul>
           </div>
           @endif
+          <label>Room Name</label>
+          <div style="display: flex;align-items: center;gap:20px">
           @if($room->type=='TD')
-          <div class="form-group">
+          <div class="form-group" style="display: flex;align-items: center;gap:5px">
             <label>Type</label>
             <select required name="type">
               <option value="TD">TD</option>
@@ -48,7 +50,7 @@
             </select>
           </div>
           @elseif($room->type=='TP')
-          <div class="form-group">
+          <div class="form-group" style="display: flex;align-items: center;gap:5px">
             <label>Type</label>
             <select required name="type">
               <option value="TP">TP</option>
@@ -57,7 +59,7 @@
             </select>
           </div>
           @elseif($room->type=='Hall')
-          <div class="form-group">
+          <div class="form-group" style="display: flex;align-items: center;gap:5px">
             <label>Type</label>
             <select required name="type">
               <option value="Hall">Hall</option>
@@ -66,9 +68,10 @@
             </select>
           </div>
           @endif
-          <div class="form-group">
+          <div class="form-group" style="display: flex;align-items: center;gap:5px">
             <label>Number</label>
             <input required name="number" value="{{ $num }}" class="form-control" type="number" placeholder="Enter Room/Hall Number">
+          </div>
           </div>
           <div class="form-group">
             <label>Capacity</label>
@@ -82,7 +85,7 @@
           @if($room->state=='ordinary')
           <div class="form-group">
             <label>State</label>
-            <select name="state">
+            <select required name="state">
               <option value="ordinary">Ordinary</option>
               <option value="speacial">Speacial</option>
             </select>
@@ -90,7 +93,7 @@
           @elseif($room->state=='speacial')
           <div class="form-group">
             <label>State</label>
-            <select name="state">
+            <select required name="state">
               <option value="speacial">Speacial</option>
               <option value="ordinary">Ordinary</option>
             </select>

@@ -15,7 +15,7 @@
         <div class="card-cont">
             <div class="cards" style="display:flex;justify-content:center;align-items: center;gap:20px;padding:10px">
                 <img src="{{URL('images/calendar.png')}}" alt="calendar" style="height:6em;width:6em">
-                <div><h2 style="font-size: 20px;font-weight: bold;">Calendar</h2>Our website provides you to see all reservations in your faculty using a calendar.</div>
+                <div><h2 style="font-size: 20px;font-weight: bold;">Calendar</h2>Our website allows you to see all reservations in your faculty using a calendar.</div>
             </div>
             <div class="cards" style="display:flex;justify-content: center;align-items: center;gap:20px;padding:10px">
                 <img src="{{URL('images/timetable.png')}}" alt="calendar" style="height:6em;width:6em">

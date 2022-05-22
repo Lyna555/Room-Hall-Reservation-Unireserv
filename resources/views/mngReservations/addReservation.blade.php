@@ -17,7 +17,7 @@
       background-repeat: no-repeat;
     }
   </style>
-  <title>Add Reservations</title>
+  <title>Add Reservation</title>
 </head>
 
 <body>

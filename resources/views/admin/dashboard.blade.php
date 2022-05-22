@@ -20,7 +20,7 @@
         <div class="card-cont">
             <div class="cards" style="display:flex;justify-content:center;align-items: center;gap:20px;padding:10px">
                 <img src="{{URL('images/calendar.png')}}" alt="calendar" style="height:6em;width:6em">
-                <div><h2 style="font-size: 20px;font-weight: bold;">Calendar</h2>Our website provides you to see all reservations in your faculty using a calendar.</div>
+                <div><h2 style="font-size: 20px;font-weight: bold;">Calendar</h2>Our website allows you to see all reservations within faculty using a calendar.</div>
             </div>
             <div class="cards" style="display:flex;justify-content: center;align-items: center;gap:20px;padding:10px">
                 <img src="{{URL('images/timetable.png')}}" alt="calendar" style="height:6em;width:6em">
@@ -40,7 +40,7 @@
             </div>
             <div class="cards" style="display:flex;justify-content: center;align-items: center;gap:20px;padding:10px">
                 <img src="{{URL('images/manager.png')}}" alt="calendar" style="height:6em;width:6em;padding:10px">
-                <div><h2 style="font-size: 20px;font-weight: bold;">Professors</h2>You can also manage your faculty professors to offer a more secured system!</div>
+                <div><h2 style="font-size: 20px;font-weight: bold;">Professors</h2>You can also manage your the account of faculty professors to offer a more secured system!</div>
             </div>
         </div>
         <img onclick="document.getElementById('more').style.display='none'" src="{{url('images/up.png')}}" alt="up_arrow" style="position: absolute;cursor: pointer;height:3em;width:3em;">

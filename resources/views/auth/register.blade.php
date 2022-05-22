@@ -1,7 +1,16 @@
-
-<x-guest-layout>
 @include('admin.navigation-menu')
+<div style="margin-top: 60px;">
+<x-guest-layout>
     <x-jet-authentication-card>
+        @if(session()->has('message'))
+          <div id="hh" class="alert alert-success">
+            {{session()->get('message')}}
+          </div>
+        @elseif(session()->has('error'))
+          <div id="hh" class="alert alert-danger">
+            {{session()->get('error')}}
+          </div>
+        @endif
         <x-slot name="logo">
             <div style="font-weight: bold;">Add professor</div>
         </x-slot>
@@ -67,3 +76,4 @@
         </form>
     </x-jet-authentication-card>
 </x-guest-layout>
+</div>

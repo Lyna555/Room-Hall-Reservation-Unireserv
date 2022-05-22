@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="{{ mix('css/app.css') }}">
   <script src="{{ mix('js/app.js') }}" defer></script>
   <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-  <title>Add Rooms/Hall</title>
+  <title>Add Room/Hall</title>
   <style>
     body {
       background-image: url('{{url("images/web.png")}}');
@@ -71,7 +71,7 @@
 
           <div class="form-group">
             <label>State</label>
-            <select name="state">
+            <select required name="state">
               <option>{{old('state')}}</option>
               <option value="ordinary">Ordinary</option>
               <option value="speacial">Speacial</option>

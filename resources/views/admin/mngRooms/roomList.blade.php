@@ -104,8 +104,8 @@
         event.preventDefault();
         const url = $(this).attr('href');
         swal({
-          title: 'this room is reserved, are you sure to delete it?',
-          text: 'This record and it`s details will be permanantly deleted!',
+          title: 'This room is reserved, do you want to delete it?',
+          text: 'This room and it`s reservation will be permanantly deleted!',
           icon: 'warning',
           buttons: ["Cancel", "Yes!"],
         }).then(function(value) {
@@ -120,7 +120,7 @@
         const url = $(this).attr('href');
         swal({
           title: 'Are you sure to delete this room?',
-          text: 'This record and it`s details will be permanantly deleted!',
+          text: 'This room will be permanantly deleted!',
           icon: 'warning',
           buttons: ["Cancel", "Yes!"],
         }).then(function(value) {
