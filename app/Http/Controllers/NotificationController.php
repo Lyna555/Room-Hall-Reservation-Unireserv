@@ -1,0 +1,58 @@
+<?php
+
+namespace App\Http\Controllers;
+use App\Models\Reservation;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Carbon;
+
+class NotificationController extends Controller
+{
+    public function adminNotif()
+    {
+        if (Auth::user()->role == 'admin') {
+            $sysdate = Carbon::now();
+            $count = Reservation::where('university','=',Auth::user()->university)->where('faculty','=',Auth::user()->faculty)->where('satate', '=', 'wait')->count();
+            $reservations = Reservation::where('university','=',Auth::user()->university)->where('faculty','=',Auth::user()->faculty)->get();
+            return view('admin.notifications', ['reservations' => $reservations, 'sysdate' => $sysdate, 'count' => $count]);
+        } else {
+            return abort(403);
+        }
+    }
+
+    public function accept($id)
+    {
+        if (Auth::user()->role == 'admin') {
+            $reservation = Reservation::find($id);
+            $reservation->satate = 'reserv-state';
+            $reservation->message = 'Your reservation is accepted';
+            $reservation->save();
+            return redirect('/admin/notifications');
+        } else {
+            return abort(403);
+        }
+    }
+
+    public function refuse($id)
+    {
+        if (Auth::user()->role == 'admin') {
+            $reservation = Reservation::find($id);
+            $reservation->satate = 'reserv-ref';
+            $reservation->message = 'Your reservation is refused';
+            $reservation->save();
+            return redirect('/admin/notifications');
+        } else {
+            return abort(403);
+        }
+    }
+    public function userNotif()
+    {
+        if (Auth::user()->role == 'prof') {
+            $notifications = Reservation::all();
+            $user = Auth::user()->id;
+            $count = Reservation::where('date', '>=', Carbon::now())->where('user_id', '=', Auth::user()->id)->where('satate', '=', 'reserv-state')->orWhere('satate', '=', 'reserv-ref')->count();
+            return view('notifications', ['notifications' => $notifications, 'user' => $user, 'count' => $count]);
+        } else {
+            return abort(403);
+        }
+    }
+}

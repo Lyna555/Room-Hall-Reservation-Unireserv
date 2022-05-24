@@ -29,15 +29,15 @@ Route::get('/user/home','HomeController@index')->name('/user/home');
 ////admin
 
 //admin/navbar
-Route::get('/admin/calendar', "ReservationController@adminCalendar")->name('/admin/calendar');
+Route::get('/admin/calendar', "CalendarController@adminCalendar")->name('/admin/calendar');
 Route::get('/admin/profile', function(){ return view('admin.profile.show');})->name('/admin/profile');
 Route::get('/admin/showReser',"ReservationController@showReserAdmin")->name('/admin/showReser');
 Route::get('/admin/email', "MessageController@emails")->name('/admin/email');
-Route::get('/admin/notifications', "ReservationController@showNotification")->name('/admin/notifications');
+Route::get('/admin/notifications', "NotificationController@adminNotif")->name('/admin/notifications');
 Route::get('/admin/prof', "ProfController@showProf")->name('/admin/prof');
 
 //admin/calendar
-Route::get('/admin/calendar/search',"ReservationController@searchCalendarAdmin")->name('/admin/calendar/search');
+Route::get('/admin/calendar/search',"CalendarController@searchCalendarAdmin")->name('/admin/calendar/search');
 
 //admin/rooms
 Route::get('/store',"RoomController@store");
@@ -58,8 +58,8 @@ Route::get('/admin/searchReser','ReservationController@searchAdmin')->name('/adm
 Route::get('/admin/sendedEmail', "MessageController@sendEmail");
 
 //admin/notifications
-Route::get('/accept/{id}',"ReservationController@accept");
-Route::get('/refuse/{id}',"ReservationController@refuse");
+Route::get('/accept/{id}',"NotificationController@accept");
+Route::get('/refuse/{id}',"NotificationController@refuse");
 
 //admin/prof
 Route::get('/destroyy/{id}', "ProfController@destroy");
@@ -69,13 +69,13 @@ Route::get('/searchProf', "ProfController@search");
 ////user
 
 //user/navbar
-Route::get('calendar', "ReservationController@userCalendar")->name('calendar');
+Route::get('calendar', "CalendarController@userCalendar")->name('calendar');
 Route::get('/user/showReser',"ReservationController@showReserUser")->name('/user/showReser');
 Route::get('/user/email', "MessageController@emailsUser")->name('/user/email');
-Route::get('/user/notifications', "ReservationController@notif")->name('/user/notifications');
+Route::get('/user/notifications', "NotificationController@userNotif")->name('/user/notifications');
 
 //user/calendar
-Route::get('/user/calendar/search',"ReservationController@searchCalendarUser")->name('/user/calendar/search');
+Route::get('/user/calendar/search',"CalendarController@searchCalendarUser")->name('/user/calendar/search');
 
 //user/reservation
 Route::get('/storeR',"ReservationController@store");
