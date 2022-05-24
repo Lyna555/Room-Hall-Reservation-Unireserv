@@ -459,6 +459,7 @@ class ReservationController extends Controller
         $reservation->satate = 'reserved';
 
         $reservation->user_id = Auth::user()->id;
+        $reservation->room_id = Room::where('name','=',$request->input('name'))->value('id');
 
         foreach ($reservations as $reser) {
             if ($reser->satate != 'reserv-ref') {
@@ -554,6 +555,7 @@ class ReservationController extends Controller
         $reservation->creneaude = $request->input('creneaude');
         $reservation->creneaua = $request->input('creneaua');
         $reservation->objective = $request->input('objective');
+        $reservation->room_id = Room::where('name','=',$request->input('name'))->value('id');
 
         foreach ($reservations as $reser) {
             if ($reser->id != $reservation->id && $reser->satate != 'reserv-ref') {
