@@ -35,6 +35,11 @@
     <div style="display: flex;justify-content:center;">
         <div class="calendar">
             <div class="key">
+                <form action="{{url('/user/calendar/search')}}" method="get" class="key">
+                    <button style="background-color: transparent;"><img src="{{url('images/search.png')}}" alt=""></button>
+                    <input name="search" style="border:2px solid #C3B1E1;border-radius: 20px;height: 30px;width:40%;" placeholder="Search objective.." type="search">
+                </form>
+                <div class="key">    
                 <img src="{{url('images/key.png')}}" alt="key" style="height: 3em;width:3em">
                 <div style="display:flex;flex-direction:column;align-items:center;gap:2px">
                     <div style="height:13px;width: 13px;border-radius: 50%;background:#f9a35c"></div>
@@ -47,6 +52,7 @@
                 <div style="display:flex;flex-direction:column;align-items:center;gap:2px">
                     <div style="height:13px;width: 13px;border-radius: 50%;background:#7fa1bc"></div>
                     <div>expired</div>
+                </div>
                 </div>
             </div>
             <div id='calendar'></div>

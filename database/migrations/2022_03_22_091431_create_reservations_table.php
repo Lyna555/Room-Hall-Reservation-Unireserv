@@ -24,6 +24,8 @@ class CreateReservationsTable extends Migration
             $table->string('message')->nullable();
             $table->string('satate')->default('not-reserved');
             $table->string('room_name');
+            $table->bigInteger('room_id')->unsigned();
+            $table->foreign('room_id')->references('id')->on('rooms');
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();

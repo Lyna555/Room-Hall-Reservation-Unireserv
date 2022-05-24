@@ -36,6 +36,9 @@ Route::get('/admin/email', "MessageController@emails")->name('/admin/email');
 Route::get('/admin/notifications', "ReservationController@showNotification")->name('/admin/notifications');
 Route::get('/admin/prof', "ProfController@showProf")->name('/admin/prof');
 
+//admin/calendar
+Route::get('/admin/calendar/search',"ReservationController@searchCalendarAdmin")->name('/admin/calendar/search');
+
 //admin/rooms
 Route::get('/store',"RoomController@store");
 Route::get('/showList',"RoomController@showList")->name('/showList');
@@ -70,6 +73,9 @@ Route::get('calendar', "ReservationController@userCalendar")->name('calendar');
 Route::get('/user/showReser',"ReservationController@showReserUser")->name('/user/showReser');
 Route::get('/user/email', "MessageController@emailsUser")->name('/user/email');
 Route::get('/user/notifications', "ReservationController@notif")->name('/user/notifications');
+
+//user/calendar
+Route::get('/user/calendar/search',"ReservationController@searchCalendarUser")->name('/user/calendar/search');
 
 //user/reservation
 Route::get('/storeR',"ReservationController@store");

@@ -65,14 +65,8 @@
             </div>
           </div>
           <div class="form-group">
-          </div>
-          <div class="form-group">
             <label>Objective</label>
-            <select required name="objective">
-              <option>{{old('objective')}}</option>
-              <option value="event">Event</option>
-              <option value="lecture">Lecture</option>
-            </select>
+            <input required type="text" name="objective" placeholder="Type reservation objective" value="{{old('objective')}}">
           </div>
 
         </div>

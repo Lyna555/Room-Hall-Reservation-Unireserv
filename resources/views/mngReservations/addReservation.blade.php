@@ -64,16 +64,9 @@
             </div>
           </div>
           <div class="form-group">
-          </div>
-          <div class="form-group">
             <label>Objective</label>
-            <select required name="objective">
-              <option>{{old('objective')}}</option>
-              <option value="event">Event</option>
-              <option value="lecture">Lecture</option>
-            </select>
+            <input required type="text" name="objective" placeholder="Type reservation objective" value="{{old('objective')}}">
           </div>
-
         </div>
         <div style="display: flex;justify-content:center;gap:20px">
           <input type="submit" class="btn btn-info" style="margin-top: 20px;background-color: #f9a35c;color:white;border:none;box-shadow: 0px 2px 4px gray;border-radius:15px;padding:3.7px 23.7px" value="Save">
