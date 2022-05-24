@@ -34,7 +34,7 @@
           </thead>
           <tbody>
             @foreach($notifications as $notification)
-            @if(($notification->satate=='reserv-state' || $notification->satate=='reserv-ref') && $user==$notification->user_id)
+            @if(($notification->satate=='reserv-state' || $notification->satate=='reserv-ref') && $user==$notification->user_id && $notification->date<=$now)
             <tr>
               <td>{{$notification->room_name}}</td>
               <td>{{$notification->date}}</td>
