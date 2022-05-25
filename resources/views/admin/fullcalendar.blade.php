@@ -35,7 +35,7 @@
         @include('admin.navigation-menu')
             <div style="display: flex;justify-content:center">
                 <div class="calendar">
-                    <div class="key">
+                    <div class="key1">
                     <form action="{{url('/admin/calendar/search')}}" method="get" class="key">
                         <button style="background-color: transparent;"><img src="{{url('images/search.png')}}" alt=""></button>
                         <input name="search" style="border:2px solid #C3B1E1;border-radius: 20px;height: 30px;width:40%;" placeholder="Search objective.." type="search">

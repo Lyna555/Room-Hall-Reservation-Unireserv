@@ -2731,6 +2731,14 @@ select {
   gap: 20px;
 }
 
+.key1 {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
 .key {
   display: flex;
   gap: 20px;
@@ -2776,6 +2784,9 @@ select {
 }
 
 @media (max-width: 1044px) and (max-width: 768px) {
+  .key1 {
+    flex-direction: column;
+  }
 
   #lang{
     flex-direction: column;
