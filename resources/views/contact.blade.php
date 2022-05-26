@@ -192,6 +192,10 @@
           <div id="hh" class="alert alert-success">
             {{session()->get('message')}}
           </div>
+          @elseif(session()->has('error'))
+          <div id="hh" class="alert alert-danger">
+            {{session()->get('error')}}
+          </div>
           @endif
           <img src="{{url('images/triggers.png')}}" alt="">
         </div>
