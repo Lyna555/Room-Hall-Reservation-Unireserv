@@ -66,7 +66,7 @@ class MessageController extends Controller
                 Mail::to($request->email)->send(new SendEmail());
                 return back()->with('message', 'Email Successfully Sended!');
             } else {
-                return back()->with('message', 'check your internet connection.');
+                return back()->with('error', 'check your internet connection.');
             }
         } else {
             return abort(403);
