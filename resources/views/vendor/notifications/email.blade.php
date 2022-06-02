@@ -6,7 +6,7 @@
 @if ($level === 'error')
 # @lang('Whoops!')
 @else
-<p style="text-align: center;font-family: 'Script MT';color:black;font-size:30px;">@lang('Welcome to Unireserv!')</p>
+<p style="text-align: center;font-family: 'Script MT Bold';color:black;font-size:30px;">@lang('Welcome to Unireserv!')</p>
 <p style="text-align: center;color:black;font-size:13px;font-weight:bold;"> Once you press the verification button please click on "Forgot your password?" to reset your password</p>
 @endif
 @endif

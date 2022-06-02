@@ -1,7 +1,7 @@
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
-            <p style="font-family:'Script MT';font-size:50px">Unireserv</p>
+            <p style="font-family:'Script MT Bold';font-size:50px">Unireserv</p>
         </x-slot>
 
         <x-jet-validation-errors class="mb-4" />

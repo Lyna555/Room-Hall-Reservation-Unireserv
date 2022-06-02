@@ -1,7 +1,7 @@
 <x-app-layout>
     @include('navigation-menu')
     <div class="welc-cont">
-        <div style="display:flex;flex-direction:column;text-align:center;font-family:'Script MT';font-size:90px;line-height: 80px;">
+        <div style="display:flex;flex-direction:column;text-align:center;font-family:'Script MT Bold';font-size:90px;line-height: 80px;">
             <div class="welc">Welcome to our</div>
             <div class="welc">unireserv</div>
         </div>

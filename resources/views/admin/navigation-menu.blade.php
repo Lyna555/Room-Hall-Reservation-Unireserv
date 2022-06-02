@@ -5,7 +5,7 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
-                    <a href="{{route('/admin/home')}}" style="font-family: 'Script MT';font-size:25px;color:black">
+                    <a href="{{route('/admin/home')}}" style="font-family: 'Script MT Bold';font-size:25px;color:black">
                         <x-jet-application-mark class="block h-9 w-auto" />
                     </a>
                 </div>
