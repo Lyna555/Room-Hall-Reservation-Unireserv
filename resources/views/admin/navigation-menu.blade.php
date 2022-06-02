@@ -57,6 +57,11 @@
                     </x-jet-nav-link>
                 </div>
 
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex nav" style="cursor: pointer">
+                    <div id="google_translate_element"></div>  
+                </div>
+
+
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">

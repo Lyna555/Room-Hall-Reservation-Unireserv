@@ -1,4 +1,12 @@
 <nav x-data="{ open: false }" style="background-color: transparent;">
+<style>
+    #google_translate_element select {
+            color: black;
+            border-color: transparent;
+            background-color: transparent;
+            cursor: pointer;
+        }
+</style>
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between" style="height: 40px">
@@ -43,6 +51,10 @@
                         <span style="color:white;width:15px;height:15px;background-color:Tomato;border-radius: 50%;margin-left:5px;display: flex;justify-content: center;align-items: center;">{{$count}}</span>
                         @endif
                     </x-jet-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex nav" style="cursor: pointer">
+                    <div id="google_translate_element"></div>
                 </div>
 
             </div>

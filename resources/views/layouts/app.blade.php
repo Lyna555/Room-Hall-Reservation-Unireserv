@@ -32,6 +32,13 @@
         p{
             font-weight: bold;
         }
+
+        #google_translate_element select {
+            color: black;
+            border-color: transparent;
+            background-color: transparent;
+            cursor: pointer;
+        }
         
     </style>
 
