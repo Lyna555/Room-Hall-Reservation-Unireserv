@@ -41,29 +41,32 @@
             border-radius: 20px;
             font-size: 15px;
             font-weight: bold;
-            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.493);
         }
 
         #login {
-            color: white;
-            background: #f89746;
+            color: black;
+            background-color: white;
+            border: 2px solid #f89746;
             text-decoration: none;
         }
 
         #login:hover {
-            color: black;
+            color: white;
             background: #f89760;
+            box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.493);
         }
 
         #dashb {
-            color: white;
-            background: #f89746;
+            color: black;
+            background-color: white;
+            border: 2px solid #f89746;
             text-decoration: none;
         }
 
         #dashb:hover {
-            color: black;
+            color: white;
             background: #f89760;
+            box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.493);
         }
 
         option {
@@ -77,18 +80,6 @@
             background-size: cover;
             background-repeat: no-repeat;
             box-shadow: 0px 4px 8px gray;
-        }
-
-        #google_translate_element select {
-            color: black;
-            border-radius: 20px;
-            border-color: transparent;
-            background-color: transparent;
-            cursor: pointer;
-            font-weight: bold;
-            margin: 0;
-            padding-block: 0;
-            height: 23px;
         }
 
         .welc-cont {
@@ -122,9 +113,9 @@
         @if (Route::has('login'))
         <div id="auth">
             @auth
-            <a class="buttons" id="dashb" href="{{ url('/redirects') }}">Dashboard</a>
+            <a class="btn btn-info" style="background-color: skyblue;display: flex;align-items: center;height:30px;vertical-align: middle;border:none;font-weight: bold;box-shadow: 0px 3px 6px gray;" href="{{ url('/redirects') }}">Dashboard</a>
             @else
-            <a class="buttons" id="login" href="{{ route('login') }}">Login</a>
+            <a class="btn btn-info" style="background-color: skyblue;display: flex;align-items: center;height:30px;vertical-align: middle;border:none;font-weight: bold;box-shadow: 0px 3px 6px gray;" href="{{ route('login') }}">Login</a>
             @endauth
         </div>
         @endif
@@ -135,6 +126,7 @@
             <div class="welc">Welcome to our</div>
             <div class="welc">Unireserv</div>
         </div>
+        <div style="text-align:center;font-size:15px;font-weight: bold;">Now you can book rooms and amphitheaters<br>in efficient, easy and fast way!</div>
         <a href="#more" onclick="document.getElementById('more').style.display='flex'" class="btn btn-info" style="background-color: skyblue;border:none;font-weight: bold;box-shadow: 0px 3px 6px gray;">More Details</a>
     </div>
     <div style="display: flex;width:100%;height:94vh;justify-content:end;align-items:end">
@@ -142,15 +134,13 @@
     </div>
 
     <div id="more" style="width:99%;min-height:94vh;display:none;;justify-content:end;align-items: stretch;">
-        <div style="display: flex;flex-direction: column;justify-content:space-around;align-items: center;margin-left:20px">
-            <div>
-                <h1 style="font-weight: bold;;font-size: 50px;">Professor Features</h1>
-            </div>
-            <div>
-                <h1 style="font-weight: bold;;font-size: 50px;">Admin Features</h1>
-            </div>
-        </div>
         <div class="card-cont">
+            <div></div>
+            <div></div>
+            <div class="features">
+                <h1 class="featr">Professor Features</h1>
+            </div>
+            <br>
             <div class="cards" style="display:flex;justify-content:center;align-items: center;gap:20px;padding:10px">
                 <img src="{{URL('images/calendar.png')}}" alt="calendar" style="height:6em;width:6em">
                 <div>
@@ -178,6 +168,11 @@
 
             <div></div>
             <div></div>
+
+            <div class="features">
+                <h1 class="featr">Admin Features</h1>
+            </div>
+            <br>
             <div class="cards" style="display:flex;justify-content:center;align-items: center;gap:20px;padding:10px">
                 <img src="{{URL('images/calendar.png')}}" alt="calendar" style="height:6em;width:6em">
                 <div>
@@ -215,7 +210,7 @@
                 </div>
             </div>
         </div>
-        <div style="display: flex;width:10%;min-height:94vh;align-items: center;justify-content: end;">
+        <div class="up-img">
             <img onclick="document.getElementById('more').style.display='none'" src="{{url('images/up.png')}}" alt="up_arrow" style="cursor: pointer;height:3em;width:3em;">
         </div>
     </div>

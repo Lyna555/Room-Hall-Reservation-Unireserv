@@ -6,7 +6,7 @@
 2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
 */
 
-@font-face{
+@font-face {
   font-family: 'Script MT Bold';
   src: url('/fonts/ScriptMTBold.ttf');
 }
@@ -831,11 +831,11 @@ select {
   list-style-type: lower-alpha;
 }
 
-.prose :where(ol[type="A"s]):not(:where([class~="not-prose"] *)) {
+.prose :where(ol[type="A" s]):not(:where([class~="not-prose"] *)) {
   list-style-type: upper-alpha;
 }
 
-.prose :where(ol[type="a"s]):not(:where([class~="not-prose"] *)) {
+.prose :where(ol[type="a" s]):not(:where([class~="not-prose"] *)) {
   list-style-type: lower-alpha;
 }
 
@@ -847,11 +847,11 @@ select {
   list-style-type: lower-roman;
 }
 
-.prose :where(ol[type="I"s]):not(:where([class~="not-prose"] *)) {
+.prose :where(ol[type="I" s]):not(:where([class~="not-prose"] *)) {
   list-style-type: upper-roman;
 }
 
-.prose :where(ol[type="i"s]):not(:where([class~="not-prose"] *)) {
+.prose :where(ol[type="i" s]):not(:where([class~="not-prose"] *)) {
   list-style-type: lower-roman;
 }
 
@@ -1426,7 +1426,7 @@ select {
   width: 100%;
 }
 
-.card-30{
+.card-30 {
   width: 30%;
 }
 
@@ -2789,16 +2789,62 @@ select {
   border-radius: 20px;
 }
 
+
+.featr {
+  font-weight: bold;
+  font-size: 40px;
+}
+
+#google_translate_element select {
+  color: black;
+  border-radius: 20px;
+  border-color: transparent;
+  background-color: transparent;
+  cursor: pointer;
+  font-weight: bold;
+  margin: 0;
+  padding-block: 0;
+  height: 23px;
+}
+
+.up-img {
+  display: flex;
+  width: 10%;
+  min-height: 94vh;
+  align-items: center;
+  justify-content: end;
+}
+
 @media (max-width: 1044px) and (max-width: 768px) {
+  .features {
+    display: flex;
+    justify-content: center;
+  }
+
+  .up-img {
+    display: none;
+  }
+
+  #google_translate_element select {
+    width: 160px;
+    backdrop-filter: blur(8px);
+  }
+
+  .featr {
+    font-size: 30px;
+  }
+
   .key1 {
     flex-direction: column;
   }
 
-  #lang{
+  #lang {
     flex-direction: column;
     align-items: center;
   }
+
   .welc-cont {
+    flex-direction: column;
     width: 100%;
   }
 
@@ -2833,7 +2879,7 @@ select {
     width: 100%;
   }
 
-  
+
 
 }
 
@@ -2841,14 +2887,16 @@ select {
   .delete {
     width: 60%;
   }
+
   .edited {
     width: 60%;
   }
-  .card-30{
+
+  .card-30 {
     width: 50%;
   }
 
-  
+
 }
 
 @media (max-width: 850px) {
@@ -2861,16 +2909,19 @@ select {
   .div {
     width: 90%;
   }
+
   .delete {
     width: 70%;
   }
+
   .delete {
     width: 60%;
   }
-  .card-30{
+
+  .card-30 {
     width: 80%;
   }
-  
+
 }
 
 @media (min-width:300px) {
