@@ -2803,6 +2803,12 @@ select {
   justify-content: end;
 }
 
+#google_translate_element select {
+  background-color: transparent;
+  color: black;
+  border: none;
+}
+
 @media (max-width: 1044px) and (max-width: 768px) {
   .about{
     text-align: center;
