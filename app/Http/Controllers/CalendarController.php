@@ -72,7 +72,7 @@ class CalendarController extends Controller
                                 'start' => $crudFieldValue,
                                 'end'   => $crudFieldValue1,
                                 'url'   => route($sr['route'], $model->id),
-                                'color' => '#92baff',
+                                'co lor' => '#92baff',
                             ];
                         }
                     }
