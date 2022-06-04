@@ -4,7 +4,6 @@ namespace App\Mail;
 
 use App\Models\Reservation;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
@@ -29,6 +28,6 @@ class deleteReser extends Mailable
      */
     public function build()
     {
-        return $this->view('admin.deleteReserMail')->with(['reservation'=>$this->reservation]);
+        return $this->view('admin.mngReservations.deleteReserMail')->with(['reservation'=>$this->reservation]);
     }
 }

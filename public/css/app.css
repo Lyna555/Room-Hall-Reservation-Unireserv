@@ -2795,18 +2795,6 @@ select {
   font-size: 40px;
 }
 
-#google_translate_element select {
-  color: black;
-  border-radius: 20px;
-  border-color: transparent;
-  background-color: transparent;
-  cursor: pointer;
-  font-weight: bold;
-  margin: 0;
-  padding-block: 0;
-  height: 23px;
-}
-
 .up-img {
   display: flex;
   width: 10%;
@@ -2816,6 +2804,10 @@ select {
 }
 
 @media (max-width: 1044px) and (max-width: 768px) {
+  .about{
+    text-align: center;
+  }
+
   .features {
     display: flex;
     justify-content: center;

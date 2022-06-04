@@ -31,7 +31,7 @@
 </head>
 
 <body>
-    @include('navigation-menu')
+    @include('prof.navigation-menu')
     <div style="display: flex;justify-content:center;">
         <div class="calendar">
             <div class="key1">

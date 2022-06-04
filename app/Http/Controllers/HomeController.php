@@ -20,7 +20,7 @@ class HomeController extends Controller
             return view('admin.dashboard',compact('count'));
         } else {
             $count = Reservation::where('date','>=',Carbon::now())->where('user_id','=',Auth::user()->id)->where('satate','=','reserv-state')->orWhere('satate','=','reserv-ref')->count();
-            return view('dashboard',compact('count'));
+            return view('prof.dashboard',compact('count'));
         }
     }
 }

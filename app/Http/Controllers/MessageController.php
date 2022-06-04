@@ -52,7 +52,7 @@ class MessageController extends Controller
             $users = User::where('university','=',Auth::user()->university)->where('faculty','=',Auth::user()->faculty)->get();
             $auth = Auth::user()->email;
             $count = Reservation::where('date','>=',Carbon::now())->where('user_id','=',Auth::user()->id)->where('satate','=','reserv-state')->orWhere('satate','=','reserv-ref')->count();
-            return view('contact', ['users' => $users ,'auth' => $auth,'count'=> $count]);
+            return view('prof.contact', ['users' => $users ,'auth' => $auth,'count'=> $count]);
         } else {
             return abort(403);
         }

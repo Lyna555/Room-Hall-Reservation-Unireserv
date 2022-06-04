@@ -31,7 +31,7 @@
 </head>
 
 <body>
-  @include('navigation-menu')
+  @include('prof.navigation-menu')
   <div style="display: flex;width:100%;justify-content:center;align-items:center">
     <div class="hello">
       @if(session()->has('message'))

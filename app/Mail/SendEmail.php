@@ -3,11 +3,10 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Http\Request;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class SendEmail extends Mailable
 {
@@ -32,6 +31,6 @@ class SendEmail extends Mailable
     {
         $user = Auth::user()->name;
         $email = Auth::user()->email;
-        return $this->view('email',['email'=>$email,'msg'=>$request->message,'user'=>$user]);
+        return $this->view('prof.email',['email'=>$email,'msg'=>$request->message,'user'=>$user]);
     }
 }

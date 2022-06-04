@@ -193,7 +193,7 @@
             {{ __('Contact') }}
         </x-jet-responsive-nav-link>
 
-        <x-jet-responsive-nav-link href="{{ route('/user/notifications') }}" :active="request()->routeIs('/user/notifications')">
+        <x-jet-responsive-nav-link style="display: flex;align-items: center;" href="{{ route('/user/notifications') }}" :active="request()->routeIs('/user/notifications')">
             {{ __('Notifications') }}
             @if($count==0)
             @else

@@ -223,7 +223,7 @@ class CalendarController extends Controller
                     }
                 }
             }
-            return view('fullcalendar', compact('events', 'count'));
+            return view('prof.fullcalendar', compact('events', 'count'));
         } else {
             return abort(403);
         }
@@ -295,7 +295,7 @@ class CalendarController extends Controller
                     }
                 }
             }
-            return view('fullcalendar', compact('events', 'count'));
+            return view('prof.fullcalendar', compact('events', 'count'));
         } else {
             return abort(403);
         }

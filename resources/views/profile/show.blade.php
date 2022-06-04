@@ -7,7 +7,7 @@
     <title>Profile</title>
 </head>
 <body>
-    @include('navigation-menu')
+    @include('prof.navigation-menu')
 </body>
 </html>
 

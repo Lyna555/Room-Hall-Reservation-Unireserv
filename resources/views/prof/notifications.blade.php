@@ -22,7 +22,7 @@
 </head>
 
 <body>
-  @include('navigation-menu')
+  @include('prof.navigation-menu')
   <div style="display: flex;width:100%;justify-content:center">
     <div class="card mb-3" style="width:90%;margin-top:30px">
       <div class="card-body">

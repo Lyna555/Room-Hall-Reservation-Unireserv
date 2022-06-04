@@ -3,7 +3,6 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use App\Models\Reservation;
@@ -29,6 +28,6 @@ class deleteMail extends Mailable
      */
     public function build()
     {
-        return $this->view('admin.deleteMail')->with(['reservation'=>$this->reservation]);
+        return $this->view('admin.mngRooms.deleteMail')->with(['reservation'=>$this->reservation]);
     }
 }
