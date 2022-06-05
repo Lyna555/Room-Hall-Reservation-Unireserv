@@ -7,6 +7,7 @@ use Illuminate\Support\ServiceProvider;
 use Laravel\Fortify\Fortify;
 use Laravel\Jetstream\Jetstream;
 use App\Models\Reservation;
+use Illuminate\Support\Facades\Auth;
 
 class JetstreamServiceProvider extends ServiceProvider
 {
@@ -31,7 +32,7 @@ class JetstreamServiceProvider extends ServiceProvider
 
         Jetstream::deleteUsersUsing(DeleteUser::class);
         Fortify::registerView(function (){
-            $count = Reservation::where('satate','=','wait')->count();
+            $count = Reservation::where('university','=',Auth::user()->university)->where('faculty','=',Auth::user()->faculty)->where('satate','=','wait')->count();
             return view('auth.register',compact('count'));
         });
     }
