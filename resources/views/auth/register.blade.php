@@ -1,5 +1,5 @@
 @include('admin.navigation-menu')
-<div style="margin-top: 60px;">
+<div style="margin-block: 60px;">
 <x-guest-layout>
     <x-jet-authentication-card>
         @if(session()->has('message'))
@@ -67,7 +67,10 @@
             </div>
             @endif
 
-            <div class="flex items-center justify-end mt-4">
+            <div class="flex items-center justify-center mt-10">
+                <a href="{{url('/admin/prof')}}" class="ml-4 inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition" style="background-color:white">
+                    {{ __('Cancel') }}
+                </a>
 
                 <x-jet-button class="ml-4">
                     {{ __('Register') }}

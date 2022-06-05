@@ -54,6 +54,12 @@
             </tr>
           </thead>
           <tbody>
+            @if($count==0)
+              <tr>
+                <td>There is no notifications at the moment.</td>
+              </tr>
+            @endif
+
             @foreach($reservations as $reservation)
             @if($reservation->satate=='wait')
             <tr>
