@@ -56,7 +56,13 @@
           <tbody>
             @if($count==0)
               <tr>
-                <td>There is no notifications at the moment.</td>
+                <td></td>
+                <td></td>
+                <td style="width: 30%;">
+                  There is no notifications at the moment.
+                </td>
+                <td></td>
+                <td></td>
               </tr>
             @endif
 

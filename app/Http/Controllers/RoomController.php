@@ -106,7 +106,7 @@ class RoomController extends Controller
 
     public function addRoom()
     {
-        $count = Reservation::where('satate', '=', 'wait')->count();
+        $count = Reservation::where('university','=',Auth::user()->university)->where('faculty','=',Auth::user()->faculty)->where('satate', '=', 'wait')->count();
         return view('admin.mngRooms.addRoom', compact('count'));
     }
 
@@ -125,7 +125,7 @@ class RoomController extends Controller
             $num = (int)filter_var($name,FILTER_SANITIZE_NUMBER_INT);
             $num = strval($num);
             $rooms = Room::where('university','=',Auth::user()->university)->where('faculty','=',Auth::user()->faculty)->get();
-            $count = Reservation::where('satate', '=', 'wait')->count();
+            $count = Reservation::where('university','=',Auth::user()->university)->where('faculty','=',Auth::user()->faculty)->where('satate', '=', 'wait')->count();
             return view('admin.mngRooms.editRoom', ['rooms' => $rooms, 'room' => $room, 'count' => $count,'num'=>$num]);
         } else {
             return abort(403);

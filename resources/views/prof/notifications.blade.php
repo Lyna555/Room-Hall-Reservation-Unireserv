@@ -33,6 +33,17 @@
           <thead class="thread-light">
           </thead>
           <tbody>
+            @if($count==0)
+              <tr>
+                <td></td>
+                <td></td>
+                <td style="width: 30%;">
+                  There is no notifications at the moment.
+                </td>
+                <td></td>
+                <td></td>
+              </tr>
+            @endif
             @foreach($notifications as $notification)
             @if(($notification->satate=='reserv-state' || $notification->satate=='reserv-ref') && $user==$notification->user_id && $notification->date>=$now)
             <tr>
