@@ -32,43 +32,6 @@
             background-repeat: no-repeat;
         }
 
-        .buttons {
-            width: 100px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 20px;
-            font-size: 15px;
-            font-weight: bold;
-        }
-
-        #login {
-            color: black;
-            background-color: white;
-            border: 2px solid #f89746;
-            text-decoration: none;
-        }
-
-        #login:hover {
-            color: white;
-            background: #f89760;
-            box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.493);
-        }
-
-        #dashb {
-            color: black;
-            background-color: white;
-            border: 2px solid #f89746;
-            text-decoration: none;
-        }
-
-        #dashb:hover {
-            color: white;
-            background: #f89760;
-            box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.493);
-        }
-
         option {
             color: black;
             height: 20px;
@@ -105,6 +68,26 @@
             position: absolute
         }
 
+        .butn {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            background-color: orange;
+            border: 2px solid white;
+            font-weight: bold;
+            color: black;
+            font-size: 16px;
+            padding: 5px 30px;
+            cursor: pointer;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .butn:hover {
+            background-color: transparent;
+        }
+
         @media (max-width: 1044px) and (max-width: 768px) {
             .welc-cont {
                 width: 100%;
@@ -123,11 +106,11 @@
         <a href="{{url('/welcomeContactus')}}" style="font-weight: bold;">Contact Us</a>
 
         @if (Route::has('login'))
-        <div id="auth">
+        <div>
             @auth
-            <a class="btn btn-info" style="background-color: skyblue;display: flex;align-items: center;height:30px;vertical-align: middle;border:none;font-weight: bold;box-shadow: 0px 3px 6px gray;" href="{{ url('/redirects') }}">Dashboard</a>
+            <a class="butn" href="{{ url('/redirects') }}">Dashboard</a>
             @else
-            <a class="btn btn-info" style="background-color: skyblue;display: flex;align-items: center;height:30px;vertical-align: middle;border:none;font-weight: bold;box-shadow: 0px 3px 6px gray;" href="{{ route('login') }}">Login</a>
+            <a class="butn" href="{{ route('login') }}">Login</a>
             @endauth
         </div>
         @endif
@@ -149,7 +132,9 @@
         <div style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
             <br>
             <div class="about" style="max-width: 78%;backdrop-filter: blur(8px);background-color: rgba(255,255,255,0.2);font-weight: bold;color:black;padding:20px">
-                <h1 class="featr">About</h1><br><p style="text-indent: 30px;">Nowadays time is just a mirror reflecting our journey towards a bright future, and many people do not seem to notice how important is to do our daily chores in an organized and tidy way, especialy when it comes to students, administrators and professors who are racing with time to accomplish their educational intentions and tasks, that's why we wanted to offer the educational university family an opportunity to save time, efforts and energy, by making the professors being able to reserve rooms/halls suiting them and their students needs, depending on its type and size anytime and anywhere.<p>
+                <h1 class="featr">About</h1><br>
+                <p style="text-indent: 30px;">Nowadays time is just a mirror reflecting our journey towards a bright future, and many people do not seem to notice how important is to do our daily chores in an organized and tidy way, especialy when it comes to students, administrators and professors who are racing with time to accomplish their educational intentions and tasks, that's why we wanted to offer the educational university family an opportunity to save time, efforts and energy, by making the professors being able to reserve rooms/halls suiting them and their students needs, depending on its type and size anytime and anywhere.
+                <p>
             </div>
         </div>
 
