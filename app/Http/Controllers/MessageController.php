@@ -18,7 +18,8 @@ class MessageController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
+    //list of users email admin
     public function emails()
     {
         if (Auth::user()->role == 'admin') {
@@ -31,6 +32,7 @@ class MessageController extends Controller
         }
     }
 
+    //send email admin
     public function sendEmail(Request $request)
     {
         if (Auth::user()->role == 'admin') {
@@ -46,6 +48,7 @@ class MessageController extends Controller
         }
     }
 
+    //list of users emails prof
     public function emailsUser()
     {
         if (Auth::user()->role == 'prof') {
@@ -58,6 +61,7 @@ class MessageController extends Controller
         }
     }
 
+    //send email prof
     public function sendEmailUser(Request $request)
     {
         if (Auth::user()->role == 'prof') {

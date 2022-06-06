@@ -3,7 +3,7 @@
     <div class="welc-cont">
         <div style="display:flex;flex-direction:column;text-align:center;font-family:'Script MT Bold';font-size:90px;line-height: 80px;">
             <div class="welc">Welcome to our</div>
-            <div class="welc">unireserv</div>
+            <div class="welc">Unireserv</div>
         </div>
         <div style="text-align:center;font-size:15px;font-weight: bold;">Now you can book rooms and amphitheaters<br>in efficient, easy and fast way!</div>
         <a href="#more" onclick="document.getElementById('more').style.display='flex'" class="btn btn-info" style="background-color: skyblue;border:none;font-weight: bold;box-shadow: 0px 3px 6px gray;">More Details</a>

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
+    //add admin in database
     public function contactus(Request $request){
         $connection = @fsockopen("www.google.com", 80);
         if ($connection == true) {
@@ -19,6 +20,7 @@ class ContactController extends Controller
         }
     }
 
+    //contactus in welcome page
     public function welcomeContactus(Request $request){
         $connection = @fsockopen("www.google.com", 80);
         if ($connection == true) {
