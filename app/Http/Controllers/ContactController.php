@@ -13,7 +13,7 @@ class ContactController extends Controller
     public function contactus(Request $request){
         $connection = @fsockopen("www.google.com", 80);
         if ($connection == true) {
-            Mail::to('unireserv@gmail.com')->send(new contactusMail($request->name,$request->email,$request->university,$request->faculty,$request->message));
+            Mail::to('lyna.boughaba@univ-constantine2.dz')->send(new contactusMail($request->name,$request->email,$request->university,$request->faculty,$request->message));
             return back()->with('message', 'Email Successfully Sended!');
         } else {
             return back()->with('errorMessage', 'check your internet connection.');
@@ -24,7 +24,7 @@ class ContactController extends Controller
     public function welcomeContactus(Request $request){
         $connection = @fsockopen("www.google.com", 80);
         if ($connection == true) {
-            Mail::to('unireserv@gmail.com')->send(new welcomeContactusMail($request->message,$request->email));
+            Mail::to('lyna.boughaba@univ-constantine2.dz')->send(new welcomeContactusMail($request->message,$request->email));
             return back()->with('message', 'Email Successfully Sended!');
         } else {
             return back()->with('errorMessage', 'check your internet connection.');
