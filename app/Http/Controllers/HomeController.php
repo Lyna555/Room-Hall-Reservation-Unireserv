@@ -19,7 +19,7 @@ class HomeController extends Controller
             $count = Reservation::where('university','=',Auth::user()->university)->where('faculty','=',Auth::user()->faculty)->where('satate','=','wait')->count();
             return view('admin.dashboard',compact('count'));
         } else {
-            $count = Reservation::where('university','=',Auth::user()->university)->where('faculty','=',Auth::user()->faculty)->where('date','>=',Carbon::now())->where('user_id','=',Auth::user()->id)->where('satate','=','reserv-state')->orWhere('satate','=','reserv-ref')->count();
+            $count = Reservation::where('university','=',Auth::user()->university)->where('faculty','=',Auth::user()->faculty)->where('date', '>=', Carbon::now())->where('user_id', '=', Auth::user()->id)->where('satate', '=', 'reserv-state')->orWhere('satate', '=', 'reserv-ref')->where('university','=',Auth::user()->university)->where('faculty','=',Auth::user()->faculty)->where('date', '>=', Carbon::now())->where('user_id', '=', Auth::user()->id)->count();
             return view('prof.dashboard',compact('count'));
         }
     }

@@ -178,7 +178,7 @@ class CalendarController extends Controller
         if (Auth::user()->role == 'prof') {
             $search=$request->input('search');
             $events = [];
-            $count = Reservation::where('university','=',Auth::user()->university)->where('faculty','=',Auth::user()->faculty)->where('date', '>=', Carbon::now())->where('user_id', '=', Auth::user()->id)->where('satate', '=', 'reserv-state')->orWhere('satate', '=', 'reserv-ref')->count();
+            $count = Reservation::where('university','=',Auth::user()->university)->where('faculty','=',Auth::user()->faculty)->where('date', '>=', Carbon::now())->where('user_id', '=', Auth::user()->id)->where('satate', '=', 'reserv-state')->orWhere('satate', '=', 'reserv-ref')->where('university','=',Auth::user()->university)->where('faculty','=',Auth::user()->faculty)->where('date', '>=', Carbon::now())->where('user_id', '=', Auth::user()->id)->count();
             foreach ($this->rsrc as $rcr) {
                 foreach ($rcr['model']::where('university','=',Auth::user()->university)->where('faculty','=',Auth::user()->faculty)->where('objective','like','%'.$search.'%')->get() as $model) {
                     $query = User::where('id', '=', $model->{$rcr['user_id']})->value('name');
@@ -250,7 +250,7 @@ class CalendarController extends Controller
     {
         if (Auth::user()->role == 'prof') {
             $events = [];
-            $count = Reservation::where('university','=',Auth::user()->university)->where('faculty','=',Auth::user()->faculty)->where('date', '>=', Carbon::now())->where('user_id', '=', Auth::user()->id)->where('satate', '=', 'reserv-state')->orWhere('satate', '=', 'reserv-ref')->count();
+            $count = Reservation::where('university','=',Auth::user()->university)->where('faculty','=',Auth::user()->faculty)->where('date', '>=', Carbon::now())->where('user_id', '=', Auth::user()->id)->where('satate', '=', 'reserv-state')->orWhere('satate', '=', 'reserv-ref')->where('university','=',Auth::user()->university)->where('faculty','=',Auth::user()->faculty)->where('date', '>=', Carbon::now())->where('user_id', '=', Auth::user()->id)->count();
             foreach ($this->resources as $resource) {
                 foreach ($resource['model']::where('university','=',Auth::user()->university)->where('faculty','=',Auth::user()->faculty)->get() as $model) {
                     $query = User::where('id', '=', $model->{$resource['user_id']})->value('name');

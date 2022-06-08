@@ -59,7 +59,7 @@ class ReservationController extends Controller
     {
         if (Auth::user()->role == 'prof') {
             $search = $request->input('cherche');
-            $count = Reservation::where('date', '>=', Carbon::now())->where('user_id', '=', Auth::user()->id)->where('satate', '=', 'reserv-state')->orWhere('satate', '=', 'reserv-ref')->count();
+            $count = Reservation::where('date', '>=', Carbon::now())->where('user_id', '=', Auth::user()->id)->where('satate', '=', 'reserv-state')->orWhere('satate', '=', 'reserv-ref')->where('date', '>=', Carbon::now())->where('user_id', '=', Auth::user()->id)->count();
             if ($search == '') {
                 $reservations = Reservation::where('user_id', '=', Auth::user()->id)->get();
                 $sysdate = Carbon::now();
@@ -100,7 +100,7 @@ class ReservationController extends Controller
     {
         if (Auth::user()->role == 'prof') {
             $rooms = Room::where('university', '=', Auth::user()->university)->where('faculty', '=', Auth::user()->faculty)->get();
-            $count = Reservation::where('date', '>=', Carbon::now())->where('user_id', '=', Auth::user()->id)->where('satate', '=', 'reserv-state')->orWhere('satate', '=', 'reserv-ref')->count();
+            $count = Reservation::where('date', '>=', Carbon::now())->where('user_id', '=', Auth::user()->id)->where('satate', '=', 'reserv-state')->orWhere('satate', '=', 'reserv-ref')->where('date', '>=', Carbon::now())->where('user_id', '=', Auth::user()->id)->count();
             return view('prof.mngReservations.addReservation', ['rooms' => $rooms, 'count' => $count]);
         } else {
             return abort(403);
@@ -112,7 +112,7 @@ class ReservationController extends Controller
     {
         if (Auth::user()->role == 'prof') {
             $reservations = Reservation::where('user_id', Auth::user()->id)->where('university', '=', Auth::user()->university)->where('faculty', '=', Auth::user()->faculty)->get();
-            $count = Reservation::where('user_id', '=', Auth::user()->id)->where('satate', '=', 'reserv-state')->orWhere('satate', '=', 'reserv-ref')->count();
+            $count = Reservation::where('date', '>=', Carbon::now())->where('user_id', '=', Auth::user()->id)->where('satate', '=', 'reserv-state')->orWhere('satate', '=', 'reserv-ref')->where('date', '>=', Carbon::now())->where('user_id', '=', Auth::user()->id)->count();
             $sysdate = Carbon::now();
             return view('prof.mngReservations.ReserList', ['reservations' => $reservations, 'sysdate' => $sysdate, 'count' => $count]);
         } else {
@@ -213,7 +213,7 @@ class ReservationController extends Controller
         if (Auth::user()->role == 'prof') {
             $reservation = Reservation::find($id);
             $rooms = Room::where('university', '=', Auth::user()->university)->where('faculty', '=', Auth::user()->faculty)->get();
-            $count = Reservation::where('user_id', '=', Auth::user()->id)->where('user_id', '=', Auth::user()->id)->where('satate', '=', 'reserv-state')->orWhere('satate', '=', 'reserv-ref')->count();
+            $count = Reservation::where('user_id', '=', Auth::user()->id)->where('user_id', '=', Auth::user()->id)->where('satate', '=', 'reserv-state')->orWhere('satate', '=', 'reserv-ref')->where('user_id', '=', Auth::user()->id)->where('user_id', '=', Auth::user()->id)->count();
             return view('prof.mngReservations.editReservation', ['reservation' => $reservation, 'rooms' => $rooms, 'count' => $count]);
         } else {
             return abort(403);

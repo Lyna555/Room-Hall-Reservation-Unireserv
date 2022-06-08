@@ -52,7 +52,7 @@ class NotificationController extends Controller
             $notifications = Reservation::all();
             $user = Auth::user()->id;
             $now = Carbon::now();
-            $count = Reservation::where('date', '>=', Carbon::now())->where('user_id', '=', Auth::user()->id)->where('satate', '=', 'reserv-state')->orWhere('satate', '=', 'reserv-ref')->count();
+            $count = Reservation::where('date', '>=', Carbon::now())->where('user_id', '=', Auth::user()->id)->where('satate', '=', 'reserv-state')->orWhere('satate', '=', 'reserv-ref')->where('date', '>=', Carbon::now())->where('user_id', '=', Auth::user()->id)->count();
             return view('prof.notifications', ['notifications' => $notifications, 'user' => $user, 'count' => $count,'now'=>$now]);
         } else {
             return abort(403);
