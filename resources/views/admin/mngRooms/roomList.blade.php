@@ -82,17 +82,17 @@
               <td>
                 <div style="display: flex;gap:10px;justify-content:center;align-items: center;">
                   @php
-                  $i=0;
-                  foreach($reservations as $reservation){
-                  if($reservation->room_name==$room->name){
-                  $i++;
-                  }
-                  }
+                    $i=0;
+                    foreach($reservations as $reservation){
+                      if($reservation->room_name==$room->name && $reservation->university==$auth->university && $reservation->faculty==$auth->faculty){
+                        $i++;
+                      }
+                    }
                   @endphp
                   @if($i>0)
-                  <a href="{{ url('/destroy/'.$room->id) }}" class="delete1"><img src="{{url('images/delete.png')}}" alt=""></a>
+                    <a href="{{ url('/destroy/'.$room->id) }}" class="delete1"><img src="{{url('images/delete.png')}}" alt=""></a>
                   @else
-                  <a href="{{ url('/destroy/'.$room->id) }}" class="delete2"><img src="{{url('images/delete.png')}}" alt=""></a>
+                    <a href="{{ url('/destroy/'.$room->id) }}" class="delete2"><img src="{{url('images/delete.png')}}" alt=""></a>
                   @endif
                   <a href="{{ url('/edit/'.$room->id) }}"><img src="{{url('images/edit.png')}}" alt=""></a>
                 </div>
