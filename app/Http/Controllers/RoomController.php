@@ -149,6 +149,7 @@ class RoomController extends Controller
     {
         if (Auth::user()->role == 'admin') {
             $room = Room::find($id);
+            $roomy= $room->name;
             $rooms = Room::where('university', '=', Auth::user()->university)->where('faculty', '=', Auth::user()->faculty)->get();
             $request->validate(['name' => Rule::unique('rooms')->ignore($room->id)]);
             $this->validate($request, ['name' => 'regex:/^[^"!*@#%$+]+$/']);
@@ -157,7 +158,12 @@ class RoomController extends Controller
             $room->floor = $request->input('floor');
             $room->type = $request->input('type');
             $room->state = $request->input('state');
-            $co = 0;
+            $reser=Room::join('reservations','rooms.id','reservations.room_id')->where('reservations.room_name','=',$roomy)->count();
+            $co = 0; 
+
+            if($reser>0){
+                return redirect('/showList')->with('errorMessage', 'This room is reserved, you can\'t change it\'s name');
+            }
 
             foreach ($rooms as $rm) {
                 if ($rm->name == $room->name && $rm->university == Auth::user()->university && $rm->faculty == Auth::user()->faculty) {
@@ -166,7 +172,7 @@ class RoomController extends Controller
                 }
             }
             if ($co == 1) {
-                return redirect('/showList')->with('errorMessage', 'Room/Hall exists allready!')->withInput();
+                return redirect('/showList')->with('errorMessage', 'Room/Hall exists allready!');
             } else {
                 $room->save();
                 return redirect('/showList')->with('message', 'Room/Hall successfully added!');
