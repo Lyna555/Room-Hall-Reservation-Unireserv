@@ -43,6 +43,10 @@
       <div id="hh" class="alert alert-success">
         {{session()->get('message')}}
       </div>
+      @elseif(session()->has('errorMessage'))
+      <div id="hh" class="alert alert-danger">
+        {{session()->get('errorMessage')}}
+      </div>
       @endif
 
       <div class="card-body">

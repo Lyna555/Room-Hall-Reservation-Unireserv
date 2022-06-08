@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Reservation;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
 
@@ -13,7 +14,8 @@ class NotificationController extends Controller
             $sysdate = Carbon::now();
             $count = Reservation::where('university','=',Auth::user()->university)->where('faculty','=',Auth::user()->faculty)->where('satate', '=', 'wait')->count();
             $reservations = Reservation::where('university','=',Auth::user()->university)->where('faculty','=',Auth::user()->faculty)->get();
-            return view('admin.notifications', ['reservations' => $reservations, 'sysdate' => $sysdate, 'count' => $count]);
+            $users = User::all();
+            return view('admin.notifications', ['reservations' => $reservations, 'sysdate' => $sysdate, 'count' => $count,'users'=>$users]);
         } else {
             return abort(403);
         }

@@ -68,8 +68,15 @@
 
             @foreach($reservations as $reservation)
             @if($reservation->satate=='wait')
+              @php
+                foreach($users as $user){
+                  if($user->id == $reservation->user_id){
+                    $name=$user->name;
+                  }
+                }
+              @endphp
             <tr>
-              <td>name</td>
+              <td>{{$name}}</td>
               <td>{{$reservation->room_name}}</td>
               <td>{{$reservation->date}}</td>
               <td>{{$reservation->creneaude}} - {{$reservation->creneaua}}</td>
