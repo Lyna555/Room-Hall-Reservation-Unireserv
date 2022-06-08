@@ -158,17 +158,6 @@ class RoomController extends Controller
             $room->floor = $request->input('floor');
             $room->type = $request->input('type');
             $room->state = $request->input('state');
-            
-            $reserv=Reservation::where('room_name','=',$roomy->name)->get();
-                foreach($reserv as $res){
-                    $res->room_name=$room->name;
-                    $user=User::where('id','=',$res->user_id)->value('email');
-                    $res->save();
-
-                    if($res->date>Carbon::now()){
-                        Mail::to($user)->send(new updateRoomMail($roomy,$room->name,$room->capacity,$room->floor));
-                    }
-                }
 
             $co = 0; 
 
@@ -182,6 +171,16 @@ class RoomController extends Controller
                 return redirect('/showList')->with('errorMessage', 'Room/Hall exists already!');
             } else {
                 $room->save();
+                $reserv=Reservation::where('room_name','=',$roomy->name)->get();
+                foreach($reserv as $res){
+                    $res->room_name=$room->name;
+                    $user=User::where('id','=',$res->user_id)->value('email');
+                    $res->save();
+
+                    if($res->date>Carbon::now()){
+                        Mail::to($user)->send(new updateRoomMail($roomy,$room->name,$room->capacity,$room->floor));
+                    }
+                }
                 return redirect('/showList')->with('message', 'Room/Hall successfully edited!');
             }
         } else {
