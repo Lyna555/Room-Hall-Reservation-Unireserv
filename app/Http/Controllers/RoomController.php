@@ -9,6 +9,7 @@ use App\Models\Reservation;
 use App\Mail\deleteMail;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Mail\updateRoomMail;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 
@@ -148,7 +149,7 @@ class RoomController extends Controller
     {
         if (Auth::user()->role == 'admin') {
             $room = Room::find($id);
-            $roomy= $room->name;
+            $roomy= Room::find($id);
             $rooms = Room::where('university', '=', Auth::user()->university)->where('faculty', '=', Auth::user()->faculty)->get();
             $request->validate(['name' => Rule::unique('rooms')->ignore($room->id)]);
             $this->validate($request, ['name' => 'regex:/^[^"!*@#%$+]+$/']);
@@ -158,22 +159,21 @@ class RoomController extends Controller
             $room->type = $request->input('type');
             $room->state = $request->input('state');
             
-            $reserv=Reservation::where('room_name','=',$roomy)->get();
-            $reserCount=Reservation::where('room_name','=',$roomy)->where('date','>',Carbon::now())->count();
-
-            if($reserCount>0){
-                return redirect('/showList')->with('errorMessage', 'This room is reserved, you can\'t change it\'s name');
-            }else{
+            $reserv=Reservation::where('room_name','=',$roomy->name)->get();
                 foreach($reserv as $res){
                     $res->room_name=$room->name;
+                    $user=User::where('id','=',$res->user_id)->value('email');
                     $res->save();
+
+                    if($res->date>Carbon::now()){
+                        Mail::to($user)->send(new updateRoomMail($roomy,$room->name,$room->capacity,$room->floor));
+                    }
                 }
-            }
 
             $co = 0; 
 
             foreach ($rooms as $rm) {
-                if ($rm->name == $room->name && $rm->university == Auth::user()->university && $rm->faculty == Auth::user()->faculty) {
+                if ($rm->name == $room->name && $rm->university == Auth::user()->university && $rm->faculty == Auth::user()->faculty && $rm->id!=$room->id) {
                     $co = 1;
                     break;
                 }
