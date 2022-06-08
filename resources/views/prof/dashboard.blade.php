@@ -8,10 +8,10 @@
         <div style="text-align:center;font-size:15px;font-weight: bold;">Now you can book rooms and amphitheaters<br>in efficient, easy and fast way!</div>
         <a href="#more" onclick="document.getElementById('more').style.display='flex'" class="btn btn-info" style="background-color: skyblue;border:none;font-weight: bold;box-shadow: 0px 3px 6px gray;">More Details</a>
     </div>
-    <div style="display: flex;width:100%;height:94vh;justify-content:end;align-items:end">
+    <div style="display: flex;width:100%;height:93.9vh;justify-content:end;align-items:end">
         <img src="{{URL('images/hall.png')}}" alt="">
     </div>
-    <div id="more" style="width:99%;height:100vh;display:none;;justify-content:end;align-items:center">
+    <div id="more" style="width:99%;height:100vh;display:none;justify-content:end;align-items:center">
         <div class="card-cont">
             <div class="cards" style="display:flex;justify-content:center;align-items: center;gap:20px;padding:10px">
                 <img src="{{URL('images/calendar.png')}}" alt="calendar" style="height:6em;width:6em">
