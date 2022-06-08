@@ -4,13 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use App\Models\Room;
 use App\Models\Reservation;
 use App\Mail\deleteMail;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-use FFI;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 
 class RoomController extends Controller
@@ -158,12 +157,20 @@ class RoomController extends Controller
             $room->floor = $request->input('floor');
             $room->type = $request->input('type');
             $room->state = $request->input('state');
-            $reser=Room::join('reservations','rooms.id','reservations.room_id')->where('reservations.room_name','=',$roomy)->count();
-            $co = 0; 
+            
+            $reserv=Reservation::where('room_name','=',$roomy)->get();
+            $reserCount=Reservation::where('room_name','=',$roomy)->where('date','>',Carbon::now())->count();
 
-            if($reser>0){
+            if($reserCount>0){
                 return redirect('/showList')->with('errorMessage', 'This room is reserved, you can\'t change it\'s name');
+            }else{
+                foreach($reserv as $res){
+                    $res->room_name=$room->name;
+                    $res->save();
+                }
             }
+
+            $co = 0; 
 
             foreach ($rooms as $rm) {
                 if ($rm->name == $room->name && $rm->university == Auth::user()->university && $rm->faculty == Auth::user()->faculty) {
@@ -172,10 +179,10 @@ class RoomController extends Controller
                 }
             }
             if ($co == 1) {
-                return redirect('/showList')->with('errorMessage', 'Room/Hall exists allready!');
+                return redirect('/showList')->with('errorMessage', 'Room/Hall exists already!');
             } else {
                 $room->save();
-                return redirect('/showList')->with('message', 'Room/Hall successfully added!');
+                return redirect('/showList')->with('message', 'Room/Hall successfully edited!');
             }
         } else {
             return abort(403);
