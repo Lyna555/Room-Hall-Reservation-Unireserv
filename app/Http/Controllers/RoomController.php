@@ -149,7 +149,7 @@ class RoomController extends Controller
     {
         if (Auth::user()->role == 'admin') {
             $room = Room::find($id);
-            $roomy= Room::find($id);
+            $roomy = Room::find($id);
             $rooms = Room::where('university', '=', Auth::user()->university)->where('faculty', '=', Auth::user()->faculty)->get();
             $request->validate(['name' => Rule::unique('rooms')->ignore($room->id)]);
             $this->validate($request, ['name' => 'regex:/^[^"!*@#%$+]+$/']);
@@ -159,10 +159,10 @@ class RoomController extends Controller
             $room->type = $request->input('type');
             $room->state = $request->input('state');
 
-            $co = 0; 
+            $co = 0;
 
             foreach ($rooms as $rm) {
-                if ($rm->name == $room->name && $rm->university == Auth::user()->university && $rm->faculty == Auth::user()->faculty && $rm->id!=$room->id) {
+                if ($rm->name == $room->name && $rm->university == Auth::user()->university && $rm->faculty == Auth::user()->faculty && $rm->id != $room->id) {
                     $co = 1;
                     break;
                 }
@@ -171,14 +171,18 @@ class RoomController extends Controller
                 return redirect('/showList')->with('errorMessage', 'Room/Hall exists already!');
             } else {
                 $room->save();
-                $reserv=Reservation::where('room_name','=',$roomy->name)->get();
-                foreach($reserv as $res){
-                    $res->room_name=$room->name;
-                    $user=User::where('id','=',$res->user_id)->value('email');
+                $reserv = Reservation::where('room_name', '=', $roomy->name)->get();
+                foreach ($reserv as $res) {
+                    $res->room_name = $room->name;
+                    $user = User::where('id', '=', $res->user_id)->value('email');
                     $res->save();
-
-                    if($res->date>Carbon::now()){
-                        Mail::to($user)->send(new updateRoomMail($roomy,$room->name,$room->capacity,$room->floor));
+                    $connection = @fsockopen("www.google.com", 80);
+                    if ($connection == true) {
+                        if ($res->date > Carbon::now()) {
+                            Mail::to($user)->send(new updateRoomMail($roomy, $room->name, $room->capacity, $room->floor));
+                        }
+                    } else {
+                        return redirect('/showList')->with('errorMessage', 'Failed connection!');
                     }
                 }
                 return redirect('/showList')->with('message', 'Room/Hall successfully edited!');
@@ -200,10 +204,15 @@ class RoomController extends Controller
             $room = Room::find($id);
             $reservations = Reservation::where('university', '=', Auth::user()->university)->where('faculty', '=', Auth::user()->faculty)->get();
             foreach ($reservations as $reservation) {
+                $connection = @fsockopen("www.google.com", 80);
+                    if ($connection == true) {
                 if ($reservation->room_name == $room->name) {
                     Mail::to(User::where('id', '=', $reservation->user_id)->value('email'))->send(new deleteMail($reservation));
                     $reservation->delete();
                 }
+            }else{
+                return redirect('/showList')->with('errorMessage', 'Failed connection!');
+            }
             }
             $room->delete();
             return back()->with('message', 'Room/Hall successfully deleted!');

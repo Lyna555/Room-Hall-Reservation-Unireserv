@@ -283,8 +283,13 @@ class ReservationController extends Controller
             return back()->with('errorMessage', 'End-Time should be greater than Start-Time.')->withInput();
         } elseif (Auth::user()->role == 'admin') {
             $reservation->save();
-            if ($reservation->user_id != Auth::user()->id) {
-                Mail::to(User::where('id', '=', $reservation->user_id)->value('email'))->send(new updateReserMail($reserr,$reservation));
+            $connection = @fsockopen("www.google.com", 80);
+            if ($connection == true) {
+                if ($reservation->user_id != Auth::user()->id) {
+                    Mail::to(User::where('id', '=', $reservation->user_id)->value('email'))->send(new updateReserMail($reserr, $reservation));
+                }
+            } else {
+                return redirect('/admin/showReser')->with('errorMessage', 'Failed connection!');
             }
             return redirect('/admin/showReser')->with('message', 'Reservation successfully added!');
         } else {
@@ -309,8 +314,13 @@ class ReservationController extends Controller
     public function destroy($id)
     {
         $reservation = Reservation::find($id);
-        if ($reservation->user_id != Auth::user()->id) {
-            Mail::to(User::where('id', '=', $reservation->user_id)->value('email'))->send(new deleteReser($reservation));
+        $connection = @fsockopen("www.google.com", 80);
+        if ($connection == true) {
+            if ($reservation->user_id != Auth::user()->id) {
+                Mail::to(User::where('id', '=', $reservation->user_id)->value('email'))->send(new deleteReser($reservation));
+            } else {
+                return redirect('/admin/showReser')->with('errorMessage', 'Failed connection!');
+            }
         }
         $reservation->delete();
         return back()->with('message', 'Reservation successfully deleted!');
