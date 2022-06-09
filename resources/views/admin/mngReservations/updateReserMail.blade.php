@@ -8,9 +8,12 @@
 </head>
 <body>
     Your reservation is updated by the admin: <br><br>
-    {{$reservation->room_name}} | {{$reservation->date}} | {{$reservation->creneaude}} | {{$reservation->creneaua}} <br><br>
-    to: <br>
+    
     {{$reserr->room_name}} | {{$reserr->date}} | {{$reserr->creneaude}} | {{$reserr->creneaua}} <br><br>
+    
+    to: <br>
+
+    {{$reservation->room_name}} | {{$reservation->date}} | {{$reservation->creneaude}} | {{$reservation->creneaua}} <br><br>
 
     Resgards
 </body>
