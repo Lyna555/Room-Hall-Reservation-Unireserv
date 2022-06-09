@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Room;
 use App\Models\User;
 use App\Models\Reservation;
+use App\Mail\updateReserMail;
 use Illuminate\Validation\Rule;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -242,7 +243,7 @@ class ReservationController extends Controller
      */
     public function update(Request $request, $id)
     {
-
+        $reserr = Reservation::find($id);
         $reservations = Reservation::all();
         $reservation = Reservation::find($id);
         $request->validate(['id' => Rule::unique('reservations')->ignore($reservation->id)]);
@@ -282,17 +283,16 @@ class ReservationController extends Controller
             return back()->with('errorMessage', 'End-Time should be greater than Start-Time.')->withInput();
         } elseif (Auth::user()->role == 'admin') {
             $reservation->save();
+            if ($reservation->user_id != Auth::user()->id) {
+                Mail::to(User::where('id', '=', $reservation->user_id)->value('email'))->send(new updateReserMail($reserr,$reservation));
+            }
             return redirect('/admin/showReser')->with('message', 'Reservation successfully added!');
         } else {
             $verif = Room::where('name', '=', $reservation->room_name)->value('state');
             if ($verif == 'speacial') {
                 $reservation->satate = 'wait';
                 $reservation->save();
-                if (Auth::user()->role == 'admin') {
-                    return redirect('/admin/showReser')->with('message', 'Your reservation is sended successfully to the admin!');
-                } else {
-                    return redirect('/user/showReser')->with('message', 'Your reservation is sended successfully to the admin!');
-                }
+                return redirect('/user/showReser')->with('message', 'Your reservation is sended successfully to the admin!');
             } else {
                 $reservation->save();
                 return redirect('/user/showReser')->with('message', 'Reservation successfully added!');
